@@ -51,7 +51,16 @@ export const Hero = () => {
           </div>
           
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 mt-16 w-full">
-            <div className="bg-white p-6 rounded-xl shadow-sm border border-gray-100 animate-fade-in" style={{ animationDelay: '0.3s' }}>
+            <div 
+              className="bg-white p-6 rounded-xl shadow-sm border border-gray-100 animate-fade-in cursor-pointer hover:shadow-md transition-shadow"
+              style={{ animationDelay: '0.3s' }}
+              onClick={() => {
+                const element = document.querySelector('.LuggageInput');
+                if (element) {
+                  element.scrollIntoView({ behavior: 'smooth' });
+                }
+              }}
+            >
               <div className="w-12 h-12 bg-seafoam/10 rounded-lg flex items-center justify-center mb-4">
                 <Luggage className="h-6 w-6 text-seafoam-dark" />
               </div>
@@ -59,7 +68,11 @@ export const Hero = () => {
               <p className="text-gray-600 text-sm">Enter your bag's dimensions and weight to check against airline limits.</p>
             </div>
             
-            <div className="bg-white p-6 rounded-xl shadow-sm border border-gray-100 animate-fade-in" style={{ animationDelay: '0.4s' }}>
+            <div 
+              className="bg-white p-6 rounded-xl shadow-sm border border-gray-100 animate-fade-in cursor-pointer hover:shadow-md transition-shadow" 
+              style={{ animationDelay: '0.4s' }}
+              onClick={() => navigate('/compare')}
+            >
               <div className="w-12 h-12 bg-coral/10 rounded-lg flex items-center justify-center mb-4">
                 <Plane className="h-6 w-6 text-coral-dark" />
               </div>
@@ -67,7 +80,11 @@ export const Hero = () => {
               <p className="text-gray-600 text-sm">Side-by-side comparison of baggage policies across multiple airlines.</p>
             </div>
             
-            <div className="bg-white p-6 rounded-xl shadow-sm border border-gray-100 animate-fade-in" style={{ animationDelay: '0.5s' }}>
+            <div 
+              className="bg-white p-6 rounded-xl shadow-sm border border-gray-100 animate-fade-in cursor-pointer hover:shadow-md transition-shadow" 
+              style={{ animationDelay: '0.5s' }}
+              onClick={() => navigate('/results')}
+            >
               <div className="w-12 h-12 bg-lavender/10 rounded-lg flex items-center justify-center mb-4">
                 <Search className="h-6 w-6 text-lavender-dark" />
               </div>

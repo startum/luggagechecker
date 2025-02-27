@@ -1,7 +1,7 @@
 
 import { useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { Menu, X, LuggareFill, Search, Heart, Home, PlaneTakeoff } from 'lucide-react';
+import { Menu, X, Luggage, Search, Heart, Home, PlaneTakeoff } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { cn } from '@/lib/utils';
 

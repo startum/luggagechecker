@@ -4,7 +4,7 @@ import { useParams, useSearchParams, useNavigate } from 'react-router-dom';
 import { Layout } from '@/components/Layout';
 import { AirlineSearch } from '@/components/AirlineSearch';
 import { LuggageInput } from '@/components/LuggageInput';
-import { Heart, ArrowLeft, ExternalLink, PlaneTakeoff, Luggage, Check, X, Weight } from 'lucide-react';
+import { Heart, ArrowLeft, ExternalLink, PlaneTakeoff, Luggage, Check, X, Weight, Info, Package } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Separator } from '@/components/ui/separator';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';

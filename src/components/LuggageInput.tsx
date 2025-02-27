@@ -40,7 +40,7 @@ export const LuggageInput = ({ onSubmit, initialDimensions }: LuggageInputProps)
   };
   
   return (
-    <div className="bg-white p-6 rounded-xl shadow-sm border border-gray-100 animate-fade-in">
+    <div className="bg-white p-6 rounded-xl shadow-sm border border-gray-100 animate-fade-in LuggageInput">
       <h3 className="text-lg font-semibold mb-4">Enter Your Luggage Dimensions</h3>
       
       <form onSubmit={handleSubmit}>
@@ -232,7 +232,7 @@ export const LuggageInput = ({ onSubmit, initialDimensions }: LuggageInputProps)
         </div>
         
         <Button type="submit" className="w-full bg-coral hover:bg-coral-dark">
-          Compare with Airlines
+          Check Baggage Size
         </Button>
       </form>
     </div>

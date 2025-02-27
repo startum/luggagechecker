@@ -1,18 +1,46 @@
 
 import { useState, useEffect } from 'react';
-import { Heart } from 'lucide-react';
+import { Heart, Luggage } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { AirlineCard } from './AirlineCard';
 import airlineService from '@/utils/airlineData';
 import { Airline } from '@/utils/types';
+import { useNavigate } from 'react-router-dom';
 
 export const FavoritesSection = () => {
   const [favorites, setFavorites] = useState<Airline[]>([]);
+  const navigate = useNavigate();
+  
+  // Function to refresh favorites
+  const refreshFavorites = () => {
+    const favoritedAirlines = airlineService.getFavorites();
+    setFavorites(favoritedAirlines);
+  };
   
   useEffect(() => {
     // Get favorites from service
-    const favoritedAirlines = airlineService.getFavorites();
-    setFavorites(favoritedAirlines);
+    refreshFavorites();
+    
+    // Listen for storage events to update favorites when they change
+    const handleStorageChange = (e: StorageEvent) => {
+      if (e.key === 'airline-favorites') {
+        refreshFavorites();
+      }
+    };
+    
+    window.addEventListener('storage', handleStorageChange);
+    
+    // Custom event for when favorites change within the app
+    const handleFavoritesChange = () => {
+      refreshFavorites();
+    };
+    
+    window.addEventListener('favoritesChanged', handleFavoritesChange);
+    
+    return () => {
+      window.removeEventListener('storage', handleStorageChange);
+      window.removeEventListener('favoritesChanged', handleFavoritesChange);
+    };
   }, []);
   
   if (favorites.length === 0) {
@@ -25,7 +53,9 @@ export const FavoritesSection = () => {
         <p className="text-gray-500 mb-4 max-w-sm mx-auto">
           Add airlines to your favorites for quick access to baggage policies.
         </p>
-        <Button variant="outline">Explore Airlines</Button>
+        <Button variant="outline" onClick={() => navigate('/results')}>
+          <Luggage className="mr-2 h-4 w-4" /> Explore Airlines
+        </Button>
       </div>
     );
   }
@@ -34,6 +64,9 @@ export const FavoritesSection = () => {
     <div className="animate-fade-in">
       <div className="flex items-center justify-between mb-6">
         <h2 className="text-2xl font-semibold">Your Favorite Airlines</h2>
+        <Button variant="outline" size="sm" onClick={() => navigate('/favorites')}>
+          View All Favorites
+        </Button>
       </div>
       
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">

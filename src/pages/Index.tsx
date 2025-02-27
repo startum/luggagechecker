@@ -12,18 +12,50 @@ import { useEffect, useState } from 'react';
 const Index = () => {
   const navigate = useNavigate();
   const [hasFavorites, setHasFavorites] = useState(false);
+  const [currentDimensions, setCurrentDimensions] = useState<LuggageDimensions>({
+    width: 40,
+    height: 55,
+    depth: 20,
+    weight: 10
+  });
+  const [filterCriteria, setFilterCriteria] = useState({
+    search: '',
+    restrictive: false
+  });
   
   useEffect(() => {
     // Check if user has any favorites
     const favorites = airlineService.getFavorites();
     setHasFavorites(favorites.length > 0);
+    
+    // Try to load luggage dimensions from session storage
+    try {
+      const storedDimensions = sessionStorage.getItem('luggage-dimensions');
+      if (storedDimensions) {
+        setCurrentDimensions(JSON.parse(storedDimensions));
+      }
+    } catch (error) {
+      console.error('Failed to load luggage dimensions:', error);
+    }
   }, []);
   
   const handleLuggageSubmit = (dimensions: LuggageDimensions) => {
-    // Store dimensions in session storage for comparison page
+    // Store dimensions in session storage and update state
     sessionStorage.setItem('luggage-dimensions', JSON.stringify(dimensions));
+    setCurrentDimensions(dimensions);
+    
     // Navigate to comparison page
     navigate('/compare');
+  };
+  
+  // Filter airlines based on dimensions
+  const filterBySizeAndWeight = (airlines) => {
+    return airlines.filter(airline => 
+      airline.carryOn.maxWidth >= currentDimensions.width &&
+      airline.carryOn.maxHeight >= currentDimensions.height &&
+      airline.carryOn.maxDepth >= currentDimensions.depth &&
+      airline.carryOn.maxWeight >= currentDimensions.weight
+    );
   };
   
   return (
@@ -37,13 +69,27 @@ const Index = () => {
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
             {/* Luggage Input Side */}
             <div className="lg:col-span-1">
-              <LuggageInput onSubmit={handleLuggageSubmit} />
+              <LuggageInput 
+                onSubmit={handleLuggageSubmit}
+                initialDimensions={currentDimensions}
+              />
             </div>
             
             {/* Search Results Side */}
             <div className="lg:col-span-2">
-              <h2 className="text-2xl font-semibold mb-6">Popular Airlines</h2>
-              <AirlineSearch />
+              <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-6">
+                <h2 className="text-2xl font-semibold">Popular Airlines</h2>
+                <div className="text-sm text-gray-500">
+                  Showing airlines that fit your luggage: 
+                  {currentDimensions.width} × {currentDimensions.height} × {currentDimensions.depth} cm, 
+                  {currentDimensions.weight} kg
+                </div>
+              </div>
+              <AirlineSearch 
+                initialSearch={filterCriteria.search}
+                filterByDimensions={true}
+                luggageDimensions={currentDimensions}
+              />
             </div>
           </div>
         </div>

@@ -7,13 +7,19 @@ import { Checkbox } from '@/components/ui/checkbox';
 import { Label } from '@/components/ui/label';
 import { AirlineCard } from './AirlineCard';
 import airlineService from '@/utils/airlineData';
-import { Airline, FilterCriteria } from '@/utils/types';
+import { Airline, FilterCriteria, LuggageDimensions } from '@/utils/types';
 
 interface AirlineSearchProps {
   initialSearch?: string;
+  filterByDimensions?: boolean;
+  luggageDimensions?: LuggageDimensions;
 }
 
-export const AirlineSearch = ({ initialSearch = '' }: AirlineSearchProps) => {
+export const AirlineSearch = ({ 
+  initialSearch = '', 
+  filterByDimensions = false,
+  luggageDimensions
+}: AirlineSearchProps) => {
   const [searchTerm, setSearchTerm] = useState(initialSearch);
   const [showFilters, setShowFilters] = useState(false);
   const [airlines, setAirlines] = useState<Airline[]>([]);
@@ -22,17 +28,28 @@ export const AirlineSearch = ({ initialSearch = '' }: AirlineSearchProps) => {
     restrictive: false
   });
 
+  // Perform search when component mounts, when search term changes, or when filter criteria changes
+  useEffect(() => {
+    // Update filter criteria with current search term
+    setFilterCriteria(prev => ({ ...prev, search: searchTerm }));
+  }, [searchTerm]);
+
   useEffect(() => {
     // Update airlines based on search and filters
-    const results = airlineService.searchAirlines(filterCriteria);
+    let results = airlineService.searchAirlines(filterCriteria);
+    
+    // Filter by dimensions if enabled and dimensions are provided
+    if (filterByDimensions && luggageDimensions) {
+      results = results.filter(airline => 
+        airline.carryOn.maxWidth >= luggageDimensions.width &&
+        airline.carryOn.maxHeight >= luggageDimensions.height &&
+        airline.carryOn.maxDepth >= luggageDimensions.depth &&
+        airline.carryOn.maxWeight >= luggageDimensions.weight
+      );
+    }
+    
     setAirlines(results);
-  }, [filterCriteria]);
-
-  // Handle search submission
-  const handleSearch = (e: React.FormEvent) => {
-    e.preventDefault();
-    setFilterCriteria({ ...filterCriteria, search: searchTerm });
-  };
+  }, [filterCriteria, luggageDimensions, filterByDimensions]);
 
   // Toggle sort by restrictiveness
   const toggleRestrictive = () => {
@@ -52,7 +69,7 @@ export const AirlineSearch = ({ initialSearch = '' }: AirlineSearchProps) => {
     <div className="w-full">
       {/* Search and Filter Controls */}
       <div className="mb-6 animate-fade-in">
-        <form onSubmit={handleSearch} className="relative mb-4">
+        <form className="relative mb-4" onSubmit={(e) => e.preventDefault()}>
           <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" />
           <Input 
             type="text" 
@@ -70,9 +87,6 @@ export const AirlineSearch = ({ initialSearch = '' }: AirlineSearchProps) => {
               className="h-8 w-8"
             >
               <Filter className="h-4 w-4" />
-            </Button>
-            <Button type="submit" size="sm" className="h-8">
-              Search
             </Button>
           </div>
         </form>
