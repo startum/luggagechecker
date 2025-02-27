@@ -78,7 +78,7 @@ const Compare = () => {
           <ArrowLeft className="h-4 w-4 mr-2" /> Back
         </Button>
         
-        <h1 className="text-3xl font-bold mb-8">Compare Airlines</h1>
+        <h1 className="text-3xl font-bold mb-8">Check Luggage Sizes</h1>
         
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
           {/* Left Column */}

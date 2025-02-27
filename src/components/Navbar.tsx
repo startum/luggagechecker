@@ -14,7 +14,7 @@ export const Navbar = () => {
   const navLinks = [
     { name: 'Home', path: '/', icon: <Home className="w-4 h-4 mr-2" /> },
     { name: 'Airlines', path: '/results', icon: <PlaneTakeoff className="w-4 h-4 mr-2" /> },
-    { name: 'Compare', path: '/compare', icon: <Search className="w-4 h-4 mr-2" /> },
+    { name: 'Check Sizes', path: '/compare', icon: <Search className="w-4 h-4 mr-2" /> },
     { name: 'Favorites', path: '/favorites', icon: <Heart className="w-4 h-4 mr-2" /> },
   ];
 
