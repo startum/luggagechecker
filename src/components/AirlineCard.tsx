@@ -1,6 +1,6 @@
 
 import { useNavigate } from 'react-router-dom';
-import { ArrowRight, Heart } from 'lucide-react';
+import { ArrowRight, Heart, MapPin, Plane } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Airline } from '@/utils/types';
 import airlineService from '@/utils/airlineData';
@@ -38,11 +38,25 @@ export const AirlineCard = ({ airline, delay = 0, compact = false }: AirlineCard
               src={airline.logo} 
               alt={airline.name}
               className="w-full h-full object-cover"
+              onError={(e) => {
+                (e.target as HTMLImageElement).src = "https://images.unsplash.com/photo-1483729558449-99ef09a8c325?q=80&w=120&auto=format&fit=crop";
+              }}
             />
           </div>
           <div>
             <h3 className="font-medium text-sm">{airline.name}</h3>
-            <p className="text-xs text-gray-500">{airline.code}</p>
+            <div className="flex items-center gap-2 text-xs text-gray-500">
+              <span className="flex items-center gap-1">
+                <Plane className="h-3 w-3" />
+                {airline.code}
+              </span>
+              {airline.country && (
+                <span className="flex items-center gap-1">
+                  <MapPin className="h-3 w-3" />
+                  {airline.country}
+                </span>
+              )}
+            </div>
           </div>
         </div>
         <Button variant="ghost" size="icon" onClick={toggleFavorite} className={isFavorite ? "text-coral" : ""}>
@@ -74,11 +88,25 @@ export const AirlineCard = ({ airline, delay = 0, compact = false }: AirlineCard
               src={airline.logo} 
               alt={airline.name}
               className="w-full h-full object-cover"
+              onError={(e) => {
+                (e.target as HTMLImageElement).src = "https://images.unsplash.com/photo-1483729558449-99ef09a8c325?q=80&w=120&auto=format&fit=crop";
+              }}
             />
           </div>
           <div>
             <h3 className="font-semibold">{airline.name}</h3>
-            <p className="text-sm text-gray-500">{airline.code}</p>
+            <div className="flex flex-wrap items-center gap-2 text-sm text-gray-500">
+              <span className="flex items-center gap-1">
+                <Plane className="h-3 w-3" />
+                {airline.code}
+              </span>
+              {airline.country && (
+                <span className="flex items-center gap-1">
+                  <MapPin className="h-3 w-3" />
+                  {airline.country}
+                </span>
+              )}
+            </div>
           </div>
         </div>
         

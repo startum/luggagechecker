@@ -1,198 +1,62 @@
 
 import { Airline, FilterCriteria, LuggageDimensions, ComparisonResult } from './types';
 import { toast } from "sonner";
+import { fetchAirlinesFromDatabase } from './supabaseService';
 
-// Mock airline data
-const airlines: Airline[] = [
-  {
-    id: "ryanair",
-    name: "Ryanair",
-    code: "FR",
-    logo: "https://images.unsplash.com/photo-1583810111145-069345044bf5?q=80&w=120&auto=format&fit=crop",
-    website: "https://www.ryanair.com",
-    carryOn: {
-      maxWidth: 40,
-      maxHeight: 55,
-      maxDepth: 20,
-      maxWeight: 10,
-      notes: "Priority customers can bring an additional small bag (40x20x25cm)"
-    },
-    checkedBaggage: [
-      {
-        maxWidth: 75,
-        maxHeight: 81,
-        maxDepth: 119,
-        maxWeight: 20,
-        price: "From €20.99"
-      },
-      {
-        maxWidth: 75,
-        maxHeight: 81,
-        maxDepth: 119,
-        maxWeight: 32,
-        price: "From €35.99"
-      }
-    ],
-    popularRoutes: ["London - Dublin", "London - Barcelona", "Madrid - Milan"]
-  },
-  {
-    id: "easyjet",
-    name: "EasyJet",
-    code: "U2",
-    logo: "https://images.unsplash.com/photo-1583810111145-069345044bf5?q=80&w=120&auto=format&fit=crop",
-    website: "https://www.easyjet.com",
-    carryOn: {
-      maxWidth: 45,
-      maxHeight: 56,
-      maxDepth: 25,
-      maxWeight: 15,
-      notes: "One cabin bag per person"
-    },
-    checkedBaggage: [
-      {
-        maxWidth: 70,
-        maxHeight: 90,
-        maxDepth: 120,
-        maxWeight: 23,
-        price: "From £6.99"
-      },
-      {
-        maxWidth: 70,
-        maxHeight: 90,
-        maxDepth: 120,
-        maxWeight: 32,
-        price: "From £12.99"
-      }
-    ],
-    popularRoutes: ["London - Paris", "London - Nice", "London - Amsterdam"]
-  },
-  {
-    id: "britishairways",
-    name: "British Airways",
-    code: "BA",
-    logo: "https://images.unsplash.com/photo-1583810111145-069345044bf5?q=80&w=120&auto=format&fit=crop",
-    website: "https://www.britishairways.com",
-    carryOn: {
-      maxWidth: 45,
-      maxHeight: 56,
-      maxDepth: 25,
-      maxWeight: 23,
-      notes: "Plus one personal item"
-    },
-    checkedBaggage: [
-      {
-        maxWidth: 90,
-        maxHeight: 75,
-        maxDepth: 43,
-        maxWeight: 23,
-        price: "Usually included in ticket"
-      },
-      {
-        maxWidth: 90,
-        maxHeight: 75,
-        maxDepth: 43,
-        maxWeight: 32,
-        price: "Additional fee may apply"
-      }
-    ],
-    popularRoutes: ["London - New York", "London - Dubai", "London - Singapore"]
-  },
-  {
-    id: "lufthansa",
-    name: "Lufthansa",
-    code: "LH",
-    logo: "https://images.unsplash.com/photo-1583810111145-069345044bf5?q=80&w=120&auto=format&fit=crop",
-    website: "https://www.lufthansa.com",
-    carryOn: {
-      maxWidth: 40,
-      maxHeight: 55,
-      maxDepth: 23,
-      maxWeight: 8,
-      notes: "Economy class, plus one personal item"
-    },
-    checkedBaggage: [
-      {
-        maxWidth: 80,
-        maxHeight: 80,
-        maxDepth: 120,
-        maxWeight: 23,
-        price: "Usually included in ticket"
-      }
-    ],
-    popularRoutes: ["Frankfurt - London", "Munich - New York", "Frankfurt - Tokyo"]
-  },
-  {
-    id: "airfrance",
-    name: "Air France",
-    code: "AF",
-    logo: "https://images.unsplash.com/photo-1583810111145-069345044bf5?q=80&w=120&auto=format&fit=crop",
-    website: "https://www.airfrance.com",
-    carryOn: {
-      maxWidth: 55,
-      maxHeight: 35,
-      maxDepth: 25,
-      maxWeight: 12,
-      notes: "Economy class, plus one personal item"
-    },
-    checkedBaggage: [
-      {
-        maxWidth: 158,
-        maxHeight: 158,
-        maxDepth: 158,
-        maxWeight: 23,
-        price: "Usually included in ticket"
-      }
-    ],
-    popularRoutes: ["Paris - New York", "Paris - Tokyo", "Paris - Johannesburg"]
-  },
-  {
-    id: "americanairlines",
-    name: "American Airlines",
-    code: "AA",
-    logo: "https://images.unsplash.com/photo-1583810111145-069345044bf5?q=80&w=120&auto=format&fit=crop",
-    website: "https://www.aa.com",
-    carryOn: {
-      maxWidth: 56,
-      maxHeight: 36,
-      maxDepth: 23,
-      maxWeight: 10,
-      notes: "Plus one personal item"
-    },
-    checkedBaggage: [
-      {
-        maxWidth: 157,
-        maxHeight: 157,
-        maxDepth: 157,
-        maxWeight: 23,
-        price: "From $30 per bag"
-      }
-    ],
-    popularRoutes: ["Dallas - New York", "Miami - London", "Los Angeles - Tokyo"]
-  },
-];
+// Initial empty airlines array
+const airlines: Airline[] = [];
 
 // Service class to handle airline data operations
 class AirlineService {
   private airlines: Airline[] = airlines;
   private favorites: string[] = [];
+  private isLoaded: boolean = false;
 
   constructor() {
     // Load favorites from localStorage
     this.loadFavorites();
+    // Initial load of airlines from database
+    this.loadAirlinesFromDB();
+  }
+
+  // Load airlines from database
+  async loadAirlinesFromDB(): Promise<void> {
+    if (this.isLoaded) return;
+    
+    try {
+      const dbAirlines = await fetchAirlinesFromDatabase();
+      if (dbAirlines && dbAirlines.length > 0) {
+        this.airlines = dbAirlines;
+        this.isLoaded = true;
+        console.log(`Loaded ${dbAirlines.length} airlines from database`);
+      }
+    } catch (error) {
+      console.error('Failed to load airlines from database:', error);
+    }
   }
 
   // Get all airlines
-  getAllAirlines(): Airline[] {
+  async getAllAirlines(): Promise<Airline[]> {
+    if (!this.isLoaded) {
+      await this.loadAirlinesFromDB();
+    }
     return this.airlines;
   }
 
   // Get airline by ID
-  getAirlineById(id: string): Airline | undefined {
+  async getAirlineById(id: string): Promise<Airline | undefined> {
+    if (!this.isLoaded) {
+      await this.loadAirlinesFromDB();
+    }
     return this.airlines.find(airline => airline.id === id);
   }
 
   // Search airlines by criteria
-  searchAirlines(criteria: FilterCriteria): Airline[] {
+  async searchAirlines(criteria: FilterCriteria): Promise<Airline[]> {
+    if (!this.isLoaded) {
+      await this.loadAirlinesFromDB();
+    }
+    
     let results = [...this.airlines];
     
     // Filter by search term
@@ -200,7 +64,8 @@ class AirlineService {
       const searchTerm = criteria.search.toLowerCase();
       results = results.filter(airline => 
         airline.name.toLowerCase().includes(searchTerm) || 
-        airline.code.toLowerCase().includes(searchTerm)
+        airline.code.toLowerCase().includes(searchTerm) ||
+        (airline.country && airline.country.toLowerCase().includes(searchTerm))
       );
     }
     
@@ -224,11 +89,15 @@ class AirlineService {
   }
 
   // Compare luggage with airline policies
-  compareLuggage(dimensions: LuggageDimensions, airlineIds: string[]): ComparisonResult[] {
+  async compareLuggage(dimensions: LuggageDimensions, airlineIds: string[]): Promise<ComparisonResult[]> {
+    if (!this.isLoaded) {
+      await this.loadAirlinesFromDB();
+    }
+    
     const results: ComparisonResult[] = [];
     
     for (const id of airlineIds) {
-      const airline = this.getAirlineById(id);
+      const airline = await this.getAirlineById(id);
       if (!airline) continue;
       
       const { width, height, depth, weight } = dimensions;
@@ -255,7 +124,10 @@ class AirlineService {
   }
 
   // Favorites management
-  getFavorites(): Airline[] {
+  async getFavorites(): Promise<Airline[]> {
+    if (!this.isLoaded) {
+      await this.loadAirlinesFromDB();
+    }
     return this.airlines.filter(airline => this.favorites.includes(airline.id));
   }
 

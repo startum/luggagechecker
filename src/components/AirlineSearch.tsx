@@ -23,36 +23,48 @@ export const AirlineSearch = ({
   const [searchTerm, setSearchTerm] = useState(initialSearch);
   const [showFilters, setShowFilters] = useState(false);
   const [airlines, setAirlines] = useState<Airline[]>([]);
+  const [loading, setLoading] = useState(true);
   const [filterCriteria, setFilterCriteria] = useState<FilterCriteria>({
     search: initialSearch,
     restrictive: false
   });
 
+  // Initial load of airlines
+  useEffect(() => {
+    const loadAirlines = async () => {
+      setLoading(true);
+      try {
+        await airlineService.loadAirlinesFromDB();
+        updateAirlines();
+      } catch (error) {
+        console.error('Error loading airlines:', error);
+      } finally {
+        setLoading(false);
+      }
+    };
+    
+    loadAirlines();
+  }, []);
+
   // Update filter criteria whenever search term changes
   useEffect(() => {
     const updatedCriteria = { ...filterCriteria, search: searchTerm };
     setFilterCriteria(updatedCriteria);
-    
-    // This immediately updates the airlines based on the search term
-    let results = airlineService.searchAirlines(updatedCriteria);
-    
-    // Apply dimension filtering if needed
-    if (filterByDimensions && luggageDimensions) {
-      results = results.filter(airline => 
-        airline.carryOn.maxWidth >= luggageDimensions.width &&
-        airline.carryOn.maxHeight >= luggageDimensions.height &&
-        airline.carryOn.maxDepth >= luggageDimensions.depth &&
-        airline.carryOn.maxWeight >= luggageDimensions.weight
-      );
-    }
-    
-    setAirlines(results);
+    updateAirlines();
   }, [searchTerm, filterByDimensions, luggageDimensions]);
 
   // Handle changes to other filter criteria (not search term)
   useEffect(() => {
     if (filterCriteria.restrictive !== undefined) {
-      let results = airlineService.searchAirlines(filterCriteria);
+      updateAirlines();
+    }
+  }, [filterCriteria.restrictive, filterByDimensions, luggageDimensions]);
+
+  // Function to update airlines based on current criteria
+  const updateAirlines = async () => {
+    setLoading(true);
+    try {
+      let results = await airlineService.searchAirlines(filterCriteria);
       
       // Apply dimension filtering if needed
       if (filterByDimensions && luggageDimensions) {
@@ -65,8 +77,12 @@ export const AirlineSearch = ({
       }
       
       setAirlines(results);
+    } catch (error) {
+      console.error('Error updating airlines:', error);
+    } finally {
+      setLoading(false);
     }
-  }, [filterCriteria.restrictive, filterByDimensions, luggageDimensions]);
+  };
 
   // Toggle sort by restrictiveness
   const toggleRestrictive = () => {
@@ -90,7 +106,7 @@ export const AirlineSearch = ({
           <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" />
           <Input 
             type="text" 
-            placeholder="Search airlines by name or code" 
+            placeholder="Search airlines by name, code or country" 
             className="pl-10 pr-20 h-12"
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
@@ -137,12 +153,20 @@ export const AirlineSearch = ({
         
         {/* Search Results Count */}
         <div className="text-sm text-gray-500 mb-2">
-          {airlines.length} {airlines.length === 1 ? 'airline' : 'airlines'} found
+          {loading ? (
+            "Loading airlines..."
+          ) : (
+            `${airlines.length} ${airlines.length === 1 ? 'airline' : 'airlines'} found`
+          )}
         </div>
       </div>
       
       {/* Results Grid */}
-      {airlines.length > 0 ? (
+      {loading ? (
+        <div className="flex justify-center p-12">
+          <div className="animate-spin h-10 w-10 border-4 border-coral border-t-transparent rounded-full"></div>
+        </div>
+      ) : airlines.length > 0 ? (
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {airlines.map((airline, index) => (
             <AirlineCard 

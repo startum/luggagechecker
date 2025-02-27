@@ -1,11 +1,10 @@
 
 import { useEffect, useState } from 'react';
-import { useParams, useSearchParams, useNavigate, useLocation } from 'react-router-dom';
+import { useParams, useSearchParams, useNavigate } from 'react-router-dom';
 import { Layout } from '@/components/Layout';
 import { AirlineSearch } from '@/components/AirlineSearch';
 import { LuggageInput } from '@/components/LuggageInput';
-import { AirlineCard } from '@/components/AirlineCard';
-import { Heart, ArrowLeft, ExternalLink, PlaneTakeoff, Luggage, Check, X, Weight, Info, Package } from 'lucide-react';
+import { Heart, ArrowLeft, ExternalLink, PlaneTakeoff, Luggage, Check, X, Weight, Info, Package, MapPin, Plane } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Separator } from '@/components/ui/separator';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
@@ -21,26 +20,39 @@ const Results = () => {
   const [airline, setAirline] = useState<Airline | null>(null);
   const [isFavorite, setIsFavorite] = useState(false);
   const [luggageDimensions, setLuggageDimensions] = useState<LuggageDimensions | null>(null);
+  const [loading, setLoading] = useState(true);
   
   useEffect(() => {
-    // Try to load luggage dimensions from session storage
-    try {
-      const storedDimensions = sessionStorage.getItem('luggage-dimensions');
-      if (storedDimensions) {
-        setLuggageDimensions(JSON.parse(storedDimensions));
+    const loadData = async () => {
+      setLoading(true);
+      
+      // Try to load luggage dimensions from session storage
+      try {
+        const storedDimensions = sessionStorage.getItem('luggage-dimensions');
+        if (storedDimensions) {
+          setLuggageDimensions(JSON.parse(storedDimensions));
+        }
+      } catch (error) {
+        console.error('Failed to load luggage dimensions:', error);
       }
-    } catch (error) {
-      console.error('Failed to load luggage dimensions:', error);
-    }
+      
+      // If we have an airline ID, get the airline details
+      if (airlineId) {
+        try {
+          const airlineDetails = await airlineService.getAirlineById(airlineId);
+          if (airlineDetails) {
+            setAirline(airlineDetails);
+            setIsFavorite(airlineService.isFavorite(airlineId));
+          }
+        } catch (error) {
+          console.error('Failed to load airline details:', error);
+        }
+      }
+      
+      setLoading(false);
+    };
     
-    // If we have an airline ID, get the airline details
-    if (airlineId) {
-      const airlineDetails = airlineService.getAirlineById(airlineId);
-      if (airlineDetails) {
-        setAirline(airlineDetails);
-        setIsFavorite(airlineService.isFavorite(airlineId));
-      }
-    }
+    loadData();
   }, [airlineId]);
   
   const toggleFavorite = () => {
@@ -63,6 +75,19 @@ const Results = () => {
         <div className="py-10 layout-container">
           <h1 className="text-3xl font-bold mb-8">Airline Search</h1>
           <AirlineSearch initialSearch={searchQuery} />
+        </div>
+      </Layout>
+    );
+  }
+  
+  // Show loading state
+  if (loading) {
+    return (
+      <Layout>
+        <div className="py-10 layout-container">
+          <div className="flex justify-center items-center py-16">
+            <div className="animate-spin h-10 w-10 border-4 border-coral border-t-transparent rounded-full"></div>
+          </div>
         </div>
       </Layout>
     );
@@ -114,11 +139,25 @@ const Results = () => {
                   src={airline.logo} 
                   alt={airline.name}
                   className="w-full h-full object-cover"
+                  onError={(e) => {
+                    (e.target as HTMLImageElement).src = "https://images.unsplash.com/photo-1483729558449-99ef09a8c325?q=80&w=120&auto=format&fit=crop";
+                  }}
                 />
               </div>
               <div>
                 <h1 className="text-2xl font-bold">{airline.name}</h1>
-                <p className="text-gray-500">Airline Code: {airline.code}</p>
+                <div className="flex flex-wrap items-center gap-3 text-gray-500">
+                  <span className="flex items-center gap-1">
+                    <Plane className="h-4 w-4" />
+                    {airline.code}
+                  </span>
+                  {airline.country && (
+                    <span className="flex items-center gap-1">
+                      <MapPin className="h-4 w-4" />
+                      {airline.country}
+                    </span>
+                  )}
+                </div>
               </div>
             </div>
             

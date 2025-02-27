@@ -5,6 +5,7 @@ export interface Airline {
   code: string;
   logo: string;
   website: string;
+  country?: string; // Added country field
   carryOn: LuggagePolicy;
   checkedBaggage: LuggagePolicy[];
   popularRoutes: string[];
