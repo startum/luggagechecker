@@ -1,10 +1,11 @@
+
 import { useState, useEffect } from 'react';
-import { Heart, Luggage } from 'lucide-react';
-import { Button } from '@/components/ui/button';
 import { AirlineCard } from './AirlineCard';
+import { Button } from '@/components/ui/button';
+import { Heart } from 'lucide-react';
+import { useNavigate } from 'react-router-dom';
 import airlineService from '@/utils/airlineData';
 import { Airline } from '@/utils/types';
-import { useNavigate } from 'react-router-dom';
 
 export const FavoritesSection = () => {
   const [favorites, setFavorites] = useState<Airline[]>([]);
@@ -27,25 +28,16 @@ export const FavoritesSection = () => {
   useEffect(() => {
     refreshFavorites();
     
-    // Listen for storage events to update favorites when they change
-    const handleStorageChange = (e: StorageEvent) => {
-      if (e.key === 'airline-favorites') {
-        refreshFavorites();
-      }
-    };
-    
-    window.addEventListener('storage', handleStorageChange);
-    
-    // Custom event for when favorites change within the app
-    const handleFavoritesChange = () => {
+    // Listen for favorites changes and update
+    const handleFavoritesChanged = () => {
       refreshFavorites();
     };
     
-    window.addEventListener('favoritesChanged', handleFavoritesChange);
+    window.addEventListener('favoritesChanged', handleFavoritesChanged);
     
+    // Cleanup
     return () => {
-      window.removeEventListener('storage', handleStorageChange);
-      window.removeEventListener('favoritesChanged', handleFavoritesChange);
+      window.removeEventListener('favoritesChanged', handleFavoritesChanged);
     };
   }, []);
   
@@ -60,37 +52,34 @@ export const FavoritesSection = () => {
   if (favorites.length === 0) {
     return (
       <div className="text-center py-16 bg-white rounded-xl shadow-sm border border-gray-100 animate-fade-in">
-        <div className="w-16 h-16 mx-auto mb-4 bg-gray-50 rounded-full flex items-center justify-center">
-          <Heart className="h-6 w-6 text-gray-300" />
-        </div>
-        <h3 className="text-lg font-semibold mb-2">No Favorite Airlines Yet</h3>
-        <p className="text-gray-500 mb-4 max-w-sm mx-auto">
-          Add airlines to your favorites for quick access to baggage policies.
+        <Heart className="h-12 w-12 mx-auto text-gray-300 mb-4" />
+        <h3 className="text-lg font-semibold mb-2">No Favorites Yet</h3>
+        <p className="text-gray-500 mb-6 max-w-md mx-auto">
+          Add airlines to your favorites to quickly access them later.
         </p>
-        <Button variant="outline" onClick={() => navigate('/results')}>
-          <Luggage className="mr-2 h-4 w-4" /> Explore Airlines
+        <Button onClick={() => navigate('/results')}>
+          Browse Airlines
         </Button>
       </div>
     );
   }
   
   return (
-    <div className="animate-fade-in">
-      <div className="flex items-center justify-between mb-6">
-        <h2 className="text-2xl font-semibold">Your Favorite Airlines</h2>
-        <Button variant="outline" size="sm" onClick={() => navigate('/favorites')}>
-          View All Favorites
-        </Button>
-      </div>
-      
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-        {favorites.map((airline, index) => (
+    <div className="space-y-6 animate-fade-in">
+      <div className="grid grid-cols-1 gap-4">
+        {favorites.map(airline => (
           <AirlineCard 
             key={airline.id} 
             airline={airline} 
-            delay={index * 0.1}
+            compact={true}
           />
         ))}
+      </div>
+      
+      <div className="text-center">
+        <Button variant="outline" onClick={() => navigate('/results')} className="w-full">
+          Browse All Airlines
+        </Button>
       </div>
     </div>
   );

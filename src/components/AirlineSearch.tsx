@@ -34,8 +34,9 @@ export const AirlineSearch = ({
     const loadAirlines = async () => {
       setLoading(true);
       try {
-        await airlineService.loadAirlinesFromDB();
-        updateAirlines();
+        const allAirlines = await airlineService.getAllAirlines();
+        setAirlines(allAirlines);
+        updateAirlines(allAirlines, filterCriteria);
       } catch (error) {
         console.error('Error loading airlines:', error);
       } finally {
@@ -50,21 +51,21 @@ export const AirlineSearch = ({
   useEffect(() => {
     const updatedCriteria = { ...filterCriteria, search: searchTerm };
     setFilterCriteria(updatedCriteria);
-    updateAirlines();
-  }, [searchTerm, filterByDimensions, luggageDimensions]);
+    updateAirlines(airlines, updatedCriteria);
+  }, [searchTerm]);
 
   // Handle changes to other filter criteria (not search term)
   useEffect(() => {
     if (filterCriteria.restrictive !== undefined) {
-      updateAirlines();
+      updateAirlines(airlines, filterCriteria);
     }
-  }, [filterCriteria.restrictive, filterByDimensions, luggageDimensions]);
+  }, [filterCriteria.restrictive]);
 
   // Function to update airlines based on current criteria
-  const updateAirlines = async () => {
+  const updateAirlines = async (allAirlines: Airline[], criteria: FilterCriteria) => {
     setLoading(true);
     try {
-      let results = await airlineService.searchAirlines(filterCriteria);
+      let results = await airlineService.searchAirlines(criteria);
       
       // Apply dimension filtering if needed
       if (filterByDimensions && luggageDimensions) {

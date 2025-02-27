@@ -4,7 +4,6 @@ import { useNavigate } from 'react-router-dom';
 import { Layout } from '@/components/Layout';
 import { LuggageInput } from '@/components/LuggageInput';
 import { ComparisonView } from '@/components/ComparisonView';
-import { AirlineCard } from '@/components/AirlineCard';
 import { Button } from '@/components/ui/button';
 import { Search, Plus, X, ArrowLeft } from 'lucide-react';
 import { Input } from '@/components/ui/input';
@@ -43,9 +42,14 @@ const Compare = () => {
     setLuggageDimensions(dimensions);
   };
   
-  const handleSearch = () => {
-    const results = airlineService.searchAirlines({ search: searchTerm });
-    setSearchResults(results);
+  const handleSearch = async () => {
+    try {
+      const results = await airlineService.searchAirlines({ search: searchTerm });
+      setSearchResults(results);
+    } catch (error) {
+      console.error('Error searching airlines:', error);
+      setSearchResults([]);
+    }
   };
   
   const addAirline = (airlineId: string) => {
@@ -59,11 +63,24 @@ const Compare = () => {
     setSelectedAirlines(selectedAirlines.filter(id => id !== airlineId));
   };
   
-  const getSelectedAirlineObjects = () => {
-    return selectedAirlines
-      .map(id => airlineService.getAirlineById(id))
-      .filter((airline): airline is Airline => !!airline);
-  };
+  const [selectedAirlineObjects, setSelectedAirlineObjects] = useState<Airline[]>([]);
+
+  useEffect(() => {
+    const fetchSelectedAirlines = async () => {
+      if (selectedAirlines.length === 0) {
+        setSelectedAirlineObjects([]);
+        return;
+      }
+
+      const airlinePromises = selectedAirlines.map(id => airlineService.getAirlineById(id));
+      const airlines = await Promise.all(airlinePromises);
+      
+      // Filter out any undefined results (airlines that weren't found)
+      setSelectedAirlineObjects(airlines.filter((airline): airline is Airline => airline !== undefined));
+    };
+
+    fetchSelectedAirlines();
+  }, [selectedAirlines]);
   
   return (
     <Layout>
@@ -126,7 +143,7 @@ const Compare = () => {
                           onClick={() => addAirline(airline.id)}
                         >
                           <div className="flex items-center gap-3">
-                            <div className="w-8 h-8 bg-gray-200 rounded-full overflow-hidden">
+                            <div className="w-8 h-8 bg-gray-200 rounded-full overflow-hidden flex-shrink-0">
                               <img 
                                 src={airline.logo} 
                                 alt={airline.name}
@@ -160,9 +177,9 @@ const Compare = () => {
                 </Dialog>
               </div>
               
-              {selectedAirlines.length > 0 ? (
+              {selectedAirlineObjects.length > 0 ? (
                 <div className="space-y-3">
-                  {getSelectedAirlineObjects().map(airline => (
+                  {selectedAirlineObjects.map(airline => (
                     <div key={airline.id} className="flex items-center justify-between bg-gray-50 p-3 rounded-lg">
                       <div className="flex items-center gap-3">
                         <div className="w-8 h-8 bg-gray-200 rounded-full overflow-hidden">

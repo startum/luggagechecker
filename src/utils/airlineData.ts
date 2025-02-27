@@ -119,17 +119,25 @@ class AirlineService {
       this.favorites.push(airlineId);
       this.saveFavorites();
       toast.success("Added to favorites");
+      this.notifyFavoritesChanged();
       return true;
     } else {
       this.favorites.splice(index, 1);
       this.saveFavorites();
       toast.success("Removed from favorites");
+      this.notifyFavoritesChanged();
       return false;
     }
   }
 
   isFavorite(airlineId: string): boolean {
     return this.favorites.includes(airlineId);
+  }
+
+  private notifyFavoritesChanged(): void {
+    // Dispatch a custom event that components can listen for
+    const event = new CustomEvent('favoritesChanged');
+    window.dispatchEvent(event);
   }
 
   private saveFavorites(): void {
