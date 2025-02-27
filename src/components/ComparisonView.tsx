@@ -57,6 +57,9 @@ export const ComparisonView = ({ luggageDimensions, airlineIds }: ComparisonView
                     src={result.airline.logo} 
                     alt={result.airline.name}
                     className="w-full h-full object-cover"
+                    onError={(e) => {
+                      (e.target as HTMLImageElement).src = "https://images.unsplash.com/photo-1483729558449-99ef09a8c325?q=80&w=120&auto=format&fit=crop";
+                    }}
                   />
                 </div>
                 <div>
