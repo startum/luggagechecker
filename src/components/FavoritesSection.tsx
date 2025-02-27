@@ -1,4 +1,3 @@
-
 import { useState, useEffect } from 'react';
 import { Heart, Luggage } from 'lucide-react';
 import { Button } from '@/components/ui/button';
@@ -9,16 +8,23 @@ import { useNavigate } from 'react-router-dom';
 
 export const FavoritesSection = () => {
   const [favorites, setFavorites] = useState<Airline[]>([]);
+  const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
   
   // Function to refresh favorites
-  const refreshFavorites = () => {
-    const favoritedAirlines = airlineService.getFavorites();
-    setFavorites(favoritedAirlines);
+  const refreshFavorites = async () => {
+    setLoading(true);
+    try {
+      const favoritedAirlines = await airlineService.getFavorites();
+      setFavorites(favoritedAirlines);
+    } catch (error) {
+      console.error('Error loading favorites:', error);
+    } finally {
+      setLoading(false);
+    }
   };
   
   useEffect(() => {
-    // Get favorites from service
     refreshFavorites();
     
     // Listen for storage events to update favorites when they change
@@ -42,6 +48,14 @@ export const FavoritesSection = () => {
       window.removeEventListener('favoritesChanged', handleFavoritesChange);
     };
   }, []);
+  
+  if (loading) {
+    return (
+      <div className="text-center py-16 bg-white rounded-xl shadow-sm border border-gray-100 animate-fade-in">
+        <div className="animate-spin h-10 w-10 border-4 border-coral border-t-transparent rounded-full mx-auto"></div>
+      </div>
+    );
+  }
   
   if (favorites.length === 0) {
     return (

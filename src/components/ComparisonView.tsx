@@ -12,17 +12,28 @@ interface ComparisonViewProps {
 
 export const ComparisonView = ({ luggageDimensions, airlineIds }: ComparisonViewProps) => {
   const [results, setResults] = useState<ComparisonResult[]>([]);
+  const [loading, setLoading] = useState(true);
   
   useEffect(() => {
-    // Compare luggage with selected airlines
-    const comparisonResults = airlineService.compareLuggage(luggageDimensions, airlineIds);
-    setResults(comparisonResults);
+    const loadComparison = async () => {
+      setLoading(true);
+      try {
+        const comparisonResults = await airlineService.compareLuggage(luggageDimensions, airlineIds);
+        setResults(comparisonResults);
+      } catch (error) {
+        console.error('Error comparing luggage:', error);
+      } finally {
+        setLoading(false);
+      }
+    };
+    
+    loadComparison();
   }, [luggageDimensions, airlineIds]);
   
-  if (results.length === 0) {
+  if (loading) {
     return (
       <div className="text-center p-6 bg-white rounded-xl shadow-sm border border-gray-100">
-        <p className="text-gray-500">No comparison results available.</p>
+        <div className="animate-spin h-10 w-10 border-4 border-coral border-t-transparent rounded-full mx-auto"></div>
       </div>
     );
   }
