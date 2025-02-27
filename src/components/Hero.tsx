@@ -76,7 +76,7 @@ export const Hero = () => {
               <div className="w-12 h-12 bg-coral/10 rounded-lg flex items-center justify-center mb-4">
                 <Plane className="h-6 w-6 text-coral-dark" />
               </div>
-              <h3 className="text-lg font-semibold mb-2">Check Luggage Sizes</h3>
+              <h3 className="text-lg font-semibold mb-2">Luggage Sizes</h3>
               <p className="text-gray-600 text-sm">Side-by-side comparison of baggage policies across multiple airlines.</p>
             </div>
             

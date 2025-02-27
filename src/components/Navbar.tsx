@@ -14,7 +14,7 @@ export const Navbar = () => {
   const navLinks = [
     { name: 'Home', path: '/', icon: <Home className="w-4 h-4 mr-2" /> },
     { name: 'Airlines', path: '/results', icon: <PlaneTakeoff className="w-4 h-4 mr-2" /> },
-    { name: 'Check Sizes', path: '/compare', icon: <Search className="w-4 h-4 mr-2" /> },
+    { name: 'Luggage Sizes', path: '/compare', icon: <Search className="w-4 h-4 mr-2" /> },
     { name: 'Favorites', path: '/favorites', icon: <Heart className="w-4 h-4 mr-2" /> },
   ];
 
@@ -24,9 +24,9 @@ export const Navbar = () => {
         <div className="flex h-16 items-center justify-between">
           <div className="flex items-center gap-2">
             <Link to="/" className="flex items-center gap-2 font-semibold text-xl">
-              <span className="text-coral">Travel</span>
+              <span className="text-coral">Flight</span>
               <span className="text-lavender">Bag</span>
-              <span className="text-seafoam">Buddy</span>
+              <span className="text-seafoam">Checker</span>
             </Link>
           </div>
           
