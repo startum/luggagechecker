@@ -25,8 +25,12 @@ const Index = () => {
   
   useEffect(() => {
     // Check if user has any favorites
-    const favorites = airlineService.getFavorites();
-    setHasFavorites(favorites.length > 0);
+    const checkFavorites = async () => {
+      const favorites = await airlineService.getFavorites();
+      setHasFavorites(favorites.length > 0);
+    };
+    
+    checkFavorites();
     
     // Try to load luggage dimensions from session storage
     try {
@@ -46,16 +50,6 @@ const Index = () => {
     
     // Navigate to comparison page
     navigate('/compare');
-  };
-  
-  // Filter airlines based on dimensions
-  const filterBySizeAndWeight = (airlines) => {
-    return airlines.filter(airline => 
-      airline.carryOn.maxWidth >= currentDimensions.width &&
-      airline.carryOn.maxHeight >= currentDimensions.height &&
-      airline.carryOn.maxDepth >= currentDimensions.depth &&
-      airline.carryOn.maxWeight >= currentDimensions.weight
-    );
   };
   
   return (

@@ -11,34 +11,67 @@ export type Database = {
     Tables: {
       airlines_data: {
         Row: {
-          airline_name: string | null
+          airline_name: string
           callsign: string | null
+          carry_on_size: string | null
+          carry_on_weight: string | null
+          checked_bag_size: string | null
+          checked_bag_weight: string | null
           country_name: string | null
           iata_code: string | null
-          icao_code: string | null
           id: number
           logo_url: string | null
           website_url: string | null
         }
         Insert: {
-          airline_name?: string | null
+          airline_name: string
           callsign?: string | null
+          carry_on_size?: string | null
+          carry_on_weight?: string | null
+          checked_bag_size?: string | null
+          checked_bag_weight?: string | null
           country_name?: string | null
           iata_code?: string | null
-          icao_code?: string | null
           id?: number
           logo_url?: string | null
           website_url?: string | null
         }
         Update: {
-          airline_name?: string | null
+          airline_name?: string
           callsign?: string | null
+          carry_on_size?: string | null
+          carry_on_weight?: string | null
+          checked_bag_size?: string | null
+          checked_bag_weight?: string | null
           country_name?: string | null
           iata_code?: string | null
-          icao_code?: string | null
           id?: number
           logo_url?: string | null
           website_url?: string | null
+        }
+        Relationships: []
+      }
+      temp_airlines_data: {
+        Row: {
+          carry_on_size: string | null
+          carry_on_weight: string | null
+          checked_bag_size: string | null
+          checked_bag_weight: string | null
+          iata_code: string
+        }
+        Insert: {
+          carry_on_size?: string | null
+          carry_on_weight?: string | null
+          checked_bag_size?: string | null
+          checked_bag_weight?: string | null
+          iata_code: string
+        }
+        Update: {
+          carry_on_size?: string | null
+          carry_on_weight?: string | null
+          checked_bag_size?: string | null
+          checked_bag_weight?: string | null
+          iata_code?: string
         }
         Relationships: []
       }
