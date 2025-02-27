@@ -1,9 +1,10 @@
 
 import { useEffect, useState } from 'react';
-import { useParams, useSearchParams, useNavigate } from 'react-router-dom';
+import { useParams, useSearchParams, useNavigate, useLocation } from 'react-router-dom';
 import { Layout } from '@/components/Layout';
 import { AirlineSearch } from '@/components/AirlineSearch';
 import { LuggageInput } from '@/components/LuggageInput';
+import { AirlineCard } from '@/components/AirlineCard';
 import { Heart, ArrowLeft, ExternalLink, PlaneTakeoff, Luggage, Check, X, Weight, Info, Package } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Separator } from '@/components/ui/separator';

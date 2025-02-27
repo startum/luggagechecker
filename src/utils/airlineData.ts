@@ -265,11 +265,13 @@ class AirlineService {
       this.favorites.push(airlineId);
       this.saveFavorites();
       toast.success("Added to favorites");
+      this.notifyFavoritesChanged();
       return true;
     } else {
       this.favorites.splice(index, 1);
       this.saveFavorites();
       toast.success("Removed from favorites");
+      this.notifyFavoritesChanged();
       return false;
     }
   }
@@ -291,6 +293,12 @@ class AirlineService {
     } catch (error) {
       console.error('Failed to load favorites:', error);
     }
+  }
+  
+  private notifyFavoritesChanged(): void {
+    // Dispatch a custom event to notify components that favorites have changed
+    const event = new CustomEvent('favoritesChanged');
+    window.dispatchEvent(event);
   }
 }
 
