@@ -209,12 +209,12 @@ const Compare = () => {
               />
             ) : (
               <div className="text-center py-16 bg-white rounded-xl shadow-sm border border-gray-100">
-                <h3 className="text-lg font-semibold mb-3">Ready to Compare</h3>
+                <h3 className="text-lg font-semibold mb-3">Ready to check sizes</h3>
                 <p className="text-gray-500 mb-6 max-w-md mx-auto">
                   Add airlines to your comparison list to see how your luggage measures up against different baggage policies.
                 </p>
                 <Button onClick={() => setDialogOpen(true)}>
-                  <Plus className="h-4 w-4 mr-2" /> Select Airlines to Compare
+                  <Plus className="h-4 w-4 mr-2" /> Select Airline
                 </Button>
               </div>
             )}

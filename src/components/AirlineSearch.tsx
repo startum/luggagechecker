@@ -28,17 +28,15 @@ export const AirlineSearch = ({
     restrictive: false
   });
 
-  // Perform search when component mounts, when search term changes, or when filter criteria changes
+  // Update filter criteria whenever search term changes
   useEffect(() => {
-    // Update filter criteria with current search term
-    setFilterCriteria(prev => ({ ...prev, search: searchTerm }));
-  }, [searchTerm]);
-
-  useEffect(() => {
-    // Update airlines based on search and filters
-    let results = airlineService.searchAirlines(filterCriteria);
+    const updatedCriteria = { ...filterCriteria, search: searchTerm };
+    setFilterCriteria(updatedCriteria);
     
-    // Filter by dimensions if enabled and dimensions are provided
+    // This immediately updates the airlines based on the search term
+    let results = airlineService.searchAirlines(updatedCriteria);
+    
+    // Apply dimension filtering if needed
     if (filterByDimensions && luggageDimensions) {
       results = results.filter(airline => 
         airline.carryOn.maxWidth >= luggageDimensions.width &&
@@ -49,7 +47,26 @@ export const AirlineSearch = ({
     }
     
     setAirlines(results);
-  }, [filterCriteria, luggageDimensions, filterByDimensions]);
+  }, [searchTerm, filterByDimensions, luggageDimensions]);
+
+  // Handle changes to other filter criteria (not search term)
+  useEffect(() => {
+    if (filterCriteria.restrictive !== undefined) {
+      let results = airlineService.searchAirlines(filterCriteria);
+      
+      // Apply dimension filtering if needed
+      if (filterByDimensions && luggageDimensions) {
+        results = results.filter(airline => 
+          airline.carryOn.maxWidth >= luggageDimensions.width &&
+          airline.carryOn.maxHeight >= luggageDimensions.height &&
+          airline.carryOn.maxDepth >= luggageDimensions.depth &&
+          airline.carryOn.maxWeight >= luggageDimensions.weight
+        );
+      }
+      
+      setAirlines(results);
+    }
+  }, [filterCriteria.restrictive, filterByDimensions, luggageDimensions]);
 
   // Toggle sort by restrictiveness
   const toggleRestrictive = () => {
@@ -62,7 +79,7 @@ export const AirlineSearch = ({
   // Clear all filters
   const clearFilters = () => {
     setSearchTerm('');
-    setFilterCriteria({ search: '' });
+    setFilterCriteria({ search: '', restrictive: false });
   };
 
   return (
