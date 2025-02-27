@@ -1,143 +1,53 @@
 
-import { Hero } from '@/components/Hero';
+import { useState, useEffect } from 'react';
 import { Layout } from '@/components/Layout';
+import { Hero } from '@/components/Hero';
 import { AirlineSearch } from '@/components/AirlineSearch';
-import { LuggageInput } from '@/components/LuggageInput';
-import { useNavigate } from 'react-router-dom';
-import { LuggageDimensions } from '@/utils/types';
 import { FavoritesSection } from '@/components/FavoritesSection';
 import airlineService from '@/utils/airlineData';
-import { useEffect, useState } from 'react';
+import { Airline } from '@/utils/types';
 
 const Index = () => {
-  const navigate = useNavigate();
-  const [hasFavorites, setHasFavorites] = useState(false);
-  const [currentDimensions, setCurrentDimensions] = useState<LuggageDimensions>({
-    width: 40,
-    height: 55,
-    depth: 20,
-    weight: 10
-  });
-  const [filterCriteria, setFilterCriteria] = useState({
-    search: '',
-    restrictive: false
-  });
-  
+  const [airlines, setAirlines] = useState<Airline[]>([]);
+  const [loading, setLoading] = useState(true);
+
   useEffect(() => {
-    // Check if user has any favorites
-    const favorites = airlineService.getFavorites();
-    setHasFavorites(favorites.length > 0);
-    
-    // Try to load luggage dimensions from session storage
-    try {
-      const storedDimensions = sessionStorage.getItem('luggage-dimensions');
-      if (storedDimensions) {
-        setCurrentDimensions(JSON.parse(storedDimensions));
+    const loadAirlines = async () => {
+      setLoading(true);
+      try {
+        const allAirlines = await airlineService.getAllAirlines();
+        setAirlines(allAirlines);
+      } catch (error) {
+        console.error('Error loading airlines:', error);
+      } finally {
+        setLoading(false);
       }
-    } catch (error) {
-      console.error('Failed to load luggage dimensions:', error);
-    }
+    };
+
+    loadAirlines();
   }, []);
-  
-  const handleLuggageSubmit = (dimensions: LuggageDimensions) => {
-    // Store dimensions in session storage and update state
-    sessionStorage.setItem('luggage-dimensions', JSON.stringify(dimensions));
-    setCurrentDimensions(dimensions);
-    
-    // Navigate to comparison page
-    navigate('/compare');
-  };
-  
-  // Filter airlines based on dimensions
-  const filterBySizeAndWeight = (airlines) => {
-    return airlines.filter(airline => 
-      airline.carryOn.maxWidth >= currentDimensions.width &&
-      airline.carryOn.maxHeight >= currentDimensions.height &&
-      airline.carryOn.maxDepth >= currentDimensions.depth &&
-      airline.carryOn.maxWeight >= currentDimensions.weight
-    );
-  };
-  
+
   return (
     <Layout>
       {/* Hero Section */}
       <Hero />
       
       {/* Main Content */}
-      <section className="py-16 bg-white">
-        <div className="layout-container">
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-            {/* Luggage Input Side */}
-            <div className="lg:col-span-1">
-              <LuggageInput 
-                onSubmit={handleLuggageSubmit}
-                initialDimensions={currentDimensions}
-              />
-            </div>
-            
-            {/* Search Results Side */}
-            <div className="lg:col-span-2">
-              <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-6">
-                <h2 className="text-2xl font-semibold">Popular Airlines</h2>
-                <div className="text-sm text-gray-500">
-                  Showing airlines that fit your luggage: 
-                  {currentDimensions.width} × {currentDimensions.height} × {currentDimensions.depth} cm, 
-                  {currentDimensions.weight} kg
-                </div>
-              </div>
-              <AirlineSearch 
-                initialSearch={filterCriteria.search}
-                filterByDimensions={true}
-                luggageDimensions={currentDimensions}
-              />
-            </div>
+      <div className="layout-container py-16">
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-12">
+          {/* Airline Search (2/3 width) */}
+          <div className="lg:col-span-2">
+            <h2 className="text-2xl font-bold mb-6">Find Airline Baggage Policies</h2>
+            <AirlineSearch />
           </div>
-        </div>
-      </section>
-      
-      {/* Favorites Section (if the user has favorites) */}
-      {hasFavorites && (
-        <section className="py-16 bg-gray-50">
-          <div className="layout-container">
+          
+          {/* Favorites Section (1/3 width) */}
+          <div className="lg:col-span-1">
+            <h2 className="text-2xl font-bold mb-6">Your Favorites</h2>
             <FavoritesSection />
           </div>
-        </section>
-      )}
-      
-      {/* Info Section */}
-      <section className="py-16">
-        <div className="layout-container">
-          <div className="text-center max-w-3xl mx-auto">
-            <h2 className="text-3xl font-bold mb-6">Why Check Before You Fly?</h2>
-            <p className="text-lg text-gray-600 mb-8">
-              Airlines are constantly changing their baggage policies, and exceeding size or weight limits can lead to unexpected fees at the airport. Stay ahead by checking your luggage against the latest airline requirements.
-            </p>
-            
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-8 text-left">
-              <div>
-                <h3 className="text-xl font-semibold mb-3">Save Money</h3>
-                <p className="text-gray-600">
-                  Avoid expensive last-minute baggage fees by ensuring your luggage meets the airline's requirements before you get to the airport.
-                </p>
-              </div>
-              
-              <div>
-                <h3 className="text-xl font-semibold mb-3">Save Time</h3>
-                <p className="text-gray-600">
-                  Skip the stress of repacking at check-in by knowing exactly what size and weight restrictions apply to your journey.
-                </p>
-              </div>
-              
-              <div>
-                <h3 className="text-xl font-semibold mb-3">Travel Confidently</h3>
-                <p className="text-gray-600">
-                  Enjoy peace of mind knowing your baggage will be accepted without issues, letting you focus on your travel experience.
-                </p>
-              </div>
-            </div>
-          </div>
         </div>
-      </section>
+      </div>
     </Layout>
   );
 };

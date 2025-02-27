@@ -5,64 +5,82 @@ import { Layout } from '@/components/Layout';
 import { LuggageInput } from '@/components/LuggageInput';
 import { ComparisonView } from '@/components/ComparisonView';
 import { AirlineCard } from '@/components/AirlineCard';
+import { ArrowLeft } from 'lucide-react';
 import { Button } from '@/components/ui/button';
-import { Search, Plus, X, ArrowLeft } from 'lucide-react';
 import { Input } from '@/components/ui/input';
-import { Dialog, DialogContent, DialogTrigger } from '@/components/ui/dialog';
+import { Checkbox } from '@/components/ui/checkbox';
+import { Label } from '@/components/ui/label';
 import airlineService from '@/utils/airlineData';
 import { Airline, LuggageDimensions } from '@/utils/types';
 
 const Compare = () => {
   const navigate = useNavigate();
-  const [selectedAirlines, setSelectedAirlines] = useState<string[]>([]);
-  const [luggageDimensions, setLuggageDimensions] = useState<LuggageDimensions>({
-    width: 40,
-    height: 55,
-    depth: 20,
-    weight: 10
-  });
+  const [airlines, setAirlines] = useState<Airline[]>([]);
+  const [filteredAirlines, setFilteredAirlines] = useState<Airline[]>([]);
   const [searchTerm, setSearchTerm] = useState('');
-  const [searchResults, setSearchResults] = useState<Airline[]>([]);
-  const [dialogOpen, setDialogOpen] = useState(false);
+  const [loading, setLoading] = useState(true);
+  const [selectedAirlines, setSelectedAirlines] = useState<Airline[]>([]);
+  const [luggageDimensions, setLuggageDimensions] = useState<LuggageDimensions | null>(null);
   
   useEffect(() => {
-    // Try to load luggage dimensions from session storage
-    try {
-      const storedDimensions = sessionStorage.getItem('luggage-dimensions');
-      if (storedDimensions) {
-        setLuggageDimensions(JSON.parse(storedDimensions));
+    const loadData = async () => {
+      setLoading(true);
+      try {
+        // Try to load luggage dimensions from session storage
+        const storedDimensions = sessionStorage.getItem('luggage-dimensions');
+        if (storedDimensions) {
+          setLuggageDimensions(JSON.parse(storedDimensions));
+        }
+        
+        // Load all airlines
+        const allAirlines = await airlineService.getAllAirlines();
+        setAirlines(allAirlines);
+        setFilteredAirlines(allAirlines);
+      } catch (error) {
+        console.error('Error loading data:', error);
+      } finally {
+        setLoading(false);
       }
-    } catch (error) {
-      console.error('Failed to load luggage dimensions:', error);
-    }
+    };
+    
+    loadData();
   }, []);
   
+  useEffect(() => {
+    if (searchTerm.trim() === '') {
+      setFilteredAirlines(airlines);
+    } else {
+      const term = searchTerm.toLowerCase();
+      const filtered = airlines.filter(airline => 
+        airline.name.toLowerCase().includes(term) || 
+        airline.code.toLowerCase().includes(term) ||
+        (airline.country && airline.country.toLowerCase().includes(term))
+      );
+      setFilteredAirlines(filtered);
+    }
+  }, [searchTerm, airlines]);
+  
+  const toggleAirlineSelection = (airline: Airline) => {
+    setSelectedAirlines(prevSelected => {
+      // Check if airline is already selected
+      const isSelected = prevSelected.some(a => a.id === airline.id);
+      
+      if (isSelected) {
+        // Remove airline from selection
+        return prevSelected.filter(a => a.id !== airline.id);
+      } else {
+        // Add airline to selection (max 3)
+        if (prevSelected.length < 3) {
+          return [...prevSelected, airline];
+        }
+        return prevSelected;
+      }
+    });
+  };
+  
   const handleLuggageSubmit = (dimensions: LuggageDimensions) => {
-    // Store dimensions
     sessionStorage.setItem('luggage-dimensions', JSON.stringify(dimensions));
     setLuggageDimensions(dimensions);
-  };
-  
-  const handleSearch = () => {
-    const results = airlineService.searchAirlines({ search: searchTerm });
-    setSearchResults(results);
-  };
-  
-  const addAirline = (airlineId: string) => {
-    if (!selectedAirlines.includes(airlineId)) {
-      setSelectedAirlines([...selectedAirlines, airlineId]);
-    }
-    setDialogOpen(false);
-  };
-  
-  const removeAirline = (airlineId: string) => {
-    setSelectedAirlines(selectedAirlines.filter(id => id !== airlineId));
-  };
-  
-  const getSelectedAirlineObjects = () => {
-    return selectedAirlines
-      .map(id => airlineService.getAirlineById(id))
-      .filter((airline): airline is Airline => !!airline);
   };
   
   return (
@@ -78,146 +96,142 @@ const Compare = () => {
           <ArrowLeft className="h-4 w-4 mr-2" /> Back
         </Button>
         
-        <h1 className="text-3xl font-bold mb-8">Check Luggage Sizes</h1>
+        <h1 className="text-3xl font-bold mb-6">Compare Airlines</h1>
         
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-          {/* Left Column */}
-          <div className="lg:col-span-1 space-y-6">
-            {/* Luggage Input */}
-            <LuggageInput 
-              onSubmit={handleLuggageSubmit} 
-              initialDimensions={luggageDimensions}
+        <div className="bg-white p-6 rounded-xl shadow-sm border border-gray-100 mb-6">
+          <h2 className="text-xl font-semibold mb-4">Enter Luggage Dimensions</h2>
+          <LuggageInput 
+            onSubmit={handleLuggageSubmit}
+            initialDimensions={luggageDimensions || undefined}
+          />
+        </div>
+        
+        {luggageDimensions && selectedAirlines.length > 0 && (
+          <div className="mb-8 animate-fade-in">
+            <ComparisonView 
+              luggageDimensions={luggageDimensions}
+              airlineIds={selectedAirlines.map(airline => airline.id)}
             />
-            
-            {/* Selected Airlines List */}
-            <div className="bg-white p-6 rounded-xl shadow-sm border border-gray-100">
-              <div className="flex items-center justify-between mb-4">
-                <h3 className="font-semibold">Selected Airlines</h3>
-                <Dialog open={dialogOpen} onOpenChange={setDialogOpen}>
-                  <DialogTrigger asChild>
-                    <Button variant="outline" size="sm" className="flex items-center gap-1.5">
-                      <Plus className="h-3.5 w-3.5" /> Add Airline
-                    </Button>
-                  </DialogTrigger>
-                  <DialogContent className="max-w-xl">
-                    <h3 className="text-lg font-semibold mb-4">Add Airline to Comparison</h3>
-                    
-                    <div className="relative mb-4">
-                      <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" />
-                      <Input 
-                        type="text" 
-                        placeholder="Search airlines" 
-                        className="pl-10 pr-20"
-                        value={searchTerm}
-                        onChange={(e) => setSearchTerm(e.target.value)}
-                      />
-                      <div className="absolute right-2 top-1/2 transform -translate-y-1/2">
-                        <Button type="button" size="sm" onClick={handleSearch}>
-                          Search
-                        </Button>
-                      </div>
-                    </div>
-                    
-                    <div className="max-h-96 overflow-y-auto pr-2 space-y-2">
-                      {searchResults.map(airline => (
-                        <div 
-                          key={airline.id}
-                          className="p-3 bg-gray-50 rounded-lg hover:bg-gray-100 transition-colors cursor-pointer flex justify-between items-center"
-                          onClick={() => addAirline(airline.id)}
-                        >
-                          <div className="flex items-center gap-3">
-                            <div className="w-8 h-8 bg-gray-200 rounded-full overflow-hidden">
-                              <img 
-                                src={airline.logo} 
-                                alt={airline.name}
-                                className="w-full h-full object-cover"
-                              />
-                            </div>
-                            <div>
-                              <p className="font-medium">{airline.name}</p>
-                              <p className="text-xs text-gray-500">{airline.code}</p>
-                            </div>
-                          </div>
-                          <Button variant="ghost" size="icon" className="h-7 w-7">
-                            <Plus className="h-4 w-4" />
-                          </Button>
-                        </div>
-                      ))}
-                      
-                      {searchResults.length === 0 && searchTerm && (
-                        <div className="text-center py-4">
-                          <p className="text-gray-500">No airlines found matching "{searchTerm}"</p>
-                        </div>
-                      )}
-                      
-                      {searchResults.length === 0 && !searchTerm && (
-                        <div className="text-center py-4">
-                          <p className="text-gray-500">Search for airlines to add to your comparison</p>
-                        </div>
-                      )}
-                    </div>
-                  </DialogContent>
-                </Dialog>
-              </div>
+          </div>
+        )}
+        
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+          {/* Selected Airlines */}
+          <div className="md:col-span-1">
+            <div className="bg-white p-6 rounded-xl shadow-sm border border-gray-100 sticky top-6">
+              <h2 className="text-xl font-semibold mb-4">Selected Airlines</h2>
+              <p className="text-sm text-gray-500 mb-4">Select up to 3 airlines to compare</p>
               
-              {selectedAirlines.length > 0 ? (
+              {selectedAirlines.length === 0 ? (
+                <div className="py-8 text-center bg-gray-50 rounded-lg">
+                  <p className="text-gray-500">No airlines selected yet</p>
+                </div>
+              ) : (
                 <div className="space-y-3">
-                  {getSelectedAirlineObjects().map(airline => (
-                    <div key={airline.id} className="flex items-center justify-between bg-gray-50 p-3 rounded-lg">
-                      <div className="flex items-center gap-3">
-                        <div className="w-8 h-8 bg-gray-200 rounded-full overflow-hidden">
-                          <img 
-                            src={airline.logo} 
-                            alt={airline.name}
-                            className="w-full h-full object-cover"
-                          />
-                        </div>
-                        <p className="font-medium text-sm">{airline.name}</p>
+                  {selectedAirlines.map(airline => (
+                    <div 
+                      key={airline.id}
+                      className="flex items-center gap-3 p-3 bg-gray-50 rounded-lg hover:bg-gray-100"
+                    >
+                      <div className="w-10 h-10 bg-gray-100 rounded-full overflow-hidden flex-shrink-0">
+                        <img 
+                          src={airline.logo} 
+                          alt={airline.name} 
+                          className="w-full h-full object-cover"
+                          onError={(e) => {
+                            (e.target as HTMLImageElement).src = "https://images.unsplash.com/photo-1483729558449-99ef09a8c325?q=80&w=120&auto=format&fit=crop";
+                          }}
+                        />
                       </div>
+                      <span className="flex-grow font-medium text-sm">{airline.name}</span>
                       <Button 
                         variant="ghost" 
-                        size="icon" 
-                        className="h-7 w-7"
-                        onClick={() => removeAirline(airline.id)}
+                        size="sm" 
+                        onClick={() => toggleAirlineSelection(airline)}
+                        className="h-8 w-8 p-0"
                       >
-                        <X className="h-4 w-4" />
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                          <path d="M18 6 6 18"></path>
+                          <path d="m6 6 12 12"></path>
+                        </svg>
                       </Button>
                     </div>
                   ))}
-                </div>
-              ) : (
-                <div className="text-center py-6 bg-gray-50 rounded-lg">
-                  <p className="text-gray-500 mb-3">No airlines selected for comparison.</p>
-                  <Button
-                    variant="outline"
-                    size="sm"
-                    onClick={() => setDialogOpen(true)}
-                  >
-                    <Plus className="h-3.5 w-3.5 mr-1.5" /> Add Airline
-                  </Button>
                 </div>
               )}
             </div>
           </div>
           
-          {/* Right Column - Comparison Results */}
-          <div className="lg:col-span-2">
-            {selectedAirlines.length > 0 ? (
-              <ComparisonView 
-                luggageDimensions={luggageDimensions}
-                airlineIds={selectedAirlines}
-              />
-            ) : (
-              <div className="text-center py-16 bg-white rounded-xl shadow-sm border border-gray-100">
-                <h3 className="text-lg font-semibold mb-3">Ready to check sizes</h3>
-                <p className="text-gray-500 mb-6 max-w-md mx-auto">
-                  Add airlines to your comparison list to see how your luggage measures up against different baggage policies.
-                </p>
-                <Button onClick={() => setDialogOpen(true)}>
-                  <Plus className="h-4 w-4 mr-2" /> Select Airline
-                </Button>
+          {/* Airline Selection */}
+          <div className="md:col-span-2">
+            <div className="bg-white p-6 rounded-xl shadow-sm border border-gray-100">
+              <h2 className="text-xl font-semibold mb-4">Choose Airlines to Compare</h2>
+              
+              {/* Search */}
+              <div className="relative mb-6">
+                <Input
+                  type="text"
+                  placeholder="Search airlines..."
+                  value={searchTerm}
+                  onChange={(e) => setSearchTerm(e.target.value)}
+                  className="pl-10"
+                />
+                <svg xmlns="http://www.w3.org/2000/svg" className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-gray-400" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                  <circle cx="11" cy="11" r="8"></circle>
+                  <path d="m21 21-4.3-4.3"></path>
+                </svg>
               </div>
-            )}
+              
+              {loading ? (
+                <div className="flex justify-center p-12">
+                  <div className="animate-spin h-10 w-10 border-4 border-coral border-t-transparent rounded-full"></div>
+                </div>
+              ) : filteredAirlines.length > 0 ? (
+                <div className="space-y-3">
+                  {filteredAirlines.map(airline => (
+                    <div
+                      key={airline.id}
+                      className="flex items-center justify-between p-4 border border-gray-100 rounded-lg hover:bg-gray-50 cursor-pointer"
+                      onClick={() => toggleAirlineSelection(airline)}
+                    >
+                      <div className="flex items-center gap-3 flex-grow">
+                        <div className="flex-shrink-0">
+                          <Checkbox 
+                            id={`airline-${airline.id}`}
+                            checked={selectedAirlines.some(a => a.id === airline.id)}
+                            onCheckedChange={() => toggleAirlineSelection(airline)}
+                            className="pointer-events-none"
+                          />
+                        </div>
+                        <div className="w-8 h-8 bg-gray-100 rounded-full overflow-hidden flex-shrink-0">
+                          <img 
+                            src={airline.logo} 
+                            alt={airline.name}
+                            className="w-full h-full object-cover"
+                            onError={(e) => {
+                              (e.target as HTMLImageElement).src = "https://images.unsplash.com/photo-1483729558449-99ef09a8c325?q=80&w=120&auto=format&fit=crop";
+                            }}
+                          />
+                        </div>
+                        <Label 
+                          htmlFor={`airline-${airline.id}`}
+                          className="font-medium cursor-pointer"
+                        >
+                          {airline.name}
+                        </Label>
+                      </div>
+                      <div className="flex-shrink-0 text-sm text-gray-500">
+                        {airline.code}
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              ) : (
+                <div className="text-center py-12 bg-gray-50 rounded-lg">
+                  <p className="text-gray-500">No airlines found matching your search.</p>
+                </div>
+              )}
+            </div>
           </div>
         </div>
       </div>
