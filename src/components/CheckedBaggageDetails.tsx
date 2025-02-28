@@ -7,31 +7,31 @@ interface CheckedBaggageDetailsProps {
 
 export const CheckedBaggageDetails = ({ airline }: CheckedBaggageDetailsProps) => {
   return (
-    <div className="bg-white p-6 rounded-xl shadow-sm border border-gray-100">
-      <h2 className="text-xl font-semibold mb-4">Checked Baggage Policy</h2>
+    <div className="bg-white p-6 rounded-xl border-2 border-gray-100 quirky-shadow-teal">
+      <h2 className="text-xl font-bold mb-4">Checked Baggage Policy</h2>
       
       {airline.checkedBaggage.length > 0 ? (
         <div className="space-y-6">
           {airline.checkedBaggage.map((bag, index) => (
-            <div key={index} className="bg-gray-50 p-4 rounded-lg">
-              <h3 className="font-medium mb-3">Option {index + 1}</h3>
+            <div key={index} className={`bg-gray-50 p-4 rounded-lg border-2 border-dashed ${index % 2 === 0 ? 'border-salmon/30' : 'border-teal/30'} ${index % 2 === 0 ? 'rotate-quirky' : 'rotate-quirky-reverse'}`}>
+              <h3 className="font-bold mb-3">Option {index + 1}</h3>
               
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
                 <div>
                   <p className="text-sm text-gray-500 mb-1">Maximum Dimensions</p>
-                  <p className="font-semibold">
+                  <p className="font-bold">
                     {bag.maxWidth} × {bag.maxHeight} × {bag.maxDepth} cm
                   </p>
                 </div>
                 
                 <div>
                   <p className="text-sm text-gray-500 mb-1">Maximum Weight</p>
-                  <p className="font-semibold">{bag.maxWeight} kg</p>
+                  <p className="font-bold">{bag.maxWeight} kg</p>
                 </div>
               </div>
               
               {bag.notes && (
-                <div className="mt-3 text-sm text-gray-600">
+                <div className="mt-3 text-sm text-gray-600 bg-purple/5 p-3 rounded-lg">
                   <p>{bag.notes}</p>
                 </div>
               )}
@@ -44,8 +44,8 @@ export const CheckedBaggageDetails = ({ airline }: CheckedBaggageDetailsProps) =
         </div>
       )}
       
-      <div className="mt-6 p-4 bg-teal/10 rounded-lg">
-        <h3 className="font-medium mb-2">Important Notes</h3>
+      <div className="mt-6 p-4 bg-yellow/20 rounded-lg border-l-4 border-yellow">
+        <h3 className="font-bold mb-2">Important Notes</h3>
         <ul className="text-sm space-y-2 list-disc list-inside text-gray-700">
           <li>Baggage fees and policies may vary by route and class of travel.</li>
           <li>Special items may require additional fees or handling.</li>
