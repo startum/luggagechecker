@@ -19,7 +19,7 @@ export const Navbar = () => {
   ];
 
   return (
-    <header className="sticky top-0 z-40 w-full backdrop-blur-sm bg-white/90 border-b-2 border-yellow">
+    <header className="sticky top-0 z-40 w-full bg-white border-b border-teal">
       <div className="layout-container">
         <div className="flex h-20 items-center justify-between">
           <div className="flex items-center gap-2">
