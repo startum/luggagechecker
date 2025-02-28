@@ -52,7 +52,7 @@ export const ComparisonView = ({ luggageDimensions, airlineIds }: ComparisonView
           <div key={result.airline.id} className="p-6">
             <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-4">
               <div className="flex items-center gap-3">
-                <div className="w-12 h-12 bg-amber-400/50 rounded-full overflow-hidden flex-shrink-0">
+                <div className="w-12 h-12 bg-gradient-to-r from-red-500/30 to-amber-400/30 rounded-full overflow-hidden flex-shrink-0">
                   <img 
                     src={result.airline.logo} 
                     alt={result.airline.name}
@@ -85,13 +85,13 @@ export const ComparisonView = ({ luggageDimensions, airlineIds }: ComparisonView
             </div>
             
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
-              <div className="bg-amber-400/30 p-3 rounded-lg">
+              <div className="bg-gradient-to-r from-red-500/20 to-amber-400/20 p-3 rounded-lg">
                 <p className="text-xs text-gray-500 mb-1">Carry-on max size</p>
                 <p className="text-sm font-medium">
                   {result.airline.carryOn.maxWidth} × {result.airline.carryOn.maxHeight} × {result.airline.carryOn.maxDepth} cm
                 </p>
               </div>
-              <div className="bg-amber-400/30 p-3 rounded-lg">
+              <div className="bg-gradient-to-r from-red-500/20 to-amber-400/20 p-3 rounded-lg">
                 <p className="text-xs text-gray-500 mb-1">Carry-on max weight</p>
                 <p className="text-sm font-medium">{result.airline.carryOn.maxWeight} kg</p>
               </div>

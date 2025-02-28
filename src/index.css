@@ -141,6 +141,6 @@
 
   /* Box styles - changed from gradients to solid colors */
   .gradient-salmon-yellow, .gradient-yellow-salmon {
-    @apply bg-amber-400/30;
+    @apply bg-gradient-to-r from-red-500/20 to-amber-400/20;
   }
 }
