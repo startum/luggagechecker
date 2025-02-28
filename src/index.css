@@ -101,7 +101,7 @@
 
   /* Form selectors styling */
   select, option, input[type="checkbox"], input[type="radio"] {
-    @apply text-salmon;
+    @apply text-primary;
     accent-color: #FFD166; /* Use direct hex color instead of accent-sunshine class */
   }
 }
@@ -122,7 +122,7 @@
 
   /* Text gradient */
   .text-gradient {
-    @apply bg-clip-text text-transparent bg-gradient-to-r from-[#FF7066] to-[#FFD166];
+    @apply bg-clip-text text-transparent bg-gradient-to-r from-red-500 to-amber-400;
   }
 
   /* Image fade in animation */
@@ -141,10 +141,10 @@
 
   /* Box gradients */
   .gradient-salmon-yellow {
-    @apply bg-gradient-to-r from-[#FF7066]/20 to-[#FFD166]/20;
+    @apply bg-gradient-to-r from-red-500/20 to-amber-400/20;
   }
   
   .gradient-yellow-salmon {
-    @apply bg-gradient-to-r from-[#FFD166]/20 to-[#FF7066]/20;
+    @apply bg-gradient-to-r from-amber-400/20 to-red-500/20;
   }
 }
