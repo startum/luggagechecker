@@ -22,16 +22,16 @@
     --popover: 0 0% 100%;
     --popover-foreground: 222 47% 11%;
 
-    --primary: 352 95% 61%;
+    --primary: 209 79% 24%; /* navy blue: #0A3F70 */
     --primary-foreground: 210 40% 98%;
 
-    --secondary: 186 83% 65%;
+    --secondary: 42 100% 70%; /* yellow: #FFD166 */
     --secondary-foreground: 222 47% 11%;
 
     --muted: 210 40% 96.1%;
     --muted-foreground: 215.4 16.3% 46.9%;
 
-    --accent: 44 96% 55%;
+    --accent: 182 94% 39%; /* teal: #06BCC1 */
     --accent-foreground: 222 47% 11%;
 
     --destructive: 0 84.2% 60.2%;

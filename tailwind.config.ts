@@ -67,36 +67,46 @@ export default {
 					border: 'hsl(var(--sidebar-border))',
 					ring: 'hsl(var(--sidebar-ring))'
 				},
-				// Custom app colors
+				// Custom app colors with new palette
 				coral: {
-					DEFAULT: '#FF6B6B',
+					DEFAULT: '#FF715B', // Updated to salmon
 					light: '#FFB4A2',
 					dark: '#E63946'
 				},
 				seafoam: {
-					DEFAULT: '#6BD5E1',
+					DEFAULT: '#06BCC1', // Updated to teal
 					light: '#AEE5D8',
 					dark: '#1A9AAA'
 				},
 				sunshine: {
-					DEFAULT: '#FFD166',
+					DEFAULT: '#FFD166', // Yellow
 					light: '#FFFCEB',
 					dark: '#FFC233'
 				},
 				lavender: {
-					DEFAULT: '#9381FF',
+					DEFAULT: '#976391', // Updated to purple
 					light: '#B8B8FF',
-					dark: '#5E60CE'
+					dark: '#7E4F7B'
 				},
 				teal: {
-					DEFAULT: '#009998',
+					DEFAULT: '#06BCC1', // New teal
 					light: '#6BD5E1',
 					dark: '#00706F'
 				},
 				navy: {
-					DEFAULT: '#0A3F70',
+					DEFAULT: '#0A3F70', // Navy blue
 					light: '#0F5A9E',
 					dark: '#062A4B'
+				},
+				salmon: {
+					DEFAULT: '#FF715B', // New salmon
+					light: '#FFA090',
+					dark: '#E55A45'
+				},
+				purple: {
+					DEFAULT: '#976391', // New purple
+					light: '#B185AB',
+					dark: '#7D4E78'
 				}
 			},
 			borderRadius: {

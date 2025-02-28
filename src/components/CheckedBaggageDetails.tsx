@@ -44,7 +44,7 @@ export const CheckedBaggageDetails = ({ airline }: CheckedBaggageDetailsProps) =
         </div>
       )}
       
-      <div className="mt-6 p-4 bg-seafoam/10 rounded-lg">
+      <div className="mt-6 p-4 bg-teal/10 rounded-lg">
         <h3 className="font-medium mb-2">Important Notes</h3>
         <ul className="text-sm space-y-2 list-disc list-inside text-gray-700">
           <li>Baggage fees and policies may vary by route and class of travel.</li>
