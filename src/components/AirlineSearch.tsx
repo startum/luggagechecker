@@ -106,6 +106,15 @@ export const AirlineSearch = ({
     }
   }, [searchTerm, filterCriteria.restrictive]);
 
+  // Perform search
+  const handleSearch = () => {
+    console.log(`Performing search for: "${searchTerm}"`);
+    if (allAirlines.length > 0) {
+      const filtered = applyFilters(allAirlines);
+      setDisplayedAirlines(filtered);
+    }
+  };
+
   // Toggle sort by restrictiveness
   const toggleRestrictive = () => {
     console.log(`Toggling restrictive filter`);
@@ -126,7 +135,10 @@ export const AirlineSearch = ({
     <div className="w-full">
       {/* Search and Filter Controls */}
       <div className="mb-6 animate-fade-in">
-        <form className="relative mb-4" onSubmit={(e) => e.preventDefault()}>
+        <form className="relative mb-4" onSubmit={(e) => {
+          e.preventDefault();
+          handleSearch();
+        }}>
           <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" />
           <Input 
             type="text" 
@@ -136,6 +148,14 @@ export const AirlineSearch = ({
             onChange={(e) => setSearchTerm(e.target.value)}
           />
           <div className="absolute right-2 top-1/2 transform -translate-y-1/2 flex gap-2">
+            <Button 
+              type="submit" 
+              variant="default" 
+              size="sm" 
+              className="h-9"
+            >
+              <Search className="h-4 w-4 mr-1" /> Search
+            </Button>
             <Button 
               type="button" 
               variant="ghost" 
