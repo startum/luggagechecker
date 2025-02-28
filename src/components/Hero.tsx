@@ -16,9 +16,9 @@ export const Hero = () => {
   
   return (
     <section className="relative py-24 overflow-hidden">
-      {/* Background Elements - Updated with warmer tones */}
+      {/* Background Elements - Updated with navy and sunshine colors */}
       <div className="absolute top-40 left-0 w-64 h-64 bg-sunshine/40 rounded-full mix-blend-multiply filter blur-xl opacity-30 animate-floating"></div>
-      <div className="absolute bottom-0 right-0 w-72 h-72 bg-coral/30 rounded-full mix-blend-multiply filter blur-xl opacity-20 animate-floating" style={{ animationDelay: '1s' }}></div>
+      <div className="absolute bottom-0 right-0 w-72 h-72 bg-navy/30 rounded-full mix-blend-multiply filter blur-xl opacity-20 animate-floating" style={{ animationDelay: '1s' }}></div>
       
       {/* Background Image - Updated with airplane image */}
       <div className="absolute inset-0 z-0 opacity-20">
@@ -33,12 +33,12 @@ export const Hero = () => {
         <div className="flex flex-col lg:flex-row items-center max-w-6xl mx-auto">
           {/* Left Column: Text Content */}
           <div className="flex flex-col items-center lg:items-start text-center lg:text-left lg:w-1/2 mb-12 lg:mb-0">
-            <span className="inline-block px-4 py-1.5 rounded-full bg-coral/10 text-coral-dark text-base font-medium mb-6 animate-fade-in">
+            <span className="inline-block px-4 py-1.5 rounded-full bg-navy/10 text-navy-dark text-base font-medium mb-6 animate-fade-in">
               Compare Luggage Policies Across Airlines
             </span>
             
             <h1 className="text-4xl md:text-5xl lg:text-6xl font-gordita font-bold tracking-tight mb-6 animate-slide-up">
-              Will Your Bag <span className="bg-clip-text text-transparent bg-gradient-to-r from-coral to-sunshine">Fly</span> With You?
+              Will Your Bag <span className="bg-clip-text text-transparent bg-gradient-to-r from-navy to-sunshine">Fly</span> With You?
             </h1>
             
             <p className="text-xl text-gray-600 mb-8 max-w-2xl animate-slide-up font-roboto" style={{ animationDelay: '0.1s' }}>
@@ -56,7 +56,7 @@ export const Hero = () => {
                   onChange={(e) => setSearchTerm(e.target.value)}
                 />
               </form>
-              <Button onClick={handleSearch} className="h-14 bg-coral hover:bg-coral-dark shadow-sm text-white text-base px-6">
+              <Button onClick={handleSearch} className="h-14 bg-navy hover:bg-navy-dark shadow-sm text-white text-base px-6">
                 Find Airlines <ArrowRight className="ml-2 h-5 w-5" />
               </Button>
             </div>
@@ -72,7 +72,7 @@ export const Hero = () => {
               />
               <div className="absolute -bottom-4 -left-4 bg-white p-4 rounded-lg shadow-md border border-gray-100">
                 <div className="flex items-center gap-2">
-                  <Check className="text-coral h-5 w-5" />
+                  <Check className="text-navy h-5 w-5" />
                   <span className="text-base font-medium">Verified for 100+ airlines</span>
                 </div>
               </div>
@@ -92,8 +92,8 @@ export const Hero = () => {
               }
             }}
           >
-            <div className="w-16 h-16 bg-coral/10 rounded-lg flex items-center justify-center mb-5">
-              <Luggage className="h-8 w-8 text-coral-dark" />
+            <div className="w-16 h-16 bg-navy/10 rounded-lg flex items-center justify-center mb-5">
+              <Luggage className="h-8 w-8 text-navy-dark" />
             </div>
             <h3 className="text-xl font-gordita font-semibold mb-3">Measure Your Luggage</h3>
             <p className="text-gray-600 font-roboto">Enter your bag's dimensions and weight to check against airline limits.</p>
@@ -116,8 +116,8 @@ export const Hero = () => {
             style={{ animationDelay: '0.5s' }}
             onClick={() => navigate('/results')}
           >
-            <div className="w-16 h-16 bg-coral/10 rounded-lg flex items-center justify-center mb-5">
-              <Search className="h-8 w-8 text-coral-dark" />
+            <div className="w-16 h-16 bg-navy/10 rounded-lg flex items-center justify-center mb-5">
+              <Search className="h-8 w-8 text-navy-dark" />
             </div>
             <h3 className="text-xl font-gordita font-semibold mb-3">Get Detailed Results</h3>
             <p className="text-gray-600 font-roboto">View comprehensive information about carry-on and checked baggage policies.</p>

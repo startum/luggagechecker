@@ -9,7 +9,7 @@ interface LayoutProps {
 
 export const Layout: React.FC<LayoutProps> = ({ children }) => {
   return (
-    <div className="min-h-screen flex flex-col bg-gradient-to-br from-white to-teal-light font-roboto">
+    <div className="min-h-screen flex flex-col bg-gradient-to-br from-white to-sunshine/10 font-roboto">
       <Navbar />
       <main className="flex-grow">
         {children}
@@ -21,9 +21,9 @@ export const Layout: React.FC<LayoutProps> = ({ children }) => {
               © {new Date().getFullYear()} Flight Bag Checker. All rights reserved.
             </div>
             <div className="flex gap-4">
-              <a href="#" className="text-sm text-gray-500 hover:text-gray-700 transition-colors">Privacy Policy</a>
-              <a href="#" className="text-sm text-gray-500 hover:text-gray-700 transition-colors">Terms of Service</a>
-              <a href="#" className="text-sm text-gray-500 hover:text-gray-700 transition-colors">Contact</a>
+              <a href="#" className="text-sm text-gray-500 hover:text-navy transition-colors">Privacy Policy</a>
+              <a href="#" className="text-sm text-gray-500 hover:text-navy transition-colors">Terms of Service</a>
+              <a href="#" className="text-sm text-gray-500 hover:text-navy transition-colors">Contact</a>
             </div>
           </div>
         </div>

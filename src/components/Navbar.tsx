@@ -25,7 +25,7 @@ export const Navbar = () => {
           <div className="flex items-center gap-2">
             <Link to="/" className="flex items-center">
               <img 
-                src="/lovable-uploads/e6102fe8-a1af-4da7-97c9-d0e2b6b8039f.png" 
+                src="/lovable-uploads/d7e40a2f-c205-432d-b326-e226e5b78aab.png" 
                 alt="Flight Bag Checker" 
                 className="h-10"
               />
@@ -39,9 +39,9 @@ export const Navbar = () => {
                 key={link.path}
                 to={link.path}
                 className={cn(
-                  "flex items-center text-sm font-medium transition-colors hover:text-teal",
+                  "flex items-center text-sm font-medium transition-colors hover:text-navy",
                   isActive(link.path) 
-                    ? "text-teal"
+                    ? "text-navy"
                     : "text-foreground/80"
                 )}
               >
@@ -81,7 +81,7 @@ export const Navbar = () => {
                 className={cn(
                   "flex items-center px-4 py-2 rounded-md text-sm font-medium transition-colors",
                   isActive(link.path) 
-                    ? "bg-muted text-teal"
+                    ? "bg-muted text-navy"
                     : "hover:bg-muted"
                 )}
               >
