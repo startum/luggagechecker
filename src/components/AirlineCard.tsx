@@ -59,7 +59,7 @@ export const AirlineCard = ({ airline, delay = 0, compact = false }: AirlineCard
             </div>
           </div>
         </div>
-        <Button variant="ghost" size="icon" onClick={toggleFavorite} className={isFavorite ? "text-purple-500" : ""}>
+        <Button variant="ghost" size="icon" onClick={toggleFavorite} className={isFavorite ? "text-teal" : ""}>
           <Heart className="h-5 w-5" fill={isFavorite ? "currentColor" : "none"} />
         </Button>
       </div>
@@ -75,7 +75,7 @@ export const AirlineCard = ({ airline, delay = 0, compact = false }: AirlineCard
       <div className="relative">
         <div className="w-full h-16 bg-slate-100"></div>
         <div className="absolute top-4 right-4">
-          <Button variant="outline" size="icon" onClick={toggleFavorite} className={isFavorite ? "text-purple-500 bg-white" : "bg-white"}>
+          <Button variant="outline" size="icon" onClick={toggleFavorite} className={isFavorite ? "text-teal bg-white" : "bg-white"}>
             <Heart className="h-5 w-5" fill={isFavorite ? "currentColor" : "none"} />
           </Button>
         </div>
