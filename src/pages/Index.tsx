@@ -104,9 +104,9 @@ const Index = () => {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 sm:gap-12 items-center mb-12 sm:mb-16">
             <div>
               <img 
-                src="https://images.unsplash.com/photo-1499591934245-40b55745b945?q=80&w=1470&auto=format&fit=crop" 
-                alt="Traveler with luggage" 
-                className="rounded-xl shadow-lg w-full"
+                src="/lovable-uploads/a9eba0a3-7cf7-4bca-bf98-513603e6f8bf.png" 
+                alt="Airport terminal view with airplane and seating area" 
+                className="rounded-xl shadow-lg w-full object-cover h-full"
               />
             </div>
             <div>
