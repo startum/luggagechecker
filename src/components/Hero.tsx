@@ -42,7 +42,7 @@ export const Hero = () => {
             </span>
             
             <h1 className="text-4xl md:text-5xl lg:text-6xl font-gordita font-bold tracking-tight mb-8 animate-slide-up">
-              Will Your Bag <span className="bg-clip-text text-transparent bg-gradient-to-r from-salmon to-teal">Fly</span> With You?
+              Will Your Bag <span className="text-salmon">Fly</span> With You?
             </h1>
             
             <p className="text-xl text-gray-600 mb-10 max-w-2xl animate-slide-up font-roboto" style={{ animationDelay: '0.1s' }}>
