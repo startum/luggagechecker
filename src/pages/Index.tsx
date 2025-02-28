@@ -117,8 +117,8 @@ const Index = () => {
               
               <div className="space-y-3 sm:space-y-4">
                 <div className="flex items-start gap-2 sm:gap-3">
-                  <div className="w-6 h-6 sm:w-8 sm:h-8 bg-green-100 rounded-full flex items-center justify-center flex-shrink-0 mt-1">
-                    <Check className="h-4 w-4 sm:h-5 sm:w-5 text-green-600" />
+                  <div className="w-6 h-6 sm:w-8 sm:h-8 bg-teal/20 rounded-full flex items-center justify-center flex-shrink-0 mt-1">
+                    <Check className="h-4 w-4 sm:h-5 sm:w-5 text-teal" />
                   </div>
                   <div>
                     <h3 className="text-lg sm:text-xl font-semibold mb-1 sm:mb-2">100+ Airlines Covered</h3>
@@ -129,8 +129,8 @@ const Index = () => {
                 </div>
                 
                 <div className="flex items-start gap-2 sm:gap-3">
-                  <div className="w-6 h-6 sm:w-8 sm:h-8 bg-green-100 rounded-full flex items-center justify-center flex-shrink-0 mt-1">
-                    <Check className="h-4 w-4 sm:h-5 sm:w-5 text-green-600" />
+                  <div className="w-6 h-6 sm:w-8 sm:h-8 bg-teal/20 rounded-full flex items-center justify-center flex-shrink-0 mt-1">
+                    <Check className="h-4 w-4 sm:h-5 sm:w-5 text-teal" />
                   </div>
                   <div>
                     <h3 className="text-lg sm:text-xl font-semibold mb-1 sm:mb-2">Real-Time Updates</h3>
@@ -141,8 +141,8 @@ const Index = () => {
                 </div>
                 
                 <div className="flex items-start gap-2 sm:gap-3">
-                  <div className="w-6 h-6 sm:w-8 sm:h-8 bg-green-100 rounded-full flex items-center justify-center flex-shrink-0 mt-1">
-                    <Check className="h-4 w-4 sm:h-5 sm:w-5 text-green-600" />
+                  <div className="w-6 h-6 sm:w-8 sm:h-8 bg-teal/20 rounded-full flex items-center justify-center flex-shrink-0 mt-1">
+                    <Check className="h-4 w-4 sm:h-5 sm:w-5 text-teal" />
                   </div>
                   <div>
                     <h3 className="text-lg sm:text-xl font-semibold mb-1 sm:mb-2">Easy Comparisons</h3>
