@@ -29,11 +29,11 @@ export const AirlineCard = ({ airline, delay = 0, compact = false }: AirlineCard
   if (compact) {
     return (
       <div 
-        className="bg-gradient-to-r from-salmon/10 to-yellow/10 p-5 rounded-xl cursor-pointer flex items-center justify-between transition-all hover:-translate-y-1"
+        className="bg-amber-400/30 p-5 rounded-xl cursor-pointer flex items-center justify-between transition-all hover:-translate-y-1"
         onClick={handleViewDetails}
       >
         <div className="flex items-center gap-4">
-          <div className="w-11 h-11 bg-gradient-to-r from-yellow/30 to-salmon/30 rounded-full overflow-hidden flex-shrink-0">
+          <div className="w-11 h-11 bg-amber-400/50 rounded-full overflow-hidden flex-shrink-0">
             <img 
               src={airline.logo} 
               alt={airline.name}
@@ -73,7 +73,7 @@ export const AirlineCard = ({ airline, delay = 0, compact = false }: AirlineCard
       onClick={handleViewDetails}
     >
       <div className="relative">
-        <div className="w-full h-16 bg-gradient-to-r from-salmon/30 to-yellow/30"></div>
+        <div className="w-full h-16 bg-amber-400/30"></div>
         <div className="absolute top-4 right-4">
           <Button variant="ghost" size="icon" onClick={toggleFavorite} className={isFavorite ? "text-salmon bg-white/80" : "bg-white/80"}>
             <Heart className="h-5 w-5" fill={isFavorite ? "currentColor" : "none"} />
@@ -83,7 +83,7 @@ export const AirlineCard = ({ airline, delay = 0, compact = false }: AirlineCard
       
       <div className="p-6">
         <div className="mb-4 flex items-center gap-4">
-          <div className="w-14 h-14 bg-gradient-to-r from-yellow/30 to-salmon/30 rounded-full overflow-hidden flex-shrink-0">
+          <div className="w-14 h-14 bg-amber-400/50 rounded-full overflow-hidden flex-shrink-0">
             <img 
               src={airline.logo} 
               alt={airline.name}
@@ -111,13 +111,13 @@ export const AirlineCard = ({ airline, delay = 0, compact = false }: AirlineCard
         </div>
         
         <div className="grid grid-cols-2 gap-4 mb-5">
-          <div className="bg-gradient-to-r from-salmon/10 to-yellow/10 p-4 rounded-lg">
+          <div className="bg-amber-400/30 p-4 rounded-lg">
             <p className="text-sm text-gray-500 mb-1">Carry-on max size</p>
             <p className="text-base font-bold">
               {airline.carryOn.maxWidth} × {airline.carryOn.maxHeight} × {airline.carryOn.maxDepth} cm
             </p>
           </div>
-          <div className="bg-gradient-to-r from-yellow/10 to-salmon/10 p-4 rounded-lg">
+          <div className="bg-amber-400/30 p-4 rounded-lg">
             <p className="text-sm text-gray-500 mb-1">Carry-on max weight</p>
             <p className="text-base font-bold">{airline.carryOn.maxWeight} kg</p>
           </div>

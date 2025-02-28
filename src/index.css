@@ -139,12 +139,8 @@
     @apply container mx-auto px-4 md:px-6;
   }
 
-  /* Box gradients */
-  .gradient-salmon-yellow {
-    @apply bg-gradient-to-r from-red-500/20 to-amber-400/20;
-  }
-  
-  .gradient-yellow-salmon {
-    @apply bg-gradient-to-r from-amber-400/20 to-red-500/20;
+  /* Box styles - changed from gradients to solid colors */
+  .gradient-salmon-yellow, .gradient-yellow-salmon {
+    @apply bg-amber-400/30;
   }
 }

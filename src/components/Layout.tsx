@@ -19,7 +19,7 @@ export const Layout: React.FC<LayoutProps> = ({ children }) => {
           <div className="flex flex-col md:flex-row justify-between items-center gap-6">
             <div className="flex items-center">
               <img 
-                src="/lovable-uploads/41cd0ddc-72b6-46a3-92fa-508eafadbd5a.png" 
+                src="/lovable-uploads/6db1db29-a582-40e4-8cff-3e49311a67b7.png" 
                 alt="Luggage Checker" 
                 className="h-16 mr-2"
               />

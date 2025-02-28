@@ -25,7 +25,7 @@ export const Navbar = () => {
           <div className="flex items-center gap-2">
             <Link to="/" className="flex items-center">
               <img 
-                src="/lovable-uploads/41cd0ddc-72b6-46a3-92fa-508eafadbd5a.png" 
+                src="/lovable-uploads/6db1db29-a582-40e4-8cff-3e49311a67b7.png" 
                 alt="Luggage Checker" 
                 className="h-28"
               />
