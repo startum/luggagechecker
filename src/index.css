@@ -1,3 +1,4 @@
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -57,5 +58,10 @@
   .step:before {
     @apply absolute flex h-9 w-9 items-center justify-center rounded-full bg-muted font-medium text-muted-foreground ring-1 ring-border;
     content: counter(step);
+  }
+  
+  /* Layout container with proper padding */
+  .layout-container {
+    @apply container mx-auto px-4 sm:px-6 lg:px-8 max-w-7xl;
   }
 }

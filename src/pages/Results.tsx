@@ -64,7 +64,7 @@ const Results = () => {
       <div className="py-8 layout-container">
         {loading ? (
           <div className="flex justify-center items-center py-20">
-            <div className="animate-spin h-10 w-10 border-4 border-coral border-t-transparent rounded-full"></div>
+            <div className="animate-spin h-10 w-10 border-4 border-primary border-t-transparent rounded-full"></div>
           </div>
         ) : airlineId && airline ? (
           <AirlineHeader 
