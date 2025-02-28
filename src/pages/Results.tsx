@@ -11,6 +11,7 @@ const Results = () => {
   const { airlineId } = useParams();
   const [airline, setAirline] = useState(null);
   const [loading, setLoading] = useState(!!airlineId);
+  const [isFavorite, setIsFavorite] = useState(false);
   
   const location = useLocation();
   console.log("📍 Current location:", location.pathname);
@@ -32,6 +33,13 @@ const Results = () => {
           const airlineData = await airlineService.getAirlineById(airlineId);
           console.log("✅ Loaded airline details:", airlineData?.name);
           setAirline(airlineData);
+          
+          // Check if this airline is in favorites
+          if (airlineData) {
+            const favoriteStatus = airlineService.isFavorite(airlineData.id);
+            setIsFavorite(favoriteStatus);
+            console.log("🌟 Is airline favorite:", favoriteStatus);
+          }
         } catch (error) {
           console.error('❌ Error loading airline details:', error);
         } finally {
@@ -43,6 +51,14 @@ const Results = () => {
     loadAirline();
   }, [airlineId]);
   
+  const handleToggleFavorite = () => {
+    if (airline) {
+      const newFavoriteStatus = airlineService.toggleFavorite(airline.id);
+      setIsFavorite(newFavoriteStatus);
+      console.log("🔄 Toggled favorite status to:", newFavoriteStatus);
+    }
+  };
+  
   return (
     <Layout>
       <div className="py-8 layout-container">
@@ -51,7 +67,11 @@ const Results = () => {
             <div className="animate-spin h-10 w-10 border-4 border-coral border-t-transparent rounded-full"></div>
           </div>
         ) : airlineId && airline ? (
-          <AirlineHeader airline={airline} />
+          <AirlineHeader 
+            airline={airline} 
+            isFavorite={isFavorite} 
+            onToggleFavorite={handleToggleFavorite} 
+          />
         ) : isFavoritesRoute ? (
           <>
             <h1 className="text-3xl font-bold mb-6">Your Favorite Airlines</h1>
