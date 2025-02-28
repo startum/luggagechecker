@@ -17,8 +17,8 @@ export const Hero = () => {
   return (
     <section className="relative py-24 overflow-hidden">
       {/* Background Elements */}
-      <div className="absolute top-40 left-0 w-64 h-64 bg-teal-light rounded-full mix-blend-multiply filter blur-xl opacity-20 animate-floating"></div>
-      <div className="absolute bottom-0 right-0 w-72 h-72 bg-navy-light rounded-full mix-blend-multiply filter blur-xl opacity-20 animate-floating" style={{ animationDelay: '1s' }}></div>
+      <div className="absolute top-40 left-0 w-64 h-64 bg-navy-light rounded-full mix-blend-multiply filter blur-xl opacity-20 animate-floating"></div>
+      <div className="absolute bottom-0 right-0 w-72 h-72 bg-navy/30 rounded-full mix-blend-multiply filter blur-xl opacity-20 animate-floating" style={{ animationDelay: '1s' }}></div>
       
       {/* Background Image */}
       <div className="absolute inset-0 z-0 opacity-10">
@@ -33,7 +33,7 @@ export const Hero = () => {
         <div className="flex flex-col lg:flex-row items-center max-w-6xl mx-auto">
           {/* Left Column: Text Content */}
           <div className="flex flex-col items-center lg:items-start text-center lg:text-left lg:w-1/2 mb-12 lg:mb-0">
-            <span className="inline-block px-4 py-1.5 rounded-full bg-teal/10 text-teal-dark text-base font-medium mb-6 animate-fade-in">
+            <span className="inline-block px-4 py-1.5 rounded-full bg-navy/10 text-navy-dark text-base font-medium mb-6 animate-fade-in">
               Compare Luggage Policies Across Airlines
             </span>
             
@@ -56,7 +56,7 @@ export const Hero = () => {
                   onChange={(e) => setSearchTerm(e.target.value)}
                 />
               </form>
-              <Button onClick={handleSearch} className="h-14 bg-teal hover:bg-teal-dark shadow-sm text-base px-6">
+              <Button onClick={handleSearch} className="h-14 bg-navy hover:bg-navy-dark shadow-sm text-white text-base px-6">
                 Find Airlines <ArrowRight className="ml-2 h-5 w-5" />
               </Button>
             </div>
@@ -72,7 +72,7 @@ export const Hero = () => {
               />
               <div className="absolute -bottom-4 -left-4 bg-white p-4 rounded-lg shadow-md border border-gray-100">
                 <div className="flex items-center gap-2">
-                  <Check className="text-green-500 h-5 w-5" />
+                  <Check className="text-navy h-5 w-5" />
                   <span className="text-base font-medium">Verified for 100+ airlines</span>
                 </div>
               </div>
@@ -92,8 +92,8 @@ export const Hero = () => {
               }
             }}
           >
-            <div className="w-16 h-16 bg-teal/10 rounded-lg flex items-center justify-center mb-5">
-              <Luggage className="h-8 w-8 text-teal-dark" />
+            <div className="w-16 h-16 bg-navy/10 rounded-lg flex items-center justify-center mb-5">
+              <Luggage className="h-8 w-8 text-navy-dark" />
             </div>
             <h3 className="text-xl font-gordita font-semibold mb-3">Measure Your Luggage</h3>
             <p className="text-gray-600 font-roboto">Enter your bag's dimensions and weight to check against airline limits.</p>
