@@ -189,11 +189,12 @@ export const AirlineSearch = ({
           <div className="animate-spin h-10 w-10 border-4 border-primary border-t-transparent rounded-full"></div>
         </div>
       ) : displayedAirlines.length > 0 ? (
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div className="grid gap-4">
           {displayedAirlines.map((airline, index) => (
             <AirlineCard 
               key={airline.id} 
-              airline={airline} 
+              airline={airline}
+              compact={true}
               delay={index * 0.1}
             />
           ))}

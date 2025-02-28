@@ -77,12 +77,14 @@ const Index = () => {
                   {currentDimensions.weight} kg
                 </div>
               </div>
-              <AirlineSearch 
-                initialSearch={searchTerm}
-                filterByDimensions={true}
-                luggageDimensions={currentDimensions}
-                limit={6}
-              />
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <AirlineSearch 
+                  initialSearch={searchTerm}
+                  filterByDimensions={true}
+                  luggageDimensions={currentDimensions}
+                  limit={6}
+                />
+              </div>
             </div>
           </div>
         </div>
@@ -103,7 +105,7 @@ const Index = () => {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center mb-16">
             <div>
               <img 
-                src="https://images.unsplash.com/photo-1499591934245-40b55745b905?q=80&w=1470&auto=format&fit=crop" 
+                src="https://images.unsplash.com/photo-1499591934245-40b55745b945?q=80&w=1470&auto=format&fit=crop" 
                 alt="Traveler with luggage" 
                 className="rounded-xl shadow-lg"
               />
