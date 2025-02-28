@@ -93,7 +93,14 @@
 
   /* Form selectors styling */
   select, option, input[type="checkbox"], input[type="radio"] {
-    @apply text-salmon accent-yellow;
+    @apply text-salmon accent-sunshine;
+  }
+}
+
+@layer components {
+  /* Define custom classes here */
+  .accent-sunshine {
+    accent-color: theme('colors.sunshine.DEFAULT');
   }
 }
 
