@@ -32,31 +32,31 @@ export const ComparisonView = ({ luggageDimensions, airlineIds }: ComparisonView
   
   if (loading) {
     return (
-      <div className="text-center p-6 bg-white rounded-xl shadow-sm border border-gray-100">
-        <div className="animate-spin h-10 w-10 border-4 border-coral border-t-transparent rounded-full mx-auto"></div>
+      <div className="text-center p-6 bg-white rounded-lg shadow-md">
+        <div className="animate-spin h-10 w-10 border-4 border-primary border-t-transparent rounded-full mx-auto"></div>
       </div>
     );
   }
   
   return (
-    <div className="bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden animate-fade-in">
-      <div className="p-6 border-b border-gray-100">
+    <div className="bg-white rounded-lg shadow-md overflow-hidden animate-fade-in">
+      <div className="p-6 border-b">
         <h3 className="text-lg font-semibold mb-2">Comparison Results</h3>
         <p className="text-sm text-gray-500">
           Your luggage dimensions: {luggageDimensions.width} × {luggageDimensions.height} × {luggageDimensions.depth} cm, {luggageDimensions.weight} kg
         </p>
       </div>
       
-      <div className="divide-y divide-gray-100">
+      <div className="divide-y">
         {results.map((result) => (
           <div key={result.airline.id} className="p-6">
             <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-4">
               <div className="flex items-center gap-3">
-                <div className="w-12 h-12 bg-gradient-to-r from-red-500/30 to-amber-400/30 rounded-full overflow-hidden flex-shrink-0">
+                <div className="w-12 h-12 bg-slate-100 rounded-full overflow-hidden flex-shrink-0 flex items-center justify-center">
                   <img 
                     src={result.airline.logo} 
                     alt={result.airline.name}
-                    className="w-full h-full object-cover"
+                    className="max-w-full max-h-full object-contain"
                     onError={(e) => {
                       (e.target as HTMLImageElement).src = "https://images.unsplash.com/photo-1483729558449-99ef09a8c325?q=80&w=120&auto=format&fit=crop";
                     }}
@@ -85,21 +85,21 @@ export const ComparisonView = ({ luggageDimensions, airlineIds }: ComparisonView
             </div>
             
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
-              <div className="bg-gradient-to-r from-red-500/20 to-amber-400/20 p-3 rounded-lg">
+              <div className="bg-slate-100 p-3 rounded-md">
                 <p className="text-xs text-gray-500 mb-1">Carry-on max size</p>
                 <p className="text-sm font-medium">
                   {result.airline.carryOn.maxWidth} × {result.airline.carryOn.maxHeight} × {result.airline.carryOn.maxDepth} cm
                 </p>
               </div>
-              <div className="bg-gradient-to-r from-red-500/20 to-amber-400/20 p-3 rounded-lg">
+              <div className="bg-slate-100 p-3 rounded-md">
                 <p className="text-xs text-gray-500 mb-1">Carry-on max weight</p>
                 <p className="text-sm font-medium">{result.airline.carryOn.maxWeight} kg</p>
               </div>
             </div>
             
             {!result.fits && (
-              <div className="bg-coral/5 border border-coral/10 rounded-lg p-4 mb-4">
-                <h5 className="text-sm font-medium text-coral-dark mb-2">Size Issue Details</h5>
+              <div className="bg-red-50 border border-red-100 rounded-md p-4 mb-4">
+                <h5 className="text-sm font-medium text-red-700 mb-2">Size Issue Details</h5>
                 <p className="text-sm text-gray-600">{result.details}</p>
               </div>
             )}

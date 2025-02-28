@@ -127,7 +127,7 @@ export const AirlineSearch = ({
         
         {/* Filter Options */}
         {showFilters && (
-          <div className="bg-white p-4 rounded-lg shadow-sm border border-gray-100 mb-4 animate-fade-in">
+          <div className="bg-white p-4 rounded-md shadow-sm mb-4 animate-fade-in">
             <div className="flex items-center justify-between mb-4">
               <h3 className="font-medium">Filters</h3>
               <Button variant="ghost" size="sm" onClick={clearFilters} className="text-xs">
@@ -165,7 +165,7 @@ export const AirlineSearch = ({
       {/* Results Grid */}
       {loading ? (
         <div className="flex justify-center p-12">
-          <div className="animate-spin h-10 w-10 border-4 border-coral border-t-transparent rounded-full"></div>
+          <div className="animate-spin h-10 w-10 border-4 border-primary border-t-transparent rounded-full"></div>
         </div>
       ) : airlines.length > 0 ? (
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -178,7 +178,7 @@ export const AirlineSearch = ({
           ))}
         </div>
       ) : (
-        <div className="text-center py-12 bg-white rounded-lg shadow-sm border border-gray-100">
+        <div className="text-center py-12 bg-white rounded-md shadow-sm">
           <p className="text-gray-500">No airlines found matching your search criteria.</p>
           <Button variant="link" onClick={clearFilters} className="mt-2">
             Clear filters and try again

@@ -52,8 +52,8 @@ export const FavoritesSection = () => {
   
   if (loading) {
     return (
-      <div className="text-center py-16 bg-white rounded-xl shadow-sm border border-gray-100 animate-fade-in">
-        <div className="animate-spin h-10 w-10 border-4 border-coral border-t-transparent rounded-full mx-auto"></div>
+      <div className="text-center py-16 bg-white rounded-lg shadow-md animate-fade-in">
+        <div className="animate-spin h-10 w-10 border-4 border-primary border-t-transparent rounded-full mx-auto"></div>
       </div>
     );
   }
@@ -61,7 +61,7 @@ export const FavoritesSection = () => {
   if (favorites.length === 0) {
     console.log("😢 No favorites to display");
     return (
-      <div className="text-center py-16 bg-white rounded-xl shadow-sm border border-gray-100 animate-fade-in">
+      <div className="text-center py-16 bg-white rounded-lg shadow-md animate-fade-in">
         <Heart className="h-12 w-12 mx-auto text-gray-300 mb-4" />
         <h3 className="text-lg font-semibold mb-2">No Favorites Yet</h3>
         <p className="text-gray-500 mb-6 max-w-md mx-auto">

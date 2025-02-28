@@ -11,10 +11,10 @@ interface AirlineHeaderProps {
 
 export const AirlineHeader = ({ airline, isFavorite, onToggleFavorite }: AirlineHeaderProps) => {
   return (
-    <div className="bg-white p-6 rounded-xl shadow-sm border border-gray-100 mb-8">
+    <div className="bg-white p-6 rounded-lg shadow-md mb-8">
       <div className="flex flex-col md:flex-row md:items-center justify-between gap-6">
         <div className="flex items-center gap-4">
-          <div className="w-24 h-24 bg-gray-100 rounded-lg overflow-hidden flex-shrink-0 flex items-center justify-center p-2">
+          <div className="w-24 h-24 bg-slate-100 rounded-lg overflow-hidden flex-shrink-0 flex items-center justify-center p-2">
             <img 
               src={airline.logo} 
               alt={airline.name}
@@ -46,14 +46,14 @@ export const AirlineHeader = ({ airline, isFavorite, onToggleFavorite }: Airline
             variant="outline"
             size="sm"
             onClick={onToggleFavorite}
-            className={isFavorite ? "text-coral" : ""}
+            className={isFavorite ? "text-purple-500" : ""}
           >
             <Heart className="h-4 w-4 mr-2" fill={isFavorite ? "currentColor" : "none"} />
             {isFavorite ? "Favorited" : "Add to Favorites"}
           </Button>
           
           <a href={airline.website} target="_blank" rel="noopener noreferrer">
-            <Button variant="default" size="sm" className="bg-coral hover:bg-coral-dark">
+            <Button variant="default" size="sm">
               Visit Website <ExternalLink className="h-4 w-4 ml-2" />
             </Button>
           </a>
