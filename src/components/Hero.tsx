@@ -1,13 +1,39 @@
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Search, Plane, Luggage, ArrowRight, Check, Sun } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
+import airlineService from '@/utils/airlineData';
+import { Airline } from '@/utils/types';
 
 export const Hero = () => {
   const [searchTerm, setSearchTerm] = useState('');
+  const [searchResults, setSearchResults] = useState<Airline[]>([]);
+  const [showResults, setShowResults] = useState(false);
   const navigate = useNavigate();
+  
+  // Live search as user types
+  useEffect(() => {
+    const performLiveSearch = async () => {
+      if (searchTerm.trim().length >= 2) {
+        try {
+          const results = await airlineService.searchAirlines({ search: searchTerm });
+          setSearchResults(results);
+          setShowResults(true);
+        } catch (error) {
+          console.error('Error searching airlines:', error);
+          setSearchResults([]);
+        }
+      } else {
+        setShowResults(false);
+      }
+    };
+
+    // Use debounce to avoid too many API calls
+    const timeoutId = setTimeout(performLiveSearch, 300);
+    return () => clearTimeout(timeoutId);
+  }, [searchTerm]);
   
   const handleSearch = (e: React.FormEvent) => {
     e.preventDefault();
@@ -20,6 +46,19 @@ export const Hero = () => {
     }
   };
   
+  const handleSelectAirline = (airline: Airline) => {
+    setSearchTerm(airline.name);
+    setShowResults(false);
+    navigate(`/results?search=${encodeURIComponent(airline.name)}`);
+  };
+  
+  // Close dropdown when clicking outside
+  useEffect(() => {
+    const handleClickOutside = () => setShowResults(false);
+    document.addEventListener('click', handleClickOutside);
+    return () => document.removeEventListener('click', handleClickOutside);
+  }, []);
+
   return (
     <section className="relative py-20 overflow-hidden bg-white">
       {/* Gradient Top */}
@@ -58,7 +97,11 @@ export const Hero = () => {
                   placeholder="Search airlines" 
                   className="pl-10 h-14 w-full text-base rounded-xl focus:ring-salmon"
                   value={searchTerm}
-                  onChange={(e) => setSearchTerm(e.target.value)}
+                  onChange={(e) => {
+                    setSearchTerm(e.target.value);
+                    e.stopPropagation();
+                  }}
+                  onClick={(e) => e.stopPropagation()}
                 />
                 <Button 
                   type="submit" 
@@ -67,6 +110,34 @@ export const Hero = () => {
                 >
                   Find Airlines <ArrowRight className="ml-2 h-5 w-5" />
                 </Button>
+                
+                {/* Autocomplete dropdown */}
+                {showResults && searchResults.length > 0 && (
+                  <div className="absolute left-0 right-0 top-full mt-1 bg-white shadow-lg rounded-lg z-50 max-h-60 overflow-y-auto" onClick={(e) => e.stopPropagation()}>
+                    {searchResults.map((airline) => (
+                      <div 
+                        key={airline.id} 
+                        className="flex items-center px-4 py-3 hover:bg-gray-50 cursor-pointer border-b border-gray-100 last:border-b-0"
+                        onClick={() => handleSelectAirline(airline)}
+                      >
+                        <div className="w-8 h-8 rounded overflow-hidden mr-3 flex-shrink-0">
+                          <img 
+                            src={airline.logo || "/placeholder.svg"} 
+                            alt={`${airline.name} logo`}
+                            className="w-full h-full object-contain"
+                            onError={(e) => {
+                              (e.target as HTMLImageElement).src = "/placeholder.svg";
+                            }}
+                          />
+                        </div>
+                        <div>
+                          <div className="font-medium">{airline.name}</div>
+                          <div className="text-xs text-gray-500">{airline.code} • {airline.country}</div>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                )}
               </form>
             </div>
           </div>
