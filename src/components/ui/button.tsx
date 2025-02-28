@@ -10,15 +10,15 @@ const buttonVariants = cva(
   {
     variants: {
       variant: {
-        default: "bg-yellow text-black hover:bg-yellow/90 quirky-shadow-teal hover:quirky-shadow",
+        default: "bg-teal text-white shadow-[4px_4px_0px_0px_rgba(255,209,102,0.7)] hover:shadow-[4px_4px_0px_0px_rgba(255,113,91,0.7)]",
         destructive:
-          "bg-salmon text-white hover:bg-salmon/90 quirky-shadow-teal hover:quirky-shadow",
+          "bg-teal text-white shadow-[4px_4px_0px_0px_rgba(255,209,102,0.7)] hover:shadow-[4px_4px_0px_0px_rgba(255,113,91,0.7)]",
         outline:
-          "border-2 border-yellow bg-background hover:bg-yellow/10 text-black quirky-shadow-teal hover:quirky-shadow",
+          "bg-teal text-white shadow-[4px_4px_0px_0px_rgba(255,209,102,0.7)] hover:shadow-[4px_4px_0px_0px_rgba(255,113,91,0.7)]",
         secondary:
-          "bg-teal text-white hover:bg-teal/90 quirky-shadow-yellow hover:quirky-shadow",
-        ghost: "hover:bg-yellow/10 hover:text-yellow",
-        link: "text-yellow underline-offset-4 hover:underline",
+          "bg-teal text-white shadow-[4px_4px_0px_0px_rgba(255,209,102,0.7)] hover:shadow-[4px_4px_0px_0px_rgba(255,113,91,0.7)]",
+        ghost: "hover:bg-teal/10 hover:text-teal",
+        link: "text-teal underline-offset-4 hover:underline",
       },
       size: {
         default: "h-11 px-4 py-2",

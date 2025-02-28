@@ -90,16 +90,21 @@
   .text-xs {
     font-size: 0.85rem;
   }
+
+  /* Form selectors styling */
+  select, option, input[type="checkbox"], input[type="radio"] {
+    @apply text-salmon accent-yellow;
+  }
 }
 
 @layer utilities {
   /* Glass effect */
   .glass {
-    @apply bg-white/80 backdrop-blur-sm border border-white/20 shadow-md;
+    @apply bg-white/80 backdrop-blur-sm;
   }
 
   .glass-dark {
-    @apply bg-black/10 backdrop-blur-sm border border-white/10;
+    @apply bg-black/10 backdrop-blur-sm;
   }
 
   /* Text gradient */
@@ -121,36 +126,12 @@
     @apply container mx-auto px-4 md:px-6;
   }
 
-  /* Quirky styles */
-  .quirky-border {
-    @apply border-2 border-dashed rounded-xl;
+  /* Box gradients */
+  .gradient-salmon-yellow {
+    @apply bg-gradient-to-r from-salmon/20 to-yellow/20;
   }
   
-  .quirky-shadow {
-    @apply shadow-[5px_5px_0px_0px_rgba(255,113,91,0.6)];
-  }
-  
-  .quirky-shadow-teal {
-    @apply shadow-[5px_5px_0px_0px_rgba(6,188,193,0.6)];
-  }
-  
-  .quirky-shadow-purple {
-    @apply shadow-[5px_5px_0px_0px_rgba(151,99,145,0.6)];
-  }
-  
-  .quirky-shadow-yellow {
-    @apply shadow-[5px_5px_0px_0px_rgba(255,209,102,0.6)];
-  }
-  
-  .quirky-card {
-    @apply bg-white rounded-xl border-2 border-gray-100 hover:border-yellow transition-all duration-300 quirky-shadow-teal hover:quirky-shadow;
-  }
-  
-  .rotate-quirky {
-    transform: rotate(-2deg);
-  }
-  
-  .rotate-quirky-reverse {
-    transform: rotate(2deg);
+  .gradient-yellow-salmon {
+    @apply bg-gradient-to-r from-yellow/20 to-salmon/20;
   }
 }

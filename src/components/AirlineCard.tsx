@@ -29,11 +29,11 @@ export const AirlineCard = ({ airline, delay = 0, compact = false }: AirlineCard
   if (compact) {
     return (
       <div 
-        className="bg-white p-5 rounded-xl border-2 border-gray-100 hover:border-yellow quirky-shadow-teal hover:quirky-shadow cursor-pointer flex items-center justify-between transition-all hover:-translate-y-1"
+        className="bg-gradient-to-r from-salmon/10 to-yellow/10 p-5 rounded-xl cursor-pointer flex items-center justify-between transition-all hover:-translate-y-1"
         onClick={handleViewDetails}
       >
         <div className="flex items-center gap-4">
-          <div className="w-11 h-11 bg-gray-100 rounded-full overflow-hidden flex-shrink-0 border-2 border-yellow">
+          <div className="w-11 h-11 bg-gradient-to-r from-yellow/30 to-salmon/30 rounded-full overflow-hidden flex-shrink-0">
             <img 
               src={airline.logo} 
               alt={airline.name}
@@ -68,12 +68,12 @@ export const AirlineCard = ({ airline, delay = 0, compact = false }: AirlineCard
   
   return (
     <div 
-      className="bg-white rounded-xl border-2 hover:border-yellow quirky-shadow-teal hover:quirky-shadow transition-all overflow-hidden animate-fade-in cursor-pointer hover:-translate-y-1"
+      className="bg-white rounded-xl overflow-hidden animate-fade-in cursor-pointer hover:-translate-y-1 transition-all"
       style={{ animationDelay: `${delay}s` }}
       onClick={handleViewDetails}
     >
       <div className="relative">
-        <div className="w-full h-16 bg-gradient-to-r from-teal/30 to-salmon/30"></div>
+        <div className="w-full h-16 bg-gradient-to-r from-salmon/30 to-yellow/30"></div>
         <div className="absolute top-4 right-4">
           <Button variant="ghost" size="icon" onClick={toggleFavorite} className={isFavorite ? "text-salmon bg-white/80" : "bg-white/80"}>
             <Heart className="h-5 w-5" fill={isFavorite ? "currentColor" : "none"} />
@@ -83,7 +83,7 @@ export const AirlineCard = ({ airline, delay = 0, compact = false }: AirlineCard
       
       <div className="p-6">
         <div className="mb-4 flex items-center gap-4">
-          <div className="w-14 h-14 bg-gray-100 rounded-full overflow-hidden flex-shrink-0 border-2 border-yellow">
+          <div className="w-14 h-14 bg-gradient-to-r from-yellow/30 to-salmon/30 rounded-full overflow-hidden flex-shrink-0">
             <img 
               src={airline.logo} 
               alt={airline.name}
@@ -111,19 +111,19 @@ export const AirlineCard = ({ airline, delay = 0, compact = false }: AirlineCard
         </div>
         
         <div className="grid grid-cols-2 gap-4 mb-5">
-          <div className="bg-yellow/10 p-4 rounded-lg">
+          <div className="bg-gradient-to-r from-salmon/10 to-yellow/10 p-4 rounded-lg">
             <p className="text-sm text-gray-500 mb-1">Carry-on max size</p>
             <p className="text-base font-bold">
               {airline.carryOn.maxWidth} × {airline.carryOn.maxHeight} × {airline.carryOn.maxDepth} cm
             </p>
           </div>
-          <div className="bg-yellow/10 p-4 rounded-lg">
+          <div className="bg-gradient-to-r from-yellow/10 to-salmon/10 p-4 rounded-lg">
             <p className="text-sm text-gray-500 mb-1">Carry-on max weight</p>
             <p className="text-base font-bold">{airline.carryOn.maxWeight} kg</p>
           </div>
         </div>
         
-        <Button variant="default" size="lg" className="w-full group">
+        <Button size="lg" className="w-full group">
           View Details <ArrowRight className="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform" />
         </Button>
       </div>

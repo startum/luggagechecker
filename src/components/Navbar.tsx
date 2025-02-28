@@ -21,13 +21,13 @@ export const Navbar = () => {
   return (
     <header className="sticky top-0 z-40 w-full backdrop-blur-sm bg-white/90 border-b-2 border-yellow">
       <div className="layout-container">
-        <div className="flex h-16 items-center justify-between">
+        <div className="flex h-20 items-center justify-between">
           <div className="flex items-center gap-2">
             <Link to="/" className="flex items-center">
               <img 
                 src="/lovable-uploads/41cd0ddc-72b6-46a3-92fa-508eafadbd5a.png" 
                 alt="Luggage Checker" 
-                className="h-14"
+                className="h-28"
               />
             </Link>
           </div>
