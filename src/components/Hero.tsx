@@ -37,7 +37,7 @@ export const Hero = () => {
             <span className="inline-block px-5 py-2 rounded-full bg-teal/10 text-teal font-medium mb-8 animate-fade-in">
               <div className="flex items-center gap-2">
                 <Luggage className="h-5 w-5" />
-                <span>Compare Airline Baggage Policies</span>
+                <span>Check Your Luggage Sizes</span>
               </div>
             </span>
             
