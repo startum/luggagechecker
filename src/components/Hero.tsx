@@ -46,7 +46,7 @@ export const Hero = () => {
             </h1>
             
             <p className="text-xl text-gray-600 mb-10 max-w-2xl animate-slide-up font-roboto" style={{ animationDelay: '0.1s' }}>
-              Instantly check if your luggage meets size and weight requirements for over 100 airlines worldwide. 
+              Instantly check if your luggage meets size and weight requirements for airlines worldwide. 
               <span className="font-bold text-salmon"> No more baggage surprises!</span>
             </p>
             
@@ -82,10 +82,10 @@ export const Hero = () => {
                 alt="Boarding pass and passport at airport"
                 className="rounded-2xl"
               />
-              <div className="absolute -bottom-4 -left-4 bg-white p-4 rounded-lg gradient-salmon-yellow">
+              <div className="absolute -bottom-4 -left-4 bg-white p-4 rounded-lg gradient-salmon-yellow shadow-lg">
                 <div className="flex items-center gap-2">
                   <Check className="text-teal h-5 w-5" />
-                  <span className="text-base font-bold">Verified for 100+ airlines!</span>
+                  <span className="text-base font-bold">Verified for 40+ airlines!</span>
                 </div>
               </div>
             </div>
