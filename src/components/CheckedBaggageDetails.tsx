@@ -65,12 +65,6 @@ export const CheckedBaggageDetails = ({ baggageOptions }: CheckedBaggageDetailsP
                     <p>{bag.notes}</p>
                   </div>
                 )}
-                
-                {bag.price && (
-                  <div className="mt-3 text-sm font-semibold text-purple-700 bg-purple-50 p-3 rounded-lg">
-                    <p>Price: {bag.price}</p>
-                  </div>
-                )}
               </div>
             ))
           ) : (
