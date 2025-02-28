@@ -68,7 +68,7 @@ export const AirlineCard = ({ airline, delay = 0, compact = false }: AirlineCard
   
   return (
     <div 
-      className={`bg-white rounded-xl border-2 hover:border-yellow quirky-shadow-teal hover:quirky-shadow transition-all overflow-hidden animate-fade-in cursor-pointer hover:-translate-y-1 ${delay % 2 === 0 ? 'rotate-quirky' : 'rotate-quirky-reverse'}`}
+      className="bg-white rounded-xl border-2 hover:border-yellow quirky-shadow-teal hover:quirky-shadow transition-all overflow-hidden animate-fade-in cursor-pointer hover:-translate-y-1"
       style={{ animationDelay: `${delay}s` }}
       onClick={handleViewDetails}
     >
@@ -117,14 +117,14 @@ export const AirlineCard = ({ airline, delay = 0, compact = false }: AirlineCard
               {airline.carryOn.maxWidth} × {airline.carryOn.maxHeight} × {airline.carryOn.maxDepth} cm
             </p>
           </div>
-          <div className="bg-teal/10 p-4 rounded-lg">
+          <div className="bg-yellow/10 p-4 rounded-lg">
             <p className="text-sm text-gray-500 mb-1">Carry-on max weight</p>
             <p className="text-base font-bold">{airline.carryOn.maxWeight} kg</p>
           </div>
         </div>
         
-        <Button variant="outline" size="sm" className="w-full group text-base">
-          View Details <ArrowRight className="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform text-salmon" />
+        <Button variant="default" size="lg" className="w-full group">
+          View Details <ArrowRight className="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform" />
         </Button>
       </div>
     </div>

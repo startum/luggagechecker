@@ -13,7 +13,7 @@ export const CheckedBaggageDetails = ({ airline }: CheckedBaggageDetailsProps) =
       {airline.checkedBaggage.length > 0 ? (
         <div className="space-y-6">
           {airline.checkedBaggage.map((bag, index) => (
-            <div key={index} className={`bg-gray-50 p-4 rounded-lg border-2 border-dashed ${index % 2 === 0 ? 'border-salmon/30' : 'border-teal/30'} ${index % 2 === 0 ? 'rotate-quirky' : 'rotate-quirky-reverse'}`}>
+            <div key={index} className="bg-gray-50 p-4 rounded-lg border-2 border-yellow/30">
               <h3 className="font-bold mb-3">Option {index + 1}</h3>
               
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
@@ -31,7 +31,7 @@ export const CheckedBaggageDetails = ({ airline }: CheckedBaggageDetailsProps) =
               </div>
               
               {bag.notes && (
-                <div className="mt-3 text-sm text-gray-600 bg-purple/5 p-3 rounded-lg">
+                <div className="mt-3 text-sm text-gray-600 bg-yellow/10 p-3 rounded-lg">
                   <p>{bag.notes}</p>
                 </div>
               )}

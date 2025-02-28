@@ -21,16 +21,16 @@ export const Layout: React.FC<LayoutProps> = ({ children }) => {
               <img 
                 src="/lovable-uploads/41cd0ddc-72b6-46a3-92fa-508eafadbd5a.png" 
                 alt="Luggage Checker" 
-                className="h-12 -rotate-2 mr-2"
+                className="h-12 mr-2"
               />
               <div className="text-sm text-gray-500">
                 © {new Date().getFullYear()} Luggage Checker. All rights reserved.
               </div>
             </div>
             <div className="flex gap-6">
-              <a href="#" className="text-sm font-medium text-gray-600 hover:text-teal transition-colors">Privacy Policy</a>
-              <a href="#" className="text-sm font-medium text-gray-600 hover:text-salmon transition-colors">Terms of Service</a>
-              <a href="#" className="text-sm font-medium text-gray-600 hover:text-purple transition-colors">Contact</a>
+              <a href="#" className="text-sm font-medium text-gray-600 hover:text-yellow transition-colors">Privacy Policy</a>
+              <a href="#" className="text-sm font-medium text-gray-600 hover:text-yellow transition-colors">Terms of Service</a>
+              <a href="#" className="text-sm font-medium text-gray-600 hover:text-yellow transition-colors">Contact</a>
             </div>
           </div>
         </div>
