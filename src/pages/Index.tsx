@@ -84,6 +84,7 @@ const Index = () => {
                 initialSearch={filterCriteria.search}
                 filterByDimensions={true}
                 luggageDimensions={currentDimensions}
+                limit={6}
               />
             </div>
           </div>

@@ -13,16 +13,19 @@ interface AirlineSearchProps {
   initialSearch?: string;
   filterByDimensions?: boolean;
   luggageDimensions?: LuggageDimensions;
+  limit?: number;
 }
 
 export const AirlineSearch = ({ 
   initialSearch = '', 
   filterByDimensions = false,
-  luggageDimensions
+  luggageDimensions,
+  limit
 }: AirlineSearchProps) => {
   const [searchTerm, setSearchTerm] = useState(initialSearch);
   const [showFilters, setShowFilters] = useState(false);
-  const [airlines, setAirlines] = useState<Airline[]>([]);
+  const [allAirlines, setAllAirlines] = useState<Airline[]>([]);
+  const [displayedAirlines, setDisplayedAirlines] = useState<Airline[]>([]);
   const [loading, setLoading] = useState(true);
   const [filterCriteria, setFilterCriteria] = useState<FilterCriteria>({
     search: initialSearch,
@@ -34,9 +37,12 @@ export const AirlineSearch = ({
     const loadAirlines = async () => {
       setLoading(true);
       try {
-        const allAirlines = await airlineService.getAllAirlines();
-        setAirlines(allAirlines);
-        updateAirlines(allAirlines, filterCriteria);
+        const airlines = await airlineService.getAllAirlines();
+        setAllAirlines(airlines);
+        
+        // Initial filtering and display
+        const initialResults = await filterAndSortAirlines(airlines, filterCriteria);
+        setDisplayedAirlines(initialResults);
       } catch (error) {
         console.error('Error loading airlines:', error);
       } finally {
@@ -51,33 +57,64 @@ export const AirlineSearch = ({
   useEffect(() => {
     const updatedCriteria = { ...filterCriteria, search: searchTerm };
     setFilterCriteria(updatedCriteria);
-    updateAirlines(airlines, updatedCriteria);
+    updateDisplayedAirlines(updatedCriteria);
   }, [searchTerm]);
 
   // Handle changes to other filter criteria (not search term)
   useEffect(() => {
     if (filterCriteria.restrictive !== undefined) {
-      updateAirlines(airlines, filterCriteria);
+      updateDisplayedAirlines(filterCriteria);
     }
   }, [filterCriteria.restrictive]);
 
+  // Filter and sort airlines based on criteria
+  const filterAndSortAirlines = async (airlines: Airline[], criteria: FilterCriteria): Promise<Airline[]> => {
+    let results = [...airlines];
+    
+    // Apply search filter
+    if (criteria.search) {
+      const searchTerm = criteria.search.toLowerCase();
+      results = results.filter(airline => 
+        airline.name.toLowerCase().includes(searchTerm) || 
+        airline.code.toLowerCase().includes(searchTerm) ||
+        (airline.country && airline.country.toLowerCase().includes(searchTerm))
+      );
+    }
+    
+    // Apply dimension filtering if needed
+    if (filterByDimensions && luggageDimensions) {
+      results = results.filter(airline => 
+        airline.carryOn.maxWidth >= luggageDimensions.width &&
+        airline.carryOn.maxHeight >= luggageDimensions.height &&
+        airline.carryOn.maxDepth >= luggageDimensions.depth &&
+        airline.carryOn.maxWeight >= luggageDimensions.weight
+      );
+    }
+    
+    // Sort by restrictiveness if specified
+    if (criteria.restrictive) {
+      results.sort((a, b) => {
+        // Calculate total allowed volume
+        const volumeA = a.carryOn.maxWidth * a.carryOn.maxHeight * a.carryOn.maxDepth;
+        const volumeB = b.carryOn.maxWidth * b.carryOn.maxHeight * b.carryOn.maxDepth;
+        return volumeA - volumeB; // Most restrictive first
+      });
+    }
+    
+    // Apply limit if specified
+    if (limit && limit > 0) {
+      results = results.slice(0, limit);
+    }
+    
+    return results;
+  };
+
   // Function to update airlines based on current criteria
-  const updateAirlines = async (allAirlines: Airline[], criteria: FilterCriteria) => {
+  const updateDisplayedAirlines = async (criteria: FilterCriteria) => {
     setLoading(true);
     try {
-      let results = await airlineService.searchAirlines(criteria);
-      
-      // Apply dimension filtering if needed
-      if (filterByDimensions && luggageDimensions) {
-        results = results.filter(airline => 
-          airline.carryOn.maxWidth >= luggageDimensions.width &&
-          airline.carryOn.maxHeight >= luggageDimensions.height &&
-          airline.carryOn.maxDepth >= luggageDimensions.depth &&
-          airline.carryOn.maxWeight >= luggageDimensions.weight
-        );
-      }
-      
-      setAirlines(results);
+      const results = await filterAndSortAirlines(allAirlines, criteria);
+      setDisplayedAirlines(results);
     } catch (error) {
       console.error('Error updating airlines:', error);
     } finally {
@@ -157,7 +194,7 @@ export const AirlineSearch = ({
           {loading ? (
             "Loading airlines..."
           ) : (
-            `${airlines.length} ${airlines.length === 1 ? 'airline' : 'airlines'} found`
+            `${displayedAirlines.length} ${displayedAirlines.length === 1 ? 'airline' : 'airlines'} found`
           )}
         </div>
       </div>
@@ -167,9 +204,9 @@ export const AirlineSearch = ({
         <div className="flex justify-center p-12">
           <div className="animate-spin h-10 w-10 border-4 border-primary border-t-transparent rounded-full"></div>
         </div>
-      ) : airlines.length > 0 ? (
+      ) : displayedAirlines.length > 0 ? (
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {airlines.map((airline, index) => (
+          {displayedAirlines.map((airline, index) => (
             <AirlineCard 
               key={airline.id} 
               airline={airline} 
