@@ -3,6 +3,14 @@
 @tailwind components;
 @tailwind utilities;
 
+@font-face {
+  font-family: 'Gordita';
+  src: url('/public/lovable-uploads/e6102fe8-a1af-4da7-97c9-d0e2b6b8039f.png') format('woff2'); /* Placeholder until actual font file is provided */
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
 @layer base {
   :root {
     --background: 0 0% 100%;
@@ -45,8 +53,12 @@
   }
 
   body {
-    @apply bg-background text-foreground antialiased;
+    @apply bg-background text-foreground antialiased font-roboto;
     font-feature-settings: "ss01", "ss02", "cv01", "cv02", "cv03";
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-gordita font-bold;
   }
 }
 
@@ -62,7 +74,7 @@
 
   /* Text gradient */
   .text-gradient {
-    @apply bg-clip-text text-transparent bg-gradient-to-r from-coral to-lavender;
+    @apply bg-clip-text text-transparent bg-gradient-to-r from-teal to-navy;
   }
 
   /* Image fade in animation */
@@ -79,4 +91,3 @@
     @apply container mx-auto px-4 md:px-6;
   }
 }
-

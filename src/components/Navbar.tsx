@@ -23,10 +23,12 @@ export const Navbar = () => {
       <div className="layout-container">
         <div className="flex h-16 items-center justify-between">
           <div className="flex items-center gap-2">
-            <Link to="/" className="flex items-center gap-2 font-semibold text-xl">
-              <span className="text-coral">Flight</span>
-              <span className="text-lavender">Bag</span>
-              <span className="text-seafoam">Checker</span>
+            <Link to="/" className="flex items-center">
+              <img 
+                src="/lovable-uploads/e6102fe8-a1af-4da7-97c9-d0e2b6b8039f.png" 
+                alt="Flight Bag Checker" 
+                className="h-10"
+              />
             </Link>
           </div>
           
@@ -37,9 +39,9 @@ export const Navbar = () => {
                 key={link.path}
                 to={link.path}
                 className={cn(
-                  "flex items-center text-sm font-medium transition-colors hover:text-coral",
+                  "flex items-center text-sm font-medium transition-colors hover:text-teal",
                   isActive(link.path) 
-                    ? "text-coral"
+                    ? "text-teal"
                     : "text-foreground/80"
                 )}
               >
@@ -79,7 +81,7 @@ export const Navbar = () => {
                 className={cn(
                   "flex items-center px-4 py-2 rounded-md text-sm font-medium transition-colors",
                   isActive(link.path) 
-                    ? "bg-muted text-coral"
+                    ? "bg-muted text-teal"
                     : "hover:bg-muted"
                 )}
               >

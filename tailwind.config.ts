@@ -19,6 +19,10 @@ export default {
 			}
 		},
 		extend: {
+			fontFamily: {
+				gordita: ['Gordita', 'sans-serif'],
+				roboto: ['Roboto', 'sans-serif'],
+			},
 			colors: {
 				border: 'hsl(var(--border))',
 				input: 'hsl(var(--input))',
@@ -83,6 +87,16 @@ export default {
 					DEFAULT: '#9381FF',
 					light: '#B8B8FF',
 					dark: '#5E60CE'
+				},
+				teal: {
+					DEFAULT: '#009998',
+					light: '#6BD5E1',
+					dark: '#00706F'
+				},
+				navy: {
+					DEFAULT: '#0A3F70',
+					light: '#0F5A9E',
+					dark: '#062A4B'
 				}
 			},
 			borderRadius: {

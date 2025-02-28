@@ -17,20 +17,20 @@ export const Hero = () => {
   return (
     <section className="relative py-20 overflow-hidden">
       {/* Background Elements */}
-      <div className="absolute top-40 left-0 w-64 h-64 bg-lavender-light rounded-full mix-blend-multiply filter blur-xl opacity-20 animate-floating"></div>
-      <div className="absolute bottom-0 right-0 w-72 h-72 bg-coral-light rounded-full mix-blend-multiply filter blur-xl opacity-20 animate-floating" style={{ animationDelay: '1s' }}></div>
+      <div className="absolute top-40 left-0 w-64 h-64 bg-teal-light rounded-full mix-blend-multiply filter blur-xl opacity-20 animate-floating"></div>
+      <div className="absolute bottom-0 right-0 w-72 h-72 bg-navy-light rounded-full mix-blend-multiply filter blur-xl opacity-20 animate-floating" style={{ animationDelay: '1s' }}></div>
       
       <div className="layout-container">
         <div className="flex flex-col items-center text-center max-w-3xl mx-auto">
-          <span className="inline-block px-3 py-1 rounded-full bg-seafoam/10 text-seafoam-dark text-sm font-medium mb-6 animate-fade-in">
+          <span className="inline-block px-3 py-1 rounded-full bg-teal/10 text-teal-dark text-sm font-medium mb-6 animate-fade-in">
             Compare Luggage Policies Across Airlines
           </span>
           
-          <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight mb-6 animate-slide-up">
+          <h1 className="text-4xl md:text-5xl lg:text-6xl font-gordita font-bold tracking-tight mb-6 animate-slide-up">
             Will Your Bag <span className="text-gradient">Fly</span> With You?
           </h1>
           
-          <p className="text-lg text-gray-600 mb-8 max-w-2xl animate-slide-up" style={{ animationDelay: '0.1s' }}>
+          <p className="text-lg text-gray-600 mb-8 max-w-2xl animate-slide-up font-roboto" style={{ animationDelay: '0.1s' }}>
             Instantly check if your luggage meets size and weight requirements for over 100 airlines worldwide. No more baggage surprises at the airport.
           </p>
           
@@ -45,7 +45,7 @@ export const Hero = () => {
                 onChange={(e) => setSearchTerm(e.target.value)}
               />
             </form>
-            <Button onClick={handleSearch} className="h-12 bg-coral hover:bg-coral-dark shadow-sm">
+            <Button onClick={handleSearch} className="h-12 bg-teal hover:bg-teal-dark shadow-sm">
               Find Airlines <ArrowRight className="ml-2 h-4 w-4" />
             </Button>
           </div>
@@ -61,11 +61,11 @@ export const Hero = () => {
                 }
               }}
             >
-              <div className="w-12 h-12 bg-seafoam/10 rounded-lg flex items-center justify-center mb-4">
-                <Luggage className="h-6 w-6 text-seafoam-dark" />
+              <div className="w-12 h-12 bg-teal/10 rounded-lg flex items-center justify-center mb-4">
+                <Luggage className="h-6 w-6 text-teal-dark" />
               </div>
-              <h3 className="text-lg font-semibold mb-2">Measure Your Luggage</h3>
-              <p className="text-gray-600 text-sm">Enter your bag's dimensions and weight to check against airline limits.</p>
+              <h3 className="text-lg font-gordita font-semibold mb-2">Measure Your Luggage</h3>
+              <p className="text-gray-600 text-sm font-roboto">Enter your bag's dimensions and weight to check against airline limits.</p>
             </div>
             
             <div 
@@ -73,11 +73,11 @@ export const Hero = () => {
               style={{ animationDelay: '0.4s' }}
               onClick={() => navigate('/compare')}
             >
-              <div className="w-12 h-12 bg-coral/10 rounded-lg flex items-center justify-center mb-4">
-                <Plane className="h-6 w-6 text-coral-dark" />
+              <div className="w-12 h-12 bg-navy/10 rounded-lg flex items-center justify-center mb-4">
+                <Plane className="h-6 w-6 text-navy-dark" />
               </div>
-              <h3 className="text-lg font-semibold mb-2">Luggage Sizes</h3>
-              <p className="text-gray-600 text-sm">Side-by-side comparison of baggage policies across multiple airlines.</p>
+              <h3 className="text-lg font-gordita font-semibold mb-2">Luggage Sizes</h3>
+              <p className="text-gray-600 text-sm font-roboto">Side-by-side comparison of baggage policies across multiple airlines.</p>
             </div>
             
             <div 
@@ -85,11 +85,11 @@ export const Hero = () => {
               style={{ animationDelay: '0.5s' }}
               onClick={() => navigate('/results')}
             >
-              <div className="w-12 h-12 bg-lavender/10 rounded-lg flex items-center justify-center mb-4">
-                <Search className="h-6 w-6 text-lavender-dark" />
+              <div className="w-12 h-12 bg-navy/10 rounded-lg flex items-center justify-center mb-4">
+                <Search className="h-6 w-6 text-navy-dark" />
               </div>
-              <h3 className="text-lg font-semibold mb-2">Get Detailed Results</h3>
-              <p className="text-gray-600 text-sm">View comprehensive information about carry-on and checked baggage policies.</p>
+              <h3 className="text-lg font-gordita font-semibold mb-2">Get Detailed Results</h3>
+              <p className="text-gray-600 text-sm font-roboto">View comprehensive information about carry-on and checked baggage policies.</p>
             </div>
           </div>
         </div>
