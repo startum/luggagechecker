@@ -1,5 +1,6 @@
 
 import { LuggagePolicy } from '@/utils/types';
+import { Scale } from 'lucide-react';
 
 interface CheckedBaggageDetailsProps {
   baggageOptions: LuggagePolicy[];
@@ -7,57 +8,89 @@ interface CheckedBaggageDetailsProps {
 
 export const CheckedBaggageDetails = ({ baggageOptions }: CheckedBaggageDetailsProps) => {
   return (
-    <div className="bg-gradient-to-r from-salmon/5 to-yellow/5 p-6 rounded-xl">
-      <h2 className="text-xl font-bold mb-4">Checked Baggage Policy</h2>
-      
-      {baggageOptions.length > 0 ? (
-        <div className="space-y-6">
-          {baggageOptions.map((bag, index) => (
-            <div key={index} className="bg-gradient-to-r from-yellow/10 to-salmon/10 p-4 rounded-lg">
-              <h3 className="font-bold mb-3">Option {index + 1}</h3>
-              
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
-                <div>
-                  <p className="text-sm text-gray-500 mb-1">Maximum Dimensions</p>
-                  <p className="font-bold">
-                    {bag.maxWidth} × {bag.maxHeight} × {bag.maxDepth} cm
-                  </p>
+    <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+      <div>
+        <h3 className="text-lg font-semibold mb-4">Checked Baggage Dimensions</h3>
+        <div className="bg-gray-50 p-5 rounded-lg">
+          {baggageOptions.length > 0 ? (
+            baggageOptions.map((bag, index) => (
+              <div key={index} className="mb-4 last:mb-0">
+                {baggageOptions.length > 1 && (
+                  <div className="text-sm text-gray-500 mb-2">Option {index + 1}</div>
+                )}
+                <div className="flex items-center justify-between mb-3">
+                  <span className="text-gray-500">Max Width:</span>
+                  <span className="font-bold">{bag.maxWidth} cm</span>
                 </div>
-                
-                <div>
-                  <p className="text-sm text-gray-500 mb-1">Maximum Weight</p>
-                  <p className="font-bold">{bag.maxWeight} kg</p>
+                <div className="flex items-center justify-between mb-3">
+                  <span className="text-gray-500">Max Height:</span>
+                  <span className="font-bold">{bag.maxHeight} cm</span>
+                </div>
+                <div className="flex items-center justify-between mb-3">
+                  <span className="text-gray-500">Max Depth:</span>
+                  <span className="font-bold">{bag.maxDepth} cm</span>
+                </div>
+                <div className="flex items-center justify-between">
+                  <span className="text-gray-500">Total dimensions:</span>
+                  <span className="font-bold">
+                    {bag.maxWidth + bag.maxHeight + bag.maxDepth} cm
+                  </span>
                 </div>
               </div>
-              
-              {bag.notes && (
-                <div className="mt-3 text-sm text-gray-600 bg-gradient-to-r from-salmon/10 to-yellow/10 p-3 rounded-lg">
-                  <p>{bag.notes}</p>
-                </div>
-              )}
-
-              {bag.price && (
-                <div className="mt-3 text-sm font-semibold text-purple-700 bg-purple-50 p-3 rounded-lg">
-                  <p>Price: {bag.price}</p>
-                </div>
-              )}
+            ))
+          ) : (
+            <div className="text-center py-3">
+              <p className="text-gray-500">Dimension information not available.</p>
             </div>
-          ))}
+          )}
         </div>
-      ) : (
-        <div className="text-center py-6 bg-gradient-to-r from-salmon/5 to-yellow/5 rounded-lg">
-          <p className="text-gray-500">Checked baggage information not available.</p>
-        </div>
-      )}
+      </div>
       
-      <div className="mt-6 p-4 bg-gradient-to-r from-yellow/20 to-salmon/20 rounded-lg">
-        <h3 className="font-bold mb-2">Important Notes</h3>
-        <ul className="text-sm space-y-2 list-disc list-inside text-gray-700">
-          <li>Baggage fees and policies may vary by route and class of travel.</li>
-          <li>Special items may require additional fees or handling.</li>
-          <li>Pre-booking checked baggage online is usually cheaper than at the airport.</li>
-          <li>Always check the airline's website for the most up-to-date information.</li>
-        </ul>
+      <div>
+        <h3 className="text-lg font-semibold mb-4">Checked Baggage Weight</h3>
+        <div className="bg-gray-50 p-5 rounded-lg">
+          {baggageOptions.length > 0 ? (
+            baggageOptions.map((bag, index) => (
+              <div key={index} className="mb-4 last:mb-0">
+                {baggageOptions.length > 1 && (
+                  <div className="text-sm text-gray-500 mb-2">Option {index + 1}</div>
+                )}
+                <div className="flex items-center mb-4">
+                  <Scale className="h-10 w-10 text-primary mr-3" />
+                  <span className="text-2xl font-bold">{bag.maxWeight} kg</span>
+                </div>
+                
+                {bag.notes && (
+                  <div className="text-gray-600">
+                    <p>{bag.notes}</p>
+                  </div>
+                )}
+                
+                {bag.price && (
+                  <div className="mt-3 text-sm font-semibold text-purple-700 bg-purple-50 p-3 rounded-lg">
+                    <p>Price: {bag.price}</p>
+                  </div>
+                )}
+              </div>
+            ))
+          ) : (
+            <div className="text-center py-3">
+              <p className="text-gray-500">Weight information not available.</p>
+            </div>
+          )}
+        </div>
+      </div>
+      
+      <div className="md:col-span-2">
+        <div className="mt-2 p-4 bg-gray-50 rounded-lg">
+          <h3 className="font-bold mb-2">Important Notes</h3>
+          <ul className="text-sm space-y-2 list-disc list-inside text-gray-700">
+            <li>Baggage fees and policies may vary by route and class of travel.</li>
+            <li>Special items may require additional fees or handling.</li>
+            <li>Pre-booking checked baggage online is usually cheaper than at the airport.</li>
+            <li>Always check the airline's website for the most up-to-date information.</li>
+          </ul>
+        </div>
       </div>
     </div>
   );
