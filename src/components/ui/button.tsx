@@ -10,13 +10,13 @@ const buttonVariants = cva(
   {
     variants: {
       variant: {
-        default: "bg-teal text-white shadow-[4px_4px_0px_0px_rgba(255,209,102,0.7)] hover:shadow-[4px_4px_0px_0px_rgba(255,113,91,0.7)]",
+        default: "bg-teal text-white shadow-[4px_4px_0px_0px_rgba(255,113,91,0.7)] hover:shadow-[4px_4px_0px_0px_rgba(255,113,91,0.9)]",
         destructive:
-          "bg-teal text-white shadow-[4px_4px_0px_0px_rgba(255,209,102,0.7)] hover:shadow-[4px_4px_0px_0px_rgba(255,113,91,0.7)]",
+          "bg-teal text-white shadow-[4px_4px_0px_0px_rgba(255,113,91,0.7)] hover:shadow-[4px_4px_0px_0px_rgba(255,113,91,0.9)]",
         outline:
-          "bg-teal text-white shadow-[4px_4px_0px_0px_rgba(255,209,102,0.7)] hover:shadow-[4px_4px_0px_0px_rgba(255,113,91,0.7)]",
+          "bg-teal text-white shadow-[4px_4px_0px_0px_rgba(255,113,91,0.7)] hover:shadow-[4px_4px_0px_0px_rgba(255,113,91,0.9)]",
         secondary:
-          "bg-teal text-white shadow-[4px_4px_0px_0px_rgba(255,209,102,0.7)] hover:shadow-[4px_4px_0px_0px_rgba(255,113,91,0.7)]",
+          "bg-teal text-white shadow-[4px_4px_0px_0px_rgba(255,113,91,0.7)] hover:shadow-[4px_4px_0px_0px_rgba(255,113,91,0.9)]",
         ghost: "hover:bg-teal/10 hover:text-teal",
         link: "text-teal underline-offset-4 hover:underline",
       },
