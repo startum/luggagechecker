@@ -95,7 +95,7 @@ export const Hero = () => {
         {/* Feature Cards */}
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-8 mt-20 w-full">
           <div 
-            className="bg-gradient-to-r from-salmon/20 to-yellow/20 p-8 rounded-xl animate-fade-in cursor-pointer hover:-translate-y-1 transition-all duration-300"
+            className="bg-white p-8 rounded-xl animate-fade-in cursor-pointer hover:-translate-y-1 transition-all duration-300 border border-[#F1F0FB] shadow-[2px_2px_10px_rgba(0,0,0,0.05)]"
             style={{ animationDelay: '0.3s' }}
             onClick={() => {
               const element = document.querySelector('.LuggageInput');
@@ -112,7 +112,7 @@ export const Hero = () => {
           </div>
           
           <div 
-            className="bg-gradient-to-r from-yellow/20 to-salmon/20 p-8 rounded-xl animate-fade-in cursor-pointer hover:-translate-y-1 transition-all duration-300" 
+            className="bg-white p-8 rounded-xl animate-fade-in cursor-pointer hover:-translate-y-1 transition-all duration-300 border border-[#F1F0FB] shadow-[2px_2px_10px_rgba(0,0,0,0.05)]" 
             style={{ animationDelay: '0.4s' }}
             onClick={() => navigate('/compare')}
           >
@@ -124,7 +124,7 @@ export const Hero = () => {
           </div>
           
           <div 
-            className="bg-gradient-to-r from-salmon/20 to-yellow/20 p-8 rounded-xl animate-fade-in cursor-pointer hover:-translate-y-1 transition-all duration-300" 
+            className="bg-white p-8 rounded-xl animate-fade-in cursor-pointer hover:-translate-y-1 transition-all duration-300 border border-[#F1F0FB] shadow-[2px_2px_10px_rgba(0,0,0,0.05)]" 
             style={{ animationDelay: '0.5s' }}
             onClick={() => navigate('/results')}
           >
