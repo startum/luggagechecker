@@ -230,9 +230,6 @@ const Compare = () => {
               <p className="text-gray-500 mb-6 max-w-md mx-auto">
                 Add airlines to your comparison list to see how your luggage measures up against different baggage policies.
               </p>
-              <Button onClick={() => setDialogOpen(true)}>
-                <Plus className="h-4 w-4 mr-2" /> Select Airline
-              </Button>
             </div>
           )}
         </div>
