@@ -226,9 +226,9 @@ const Compare = () => {
             </div>
           ) : (
             <div className="text-center py-16 bg-white rounded-xl shadow-sm border border-gray-100">
-              <h3 className="text-lg font-semibold mb-3">Ready to check sizes</h3>
+              <h3 className="text-lg font-semibold mb-3">No airlines selected yet</h3>
               <p className="text-gray-500 mb-6 max-w-md mx-auto">
-                Add airlines to your comparison list to see how your luggage measures up against different baggage policies.
+                Click "Add Airline" above to select airlines and compare how your luggage measures up against their baggage policies.
               </p>
             </div>
           )}
