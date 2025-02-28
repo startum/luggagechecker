@@ -20,11 +20,11 @@ export const Hero = () => {
       <div className="absolute top-40 left-0 w-64 h-64 bg-sunshine/40 rounded-full mix-blend-multiply filter blur-xl opacity-30 animate-floating"></div>
       <div className="absolute bottom-0 right-0 w-72 h-72 bg-coral/30 rounded-full mix-blend-multiply filter blur-xl opacity-20 animate-floating" style={{ animationDelay: '1s' }}></div>
       
-      {/* Background Image */}
-      <div className="absolute inset-0 z-0 opacity-10">
+      {/* Background Image - Updated with airplane image */}
+      <div className="absolute inset-0 z-0 opacity-20">
         <img 
-          src="https://images.unsplash.com/photo-1486312338219-ce68d2c6f44d?q=80&w=2070&auto=format&fit=crop"
-          alt="Background"
+          src="/lovable-uploads/75694066-08e1-489f-9e89-21d50b3b6c23.png"
+          alt="Airplane flying through clouds"
           className="w-full h-full object-cover"
         />
       </div>
