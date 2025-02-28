@@ -1,18 +1,18 @@
 
-import { Airline } from '@/utils/types';
+import { LuggagePolicy } from '@/utils/types';
 
 interface CheckedBaggageDetailsProps {
-  airline: Airline;
+  baggageOptions: LuggagePolicy[];
 }
 
-export const CheckedBaggageDetails = ({ airline }: CheckedBaggageDetailsProps) => {
+export const CheckedBaggageDetails = ({ baggageOptions }: CheckedBaggageDetailsProps) => {
   return (
     <div className="bg-gradient-to-r from-salmon/5 to-yellow/5 p-6 rounded-xl">
       <h2 className="text-xl font-bold mb-4">Checked Baggage Policy</h2>
       
-      {airline.checkedBaggage.length > 0 ? (
+      {baggageOptions.length > 0 ? (
         <div className="space-y-6">
-          {airline.checkedBaggage.map((bag, index) => (
+          {baggageOptions.map((bag, index) => (
             <div key={index} className="bg-gradient-to-r from-yellow/10 to-salmon/10 p-4 rounded-lg">
               <h3 className="font-bold mb-3">Option {index + 1}</h3>
               
@@ -33,6 +33,12 @@ export const CheckedBaggageDetails = ({ airline }: CheckedBaggageDetailsProps) =
               {bag.notes && (
                 <div className="mt-3 text-sm text-gray-600 bg-gradient-to-r from-salmon/10 to-yellow/10 p-3 rounded-lg">
                   <p>{bag.notes}</p>
+                </div>
+              )}
+
+              {bag.price && (
+                <div className="mt-3 text-sm font-semibold text-purple-700 bg-purple-50 p-3 rounded-lg">
+                  <p>Price: {bag.price}</p>
                 </div>
               )}
             </div>
