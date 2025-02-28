@@ -77,14 +77,12 @@ const Index = () => {
                   {currentDimensions.weight} kg
                 </div>
               </div>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <AirlineSearch 
-                  initialSearch={searchTerm}
-                  filterByDimensions={true}
-                  luggageDimensions={currentDimensions}
-                  limit={6}
-                />
-              </div>
+              <AirlineSearch 
+                initialSearch={searchTerm}
+                filterByDimensions={true}
+                luggageDimensions={currentDimensions}
+                limit={6}
+              />
             </div>
           </div>
         </div>

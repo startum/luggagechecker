@@ -184,13 +184,13 @@ export const AirlineSearch = ({
         </div>
       </div>
       
-      {/* Results Grid */}
+      {/* Results Grid - Changed from 3 columns to 2 columns */}
       {loading ? (
         <div className="flex justify-center p-12">
           <div className="animate-spin h-10 w-10 border-4 border-primary border-t-transparent rounded-full"></div>
         </div>
       ) : (
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           {displayedAirlines.length > 0 ? displayedAirlines.map((airline, index) => (
             <Dialog key={airline.id}>
               <DialogTrigger asChild>
@@ -239,7 +239,7 @@ export const AirlineSearch = ({
               </DialogContent>
             </Dialog>
           )) : (
-            <div className="text-center py-12 bg-white rounded-md shadow-sm col-span-3">
+            <div className="text-center py-12 bg-white rounded-md shadow-sm col-span-2">
               <p className="text-gray-500">No airlines found matching your search criteria.</p>
               <Button variant="link" onClick={() => {
                 setSearchTerm('');
