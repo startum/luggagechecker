@@ -161,8 +161,8 @@ const Index = () => {
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 sm:gap-8 text-left">
               <div className="bg-white p-5 sm:p-8 rounded-xl shadow-sm border border-gray-100">
                 <img 
-                  src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?q=80&w=1470&auto=format&fit=crop" 
-                  alt="Save Money" 
+                  src="/lovable-uploads/630eedf4-e53d-4ef4-9417-a537b4fdf05e.png" 
+                  alt="Person sitting with luggage at airport" 
                   className="w-full h-36 sm:h-48 object-cover rounded-lg mb-4 sm:mb-5"
                 />
                 <h3 className="text-lg sm:text-xl font-semibold mb-2 sm:mb-3">Save Money</h3>
@@ -173,8 +173,8 @@ const Index = () => {
               
               <div className="bg-white p-5 sm:p-8 rounded-xl shadow-sm border border-gray-100">
                 <img 
-                  src="https://images.unsplash.com/photo-1435527173128-983b87201f4d?q=80&w=1470&auto=format&fit=crop" 
-                  alt="Save Time" 
+                  src="/lovable-uploads/b829ab14-a7e8-4e32-9eb6-b2607ad53970.png" 
+                  alt="Airplanes on runway" 
                   className="w-full h-36 sm:h-48 object-cover rounded-lg mb-4 sm:mb-5"
                 />
                 <h3 className="text-lg sm:text-xl font-semibold mb-2 sm:mb-3">Save Time</h3>
@@ -185,8 +185,8 @@ const Index = () => {
               
               <div className="bg-white p-5 sm:p-8 rounded-xl shadow-sm border border-gray-100 sm:col-span-2 md:col-span-1 sm:max-w-md md:max-w-full mx-auto sm:mx-auto md:mx-0 w-full">
                 <img 
-                  src="https://images.unsplash.com/photo-1488646953014-85cb44e25828?q=80&w=1470&auto=format&fit=crop" 
-                  alt="Travel Confidently" 
+                  src="/lovable-uploads/784f93a6-8163-4976-a298-e7d87944eb53.png" 
+                  alt="Airplane cabin interior with seats" 
                   className="w-full h-36 sm:h-48 object-cover rounded-lg mb-4 sm:mb-5"
                 />
                 <h3 className="text-lg sm:text-xl font-semibold mb-2 sm:mb-3">Travel Confidently</h3>
