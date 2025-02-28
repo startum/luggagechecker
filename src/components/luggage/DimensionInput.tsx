@@ -66,7 +66,7 @@ export const DimensionInput = ({
           max={max}
           step={step}
           onValueChange={handleSliderChange}
-          className="flex-grow [&>.bg-primary]:bg-teal"
+          className="flex-grow"
         />
         <Input
           type="number"
