@@ -11,7 +11,13 @@ export const Hero = () => {
   
   const handleSearch = (e: React.FormEvent) => {
     e.preventDefault();
-    navigate(`/results?search=${searchTerm}`);
+    if (searchTerm.trim()) {
+      console.log(`Navigating to results with search term: ${searchTerm}`);
+      navigate(`/results?search=${encodeURIComponent(searchTerm.trim())}`);
+    } else {
+      console.log("Empty search term, navigating to results page without search parameter");
+      navigate('/results');
+    }
   };
   
   return (
@@ -45,7 +51,7 @@ export const Hero = () => {
             </p>
             
             <div className="flex flex-col sm:flex-row gap-4 w-full max-w-md animate-slide-up" style={{ animationDelay: '0.2s' }}>
-              <form onSubmit={handleSearch} className="relative flex-grow">
+              <form onSubmit={handleSearch} className="relative flex-grow w-full">
                 <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" />
                 <Input 
                   type="text" 
@@ -54,10 +60,14 @@ export const Hero = () => {
                   value={searchTerm}
                   onChange={(e) => setSearchTerm(e.target.value)}
                 />
+                <Button 
+                  type="submit" 
+                  size="lg" 
+                  className="h-14 text-base px-6 font-semibold mt-2 sm:mt-0 sm:absolute sm:right-0 sm:top-0 sm:rounded-l-none"
+                >
+                  Find Airlines <ArrowRight className="ml-2 h-5 w-5" />
+                </Button>
               </form>
-              <Button onClick={handleSearch} size="lg" className="h-14 text-base px-6 font-semibold">
-                Find Airlines <ArrowRight className="ml-2 h-5 w-5" />
-              </Button>
             </div>
           </div>
           
