@@ -62,12 +62,12 @@ export const Hero = () => {
             </div>
           </div>
           
-          {/* Right Column: Image */}
+          {/* Right Column: Image - UPDATED WITH NEW IMAGE */}
           <div className="lg:w-1/2 flex justify-center lg:justify-end animate-fade-in">
             <div className="relative w-full max-w-md">
               <img 
-                src="https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?q=80&w=1470&auto=format&fit=crop"
-                alt="Checking luggage policies"
+                src="/public/lovable-uploads/ce753aea-3456-4e73-83ea-5ca2237f05e9.png"
+                alt="Boarding pass and passport at airport"
                 className="rounded-xl shadow-xl"
               />
               <div className="absolute -bottom-4 -left-4 bg-white p-4 rounded-lg shadow-md border border-gray-100">
