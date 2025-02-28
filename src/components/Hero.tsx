@@ -34,7 +34,7 @@ export const Hero = () => {
         <div className="flex flex-col lg:flex-row items-center max-w-6xl mx-auto">
           {/* Left Column: Text Content */}
           <div className="flex flex-col items-center lg:items-start text-center lg:text-left lg:w-1/2 mb-12 lg:mb-0">
-            <span className="inline-block px-5 py-2 rounded-full bg-teal/10 text-teal font-medium mb-8 animate-fade-in rotate-quirky">
+            <span className="inline-block px-5 py-2 rounded-full bg-teal/10 text-teal font-medium mb-8 animate-fade-in">
               <div className="flex items-center gap-2">
                 <Luggage className="h-5 w-5" />
                 <span>Compare Airline Baggage Policies</span>
@@ -61,7 +61,7 @@ export const Hero = () => {
                   onChange={(e) => setSearchTerm(e.target.value)}
                 />
               </form>
-              <Button onClick={handleSearch} size="lg" variant="secondary" className="h-14 text-base px-6 font-semibold">
+              <Button onClick={handleSearch} size="lg" variant="default" className="h-14 text-base px-6 font-semibold">
                 Find Airlines <ArrowRight className="ml-2 h-5 w-5" />
               </Button>
             </div>
@@ -76,9 +76,9 @@ export const Hero = () => {
               <img 
                 src="/lovable-uploads/ce753aea-3456-4e73-83ea-5ca2237f05e9.png"
                 alt="Boarding pass and passport at airport"
-                className="rounded-2xl quirky-shadow-salmon rotate-quirky-reverse"
+                className="rounded-2xl quirky-shadow-salmon"
               />
-              <div className="absolute -bottom-4 -left-4 bg-white p-4 rounded-lg shadow-md border-2 border-yellow quirky-shadow-teal rotate-quirky">
+              <div className="absolute -bottom-4 -left-4 bg-white p-4 rounded-lg shadow-md border-2 border-yellow quirky-shadow-teal">
                 <div className="flex items-center gap-2">
                   <Check className="text-teal h-5 w-5" />
                   <span className="text-base font-bold">Verified for 100+ airlines!</span>
@@ -91,7 +91,7 @@ export const Hero = () => {
         {/* Feature Cards */}
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-8 mt-20 w-full">
           <div 
-            className="bg-white p-8 rounded-xl border-2 border-salmon quirky-shadow-teal hover:quirky-shadow animate-fade-in cursor-pointer hover:-translate-y-1 transition-all duration-300 rotate-quirky"
+            className="bg-white p-8 rounded-xl border-2 border-salmon quirky-shadow-teal hover:quirky-shadow animate-fade-in cursor-pointer hover:-translate-y-1 transition-all duration-300"
             style={{ animationDelay: '0.3s' }}
             onClick={() => {
               const element = document.querySelector('.LuggageInput');
@@ -120,7 +120,7 @@ export const Hero = () => {
           </div>
           
           <div 
-            className="bg-white p-8 rounded-xl border-2 border-purple quirky-shadow-yellow hover:quirky-shadow animate-fade-in cursor-pointer hover:-translate-y-1 transition-all duration-300 rotate-quirky-reverse" 
+            className="bg-white p-8 rounded-xl border-2 border-purple quirky-shadow-yellow hover:quirky-shadow animate-fade-in cursor-pointer hover:-translate-y-1 transition-all duration-300" 
             style={{ animationDelay: '0.5s' }}
             onClick={() => navigate('/results')}
           >

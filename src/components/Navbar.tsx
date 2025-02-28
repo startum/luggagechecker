@@ -27,14 +27,14 @@ export const Navbar = () => {
               <img 
                 src="/lovable-uploads/41cd0ddc-72b6-46a3-92fa-508eafadbd5a.png" 
                 alt="Luggage Checker" 
-                className="h-14 -rotate-2"
+                className="h-14"
               />
             </Link>
           </div>
           
           {/* Desktop Navigation */}
           <nav className="hidden md:flex items-center gap-6">
-            {navLinks.map((link, index) => (
+            {navLinks.map((link) => (
               <Link
                 key={link.path}
                 to={link.path}
@@ -42,8 +42,7 @@ export const Navbar = () => {
                   "flex items-center text-base font-medium transition-colors hover:text-salmon px-3 py-2 rounded-lg",
                   isActive(link.path) 
                     ? "text-salmon bg-salmon/10"
-                    : "text-foreground/80",
-                  index % 2 === 0 ? "rotate-quirky" : "rotate-quirky-reverse"
+                    : "text-foreground/80"
                 )}
               >
                 {link.icon}
