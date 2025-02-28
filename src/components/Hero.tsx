@@ -63,7 +63,7 @@ export const Hero = () => {
                 <Button 
                   type="submit" 
                   size="lg" 
-                  className="h-14 text-base px-6 font-semibold mt-2 sm:mt-0 sm:absolute sm:right-0 sm:top-0 sm:rounded-l-none"
+                  className="h-14 text-base px-6 font-semibold mt-2 sm:mt-0 sm:absolute sm:right-0 sm:top-0 sm:rounded-l-none bg-salmon text-white shadow-[4px_4px_0px_0px_rgba(6,188,193,0.7)]"
                 >
                   Find Airlines <ArrowRight className="ml-2 h-5 w-5" />
                 </Button>
