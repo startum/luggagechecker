@@ -14,7 +14,7 @@ export const Layout: React.FC<LayoutProps> = ({ children }) => {
       <main className="flex-grow">
         {children}
       </main>
-      <footer className="py-6 sm:py-8 px-4 bg-gradient-to-r from-salmon/10 to-yellow/10">
+      <footer className="py-6 sm:py-8 px-4 bg-white border-t border-teal">
         <div className="layout-container">
           <div className="flex flex-col md:flex-row justify-between items-center gap-4 sm:gap-6">
             <div className="flex items-center flex-col md:flex-row text-center md:text-left">
