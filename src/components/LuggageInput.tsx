@@ -100,7 +100,7 @@ export const LuggageInput = ({ onSubmit, initialDimensions }: LuggageInputProps)
         {/* Visual Representation */}
         <LuggageVisualizer dimensions={dimensions} />
         
-        <Button type="submit" className="w-full bg-teal hover:bg-teal-dark">
+        <Button type="submit" className="w-full">
           Check Baggage Size
         </Button>
       </form>

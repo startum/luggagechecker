@@ -10,15 +10,15 @@ const buttonVariants = cva(
   {
     variants: {
       variant: {
-        default: "bg-teal text-white shadow-[4px_4px_0px_0px_rgba(255,113,91,0.7)] hover:shadow-[4px_4px_0px_0px_rgba(255,113,91,0.9)]",
+        default: "bg-salmon text-white shadow-[4px_4px_0px_0px_rgba(6,188,193,0.7)] hover:shadow-[4px_4px_0px_0px_rgba(6,188,193,0.9)]",
         destructive:
-          "bg-teal text-white shadow-[4px_4px_0px_0px_rgba(255,113,91,0.7)] hover:shadow-[4px_4px_0px_0px_rgba(255,113,91,0.9)]",
+          "bg-salmon text-white shadow-[4px_4px_0px_0px_rgba(6,188,193,0.7)] hover:shadow-[4px_4px_0px_0px_rgba(6,188,193,0.9)]",
         outline:
-          "bg-teal text-white shadow-[4px_4px_0px_0px_rgba(255,113,91,0.7)] hover:shadow-[4px_4px_0px_0px_rgba(255,113,91,0.9)]",
+          "bg-salmon text-white shadow-[4px_4px_0px_0px_rgba(6,188,193,0.7)] hover:shadow-[4px_4px_0px_0px_rgba(6,188,193,0.9)]",
         secondary:
-          "bg-teal text-white shadow-[4px_4px_0px_0px_rgba(255,113,91,0.7)] hover:shadow-[4px_4px_0px_0px_rgba(255,113,91,0.9)]",
-        ghost: "hover:bg-teal/10 hover:text-teal",
-        link: "text-teal underline-offset-4 hover:underline",
+          "bg-salmon text-white shadow-[4px_4px_0px_0px_rgba(6,188,193,0.7)] hover:shadow-[4px_4px_0px_0px_rgba(6,188,193,0.9)]",
+        ghost: "hover:bg-salmon/10 hover:text-salmon",
+        link: "text-salmon underline-offset-4 hover:underline",
       },
       size: {
         default: "h-11 px-4 py-2",
