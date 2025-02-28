@@ -9,6 +9,7 @@ class AirlineService {
   private isLoaded: boolean = false;
 
   constructor() {
+    console.log("🏁 AirlineService initialized");
     this.loadFavorites();
     this.loadAirlinesFromDB();
   }
@@ -17,14 +18,15 @@ class AirlineService {
     if (this.isLoaded) return;
     
     try {
+      console.log("🌐 Loading airlines from database...");
       const dbAirlines = await fetchAirlinesFromDatabase();
       if (dbAirlines && dbAirlines.length > 0) {
         this.airlines = dbAirlines;
         this.isLoaded = true;
-        console.log(`Loaded ${dbAirlines.length} airlines from database`);
+        console.log(`✅ Loaded ${dbAirlines.length} airlines from database`);
       }
     } catch (error) {
-      console.error('Failed to load airlines from database:', error);
+      console.error('❌ Failed to load airlines from database:', error);
     }
   }
 
@@ -107,24 +109,36 @@ class AirlineService {
   }
 
   async getFavorites(): Promise<Airline[]> {
+    console.log("🔍 getFavorites() called, favorites:", this.favorites);
     if (!this.isLoaded) {
+      console.log("🔄 Airlines not loaded yet, loading from DB...");
       await this.loadAirlinesFromDB();
     }
-    return this.airlines.filter(airline => this.favorites.includes(airline.id));
+    
+    const favoriteAirlines = this.airlines.filter(airline => this.favorites.includes(airline.id));
+    console.log("✅ Retrieved favorite airlines:", favoriteAirlines.length);
+    return favoriteAirlines;
   }
 
   toggleFavorite(airlineId: string): boolean {
+    console.log("🔄 toggleFavorite called for:", airlineId);
+    console.log("📋 Current favorites before toggle:", [...this.favorites]);
+    
     const index = this.favorites.indexOf(airlineId);
     if (index === -1) {
       this.favorites.push(airlineId);
       this.saveFavorites();
       toast.success("Added to favorites");
+      console.log("➕ Added to favorites:", airlineId);
+      console.log("📋 Updated favorites:", [...this.favorites]);
       this.notifyFavoritesChanged();
       return true;
     } else {
       this.favorites.splice(index, 1);
       this.saveFavorites();
       toast.success("Removed from favorites");
+      console.log("➖ Removed from favorites:", airlineId);
+      console.log("📋 Updated favorites:", [...this.favorites]);
       this.notifyFavoritesChanged();
       return false;
     }
@@ -136,22 +150,28 @@ class AirlineService {
 
   private notifyFavoritesChanged(): void {
     // Dispatch a custom event that components can listen for
+    console.log("🔔 Dispatching favoritesChanged event");
     const event = new CustomEvent('favoritesChanged');
     window.dispatchEvent(event);
   }
 
   private saveFavorites(): void {
     localStorage.setItem('airline-favorites', JSON.stringify(this.favorites));
+    console.log("💾 Saved favorites to localStorage:", this.favorites);
   }
 
   private loadFavorites(): void {
     try {
       const storedFavorites = localStorage.getItem('airline-favorites');
+      console.log("📂 Loading favorites from localStorage:", storedFavorites);
       if (storedFavorites) {
         this.favorites = JSON.parse(storedFavorites);
+        console.log("📋 Loaded favorites:", this.favorites);
+      } else {
+        console.log("ℹ️ No favorites found in localStorage");
       }
     } catch (error) {
-      console.error('Failed to load favorites:', error);
+      console.error('❌ Failed to load favorites:', error);
     }
   }
 }

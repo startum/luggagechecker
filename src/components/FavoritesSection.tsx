@@ -14,32 +14,41 @@ export const FavoritesSection = () => {
   
   // Function to refresh favorites
   const refreshFavorites = async () => {
+    console.log("🔍 Refreshing favorites");
     setLoading(true);
     try {
       const favoritedAirlines = await airlineService.getFavorites();
+      console.log("📋 Favorites loaded:", favoritedAirlines.length, "airlines");
+      console.log("🔢 Favorite IDs:", favoritedAirlines.map(a => a.id));
       setFavorites(favoritedAirlines);
     } catch (error) {
-      console.error('Error loading favorites:', error);
+      console.error('❌ Error loading favorites:', error);
     } finally {
       setLoading(false);
     }
   };
   
   useEffect(() => {
+    console.log("🔄 FavoritesSection mounted");
     refreshFavorites();
     
     // Listen for favorites changes and update
     const handleFavoritesChanged = () => {
+      console.log("🔔 favoritesChanged event received");
       refreshFavorites();
     };
     
     window.addEventListener('favoritesChanged', handleFavoritesChanged);
+    console.log("👂 Event listener for favoritesChanged added");
     
     // Cleanup
     return () => {
+      console.log("♻️ Cleaning up FavoritesSection");
       window.removeEventListener('favoritesChanged', handleFavoritesChanged);
     };
   }, []);
+  
+  console.log("🖼️ Rendering FavoritesSection. Loading:", loading, "Favorites count:", favorites.length);
   
   if (loading) {
     return (
@@ -50,6 +59,7 @@ export const FavoritesSection = () => {
   }
   
   if (favorites.length === 0) {
+    console.log("😢 No favorites to display");
     return (
       <div className="text-center py-16 bg-white rounded-xl shadow-sm border border-gray-100 animate-fade-in">
         <Heart className="h-12 w-12 mx-auto text-gray-300 mb-4" />
