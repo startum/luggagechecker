@@ -86,7 +86,7 @@ const Results = () => {
             <p className="text-gray-600 mb-8">
               Browse or search for airlines to view their baggage policies, including carry-on and checked baggage dimensions and weight limits.
             </p>
-            <AirlineSearch initialSearch={initialSearch} />
+            <AirlineSearch initialSearch={initialSearch} limit={40} />
           </>
         )}
       </div>
