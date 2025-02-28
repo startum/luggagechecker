@@ -43,16 +43,9 @@ export const AirlineSearch = ({
         console.log(`Loaded ${airlines.length} airlines`);
         setAllAirlines(airlines);
         
-        // Initial filtering
-        const criteria = { ...filterCriteria };
-        if (initialSearch) {
-          setSearchTerm(initialSearch);
-          criteria.search = initialSearch;
-        }
-        
-        const filteredAirlines = filterAndSortAirlines(airlines, criteria);
-        console.log(`Initial filtered results: ${filteredAirlines.length} airlines`);
-        setDisplayedAirlines(filteredAirlines);
+        // Apply initial filtering
+        const filtered = applyFilters(airlines);
+        setDisplayedAirlines(filtered);
       } catch (error) {
         console.error('Error loading airlines:', error);
       } finally {
@@ -61,40 +54,34 @@ export const AirlineSearch = ({
     };
     
     loadAirlines();
-  }, [initialSearch]);
+  }, []);
 
-  // Filter and sort function (synchronous for immediate UI updates)
-  const filterAndSortAirlines = (airlines: Airline[], criteria: FilterCriteria): Airline[] => {
-    console.log(`Filtering airlines with criteria:`, criteria);
+  // Apply all filters and return filtered results
+  const applyFilters = (airlines: Airline[]) => {
     let results = [...airlines];
     
-    // Apply search filter
-    if (criteria.search) {
-      const searchLower = criteria.search.toLowerCase();
-      console.log(`Filtering by search term: "${searchLower}"`);
+    // Apply search filter if present
+    if (searchTerm) {
+      const searchLower = searchTerm.toLowerCase();
       results = results.filter(airline => 
         airline.name.toLowerCase().includes(searchLower) || 
         airline.code.toLowerCase().includes(searchLower) ||
         (airline.country && airline.country.toLowerCase().includes(searchLower))
       );
-      console.log(`After search filter: ${results.length} airlines`);
     }
     
-    // Apply dimension filtering if needed
+    // Apply dimension filtering if enabled
     if (filterByDimensions && luggageDimensions) {
-      console.log(`Filtering by dimensions: ${JSON.stringify(luggageDimensions)}`);
       results = results.filter(airline => 
         airline.carryOn.maxWidth >= luggageDimensions.width &&
         airline.carryOn.maxHeight >= luggageDimensions.height &&
         airline.carryOn.maxDepth >= luggageDimensions.depth &&
         airline.carryOn.maxWeight >= luggageDimensions.weight
       );
-      console.log(`After dimension filter: ${results.length} airlines`);
     }
     
     // Sort by restrictiveness if specified
-    if (criteria.restrictive) {
-      console.log(`Sorting by restrictiveness`);
+    if (filterCriteria.restrictive) {
       results.sort((a, b) => {
         const volumeA = a.carryOn.maxWidth * a.carryOn.maxHeight * a.carryOn.maxDepth;
         const volumeB = b.carryOn.maxWidth * b.carryOn.maxHeight * b.carryOn.maxDepth;
@@ -104,35 +91,20 @@ export const AirlineSearch = ({
     
     // Apply limit if specified
     if (limit && limit > 0) {
-      console.log(`Limiting results to ${limit} airlines`);
       results = results.slice(0, limit);
     }
     
     return results;
   };
 
-  // Re-filter when search term changes
+  // Update displayed airlines when search term changes
   useEffect(() => {
     console.log(`Search term changed to: "${searchTerm}"`);
-    // Immediately update filter criteria and displayed airlines
-    const newCriteria = { ...filterCriteria, search: searchTerm };
-    setFilterCriteria(newCriteria);
-    
-    if (!loading && allAirlines.length > 0) {
-      const filteredResults = filterAndSortAirlines(allAirlines, newCriteria);
-      console.log(`New filtered results: ${filteredResults.length} airlines`);
-      setDisplayedAirlines(filteredResults);
+    if (allAirlines.length > 0) {
+      const filtered = applyFilters(allAirlines);
+      setDisplayedAirlines(filtered);
     }
-  }, [searchTerm]);
-
-  // Handle restrictiveness toggle
-  useEffect(() => {
-    console.log(`Restrictive filter changed to: ${filterCriteria.restrictive}`);
-    if (!loading && allAirlines.length > 0) {
-      const filteredResults = filterAndSortAirlines(allAirlines, filterCriteria);
-      setDisplayedAirlines(filteredResults);
-    }
-  }, [filterCriteria.restrictive]);
+  }, [searchTerm, filterCriteria.restrictive]);
 
   // Toggle sort by restrictiveness
   const toggleRestrictive = () => {

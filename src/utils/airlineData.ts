@@ -15,7 +15,7 @@ class AirlineService {
   }
 
   async loadAirlinesFromDB(): Promise<void> {
-    if (this.isLoaded) return;
+    if (this.isLoaded && this.airlines.length > 0) return;
     
     try {
       console.log("🌐 Loading airlines from database...");
@@ -24,28 +24,91 @@ class AirlineService {
         this.airlines = dbAirlines;
         this.isLoaded = true;
         console.log(`✅ Loaded ${dbAirlines.length} airlines from database`);
+      } else {
+        console.error('❌ No airlines loaded from database');
+        toast.error("Failed to load airline data");
       }
     } catch (error) {
       console.error('❌ Failed to load airlines from database:', error);
+      toast.error("Error loading airline data");
     }
   }
 
   async getAllAirlines(): Promise<Airline[]> {
-    if (!this.isLoaded) {
+    if (!this.isLoaded || this.airlines.length === 0) {
       await this.loadAirlinesFromDB();
     }
+    
+    if (this.airlines.length === 0) {
+      // For demo purposes, return some dummy data if database fetch fails
+      console.warn("⚠️ Returning fallback airline data");
+      return [
+        {
+          id: "ryanair",
+          name: "Ryanair",
+          code: "FR",
+          logo: "https://logo.clearbit.com/ryanair.com",
+          website: "https://www.ryanair.com",
+          country: "Ireland",
+          carryOn: {
+            maxWidth: 40,
+            maxHeight: 55,
+            maxDepth: 20,
+            maxWeight: 10,
+            notes: "Standard carry-on allowance"
+          },
+          checkedBaggage: [
+            {
+              maxWidth: 80,
+              maxHeight: 120,
+              maxDepth: 40,
+              maxWeight: 20,
+              price: "From €20.99"
+            }
+          ],
+          popularRoutes: ["London to Dublin", "Madrid to Rome"]
+        },
+        {
+          id: "easyjet",
+          name: "EasyJet",
+          code: "U2",
+          logo: "https://logo.clearbit.com/easyjet.com",
+          website: "https://www.easyjet.com",
+          country: "United Kingdom",
+          carryOn: {
+            maxWidth: 45,
+            maxHeight: 56,
+            maxDepth: 25,
+            maxWeight: 15,
+            notes: "One cabin bag per passenger"
+          },
+          checkedBaggage: [
+            {
+              maxWidth: 80,
+              maxHeight: 120,
+              maxDepth: 40,
+              maxWeight: 23,
+              price: "From €15.99"
+            }
+          ],
+          popularRoutes: ["London to Barcelona", "Paris to Nice"]
+        }
+      ];
+    }
+    
     return this.airlines;
   }
 
   async getAirlineById(id: string): Promise<Airline | undefined> {
-    if (!this.isLoaded) {
+    if ((!this.isLoaded || this.airlines.length === 0) && id) {
       await this.loadAirlinesFromDB();
     }
+    
     return this.airlines.find(airline => airline.id === id);
   }
 
   async searchAirlines(criteria: FilterCriteria): Promise<Airline[]> {
-    if (!this.isLoaded) {
+    if (!this.isLoaded || this.airlines.length === 0) {
       await this.loadAirlinesFromDB();
     }
     
@@ -75,7 +138,7 @@ class AirlineService {
   }
 
   async compareLuggage(dimensions: LuggageDimensions, airlineIds: string[]): Promise<ComparisonResult[]> {
-    if (!this.isLoaded) {
+    if (!this.isLoaded || this.airlines.length === 0) {
       await this.loadAirlinesFromDB();
     }
     
@@ -110,7 +173,7 @@ class AirlineService {
 
   async getFavorites(): Promise<Airline[]> {
     console.log("🔍 getFavorites() called, favorites:", this.favorites);
-    if (!this.isLoaded) {
+    if (!this.isLoaded || this.airlines.length === 0) {
       console.log("🔄 Airlines not loaded yet, loading from DB...");
       await this.loadAirlinesFromDB();
     }
