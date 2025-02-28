@@ -72,7 +72,7 @@ export const LuggageInput = ({ onSubmit, initialDimensions }: LuggageInputProps)
                 max={100}
                 step={1}
                 onValueChange={(value) => handleSliderChange('width', value)}
-                className="flex-grow"
+                className="flex-grow [&>.bg-primary]:bg-salmon"
               />
               <Input
                 type="number"
@@ -112,7 +112,7 @@ export const LuggageInput = ({ onSubmit, initialDimensions }: LuggageInputProps)
                 max={100}
                 step={1}
                 onValueChange={(value) => handleSliderChange('height', value)}
-                className="flex-grow"
+                className="flex-grow [&>.bg-primary]:bg-salmon"
               />
               <Input
                 type="number"
@@ -152,7 +152,7 @@ export const LuggageInput = ({ onSubmit, initialDimensions }: LuggageInputProps)
                 max={50}
                 step={1}
                 onValueChange={(value) => handleSliderChange('depth', value)}
-                className="flex-grow"
+                className="flex-grow [&>.bg-primary]:bg-salmon"
               />
               <Input
                 type="number"
@@ -192,7 +192,7 @@ export const LuggageInput = ({ onSubmit, initialDimensions }: LuggageInputProps)
                 max={35}
                 step={0.5}
                 onValueChange={(value) => handleSliderChange('weight', value)}
-                className="flex-grow"
+                className="flex-grow [&>.bg-primary]:bg-salmon"
               />
               <Input
                 type="number"
