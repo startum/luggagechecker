@@ -116,8 +116,8 @@ export const Hero = () => {
             style={{ animationDelay: '0.4s' }}
             onClick={() => navigate('/compare')}
           >
-            <div className="w-16 h-16 bg-yellow/20 rounded-lg flex items-center justify-center mb-5">
-              <Plane className="h-8 w-8 text-yellow" />
+            <div className="w-16 h-16 bg-teal/20 rounded-lg flex items-center justify-center mb-5">
+              <Plane className="h-8 w-8 text-teal" />
             </div>
             <h3 className="text-xl font-gordita font-semibold mb-3">Compare Sizes</h3>
             <p className="text-gray-600 font-roboto">Side-by-side comparison of baggage policies across multiple airlines.</p>
