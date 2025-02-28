@@ -42,6 +42,14 @@
     --ring: 222.2 84% 4.9%;
 
     --radius: 1rem; /* Increased radius for more playful shapes */
+    
+    /* Custom colors */
+    --salmon: 5 100% 68%; /* #FF7066 */
+    --yellow: 42 100% 70%; /* #FFD166 */
+    --teal: 182 94% 39%; /* #06BCC1 */
+    --purple: 291 23% 53%; /* #976391 */
+    --sunshine: 42 100% 70%; /* Same as yellow #FFD166 */
+    --coral: 5 100% 68%; /* Same as salmon #FF7066 */
   }
 
   /* Font settings */
@@ -54,13 +62,13 @@
   }
 
   body {
-    @apply bg-background text-foreground antialiased font-roboto;
+    @apply bg-background text-foreground antialiased;
     font-feature-settings: "ss01", "ss02", "cv01", "cv02", "cv03";
     font-size: 1.05rem;
   }
 
   h1, h2, h3, h4, h5, h6 {
-    @apply font-gordita font-bold text-black; /* Black for headings */
+    @apply font-bold text-black; /* Black for headings */
   }
   
   h1 {
@@ -93,15 +101,13 @@
 
   /* Form selectors styling */
   select, option, input[type="checkbox"], input[type="radio"] {
-    @apply text-salmon accent-sunshine;
+    @apply text-salmon;
+    accent-color: #FFD166; /* Use direct hex color instead of accent-sunshine class */
   }
 }
 
 @layer components {
-  /* Define custom classes here */
-  .accent-sunshine {
-    accent-color: theme('colors.sunshine.DEFAULT');
-  }
+  /* Define custom component classes here */
 }
 
 @layer utilities {
@@ -116,7 +122,7 @@
 
   /* Text gradient */
   .text-gradient {
-    @apply bg-clip-text text-transparent bg-gradient-to-r from-salmon to-yellow;
+    @apply bg-clip-text text-transparent bg-gradient-to-r from-[#FF7066] to-[#FFD166];
   }
 
   /* Image fade in animation */
@@ -135,10 +141,10 @@
 
   /* Box gradients */
   .gradient-salmon-yellow {
-    @apply bg-gradient-to-r from-salmon/20 to-yellow/20;
+    @apply bg-gradient-to-r from-[#FF7066]/20 to-[#FFD166]/20;
   }
   
   .gradient-yellow-salmon {
-    @apply bg-gradient-to-r from-yellow/20 to-salmon/20;
+    @apply bg-gradient-to-r from-[#FFD166]/20 to-[#FF7066]/20;
   }
 }
