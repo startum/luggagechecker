@@ -122,8 +122,8 @@ export const AirlineSearch = ({
   return (
     <div className="w-full">
       {/* Search Controls */}
-      <div className="mb-6 animate-fade-in">
-        <form className="relative mb-4" onSubmit={(e) => {
+      <div className="mb-4 sm:mb-6 animate-fade-in">
+        <form className="relative mb-3 sm:mb-4" onSubmit={(e) => {
           e.preventDefault();
           handleSearch();
         }}>
@@ -131,7 +131,7 @@ export const AirlineSearch = ({
           <Input 
             type="text" 
             placeholder="Search airlines by name, code or country" 
-            className="pl-10 pr-20 h-12"
+            className="pl-10 pr-20 h-10 sm:h-12 text-sm sm:text-base"
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
             onFocus={() => setShowSuggestions(suggestedAirlines.length > 0)}
@@ -142,9 +142,11 @@ export const AirlineSearch = ({
               type="submit" 
               variant="default" 
               size="sm" 
-              className="h-9"
+              className="h-7 sm:h-9 text-xs sm:text-sm"
             >
-              <Search className="h-4 w-4 mr-1" /> Search
+              <Search className="h-3 w-3 sm:h-4 sm:w-4 mr-1" /> 
+              <span className="hidden sm:inline">Search</span>
+              <span className="sm:hidden">Find</span>
             </Button>
           </div>
           
@@ -154,18 +156,18 @@ export const AirlineSearch = ({
               {suggestedAirlines.map(airline => (
                 <div 
                   key={airline.id}
-                  className="flex items-center p-3 hover:bg-gray-100 cursor-pointer"
+                  className="flex items-center p-2 sm:p-3 hover:bg-gray-100 cursor-pointer"
                   onClick={() => handleSuggestionClick(airline)}
                 >
                   {airline.logo && (
                     <img 
                       src={airline.logo} 
                       alt={`${airline.name} logo`}
-                      className="w-8 h-8 mr-3 object-contain"
+                      className="w-6 h-6 sm:w-8 sm:h-8 mr-2 sm:mr-3 object-contain"
                     />
                   )}
                   <div>
-                    <div className="font-medium">{airline.name}</div>
+                    <div className="font-medium text-sm sm:text-base">{airline.name}</div>
                     <div className="text-xs text-gray-500">{airline.code} • {airline.country}</div>
                   </div>
                 </div>
@@ -175,7 +177,7 @@ export const AirlineSearch = ({
         </form>
         
         {/* Search Results Count */}
-        <div className="text-sm text-gray-500 mb-2">
+        <div className="text-xs sm:text-sm text-gray-500 mb-2">
           {loading ? (
             "Loading airlines..."
           ) : (
@@ -186,41 +188,41 @@ export const AirlineSearch = ({
       
       {/* Results Grid - Changed from 3 columns to 2 columns */}
       {loading ? (
-        <div className="flex justify-center p-12">
-          <div className="animate-spin h-10 w-10 border-4 border-primary border-t-transparent rounded-full"></div>
+        <div className="flex justify-center p-4 sm:p-12">
+          <div className="animate-spin h-8 w-8 sm:h-10 sm:w-10 border-4 border-primary border-t-transparent rounded-full"></div>
         </div>
       ) : (
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
           {displayedAirlines.length > 0 ? displayedAirlines.map((airline, index) => (
             <Dialog key={airline.id}>
               <DialogTrigger asChild>
-                <div className="cursor-pointer bg-white rounded-lg shadow-sm border border-gray-100 p-4 hover:shadow-md transition-shadow flex flex-col justify-between h-full">
-                  <div className="flex items-center mb-3">
-                    <div className="w-10 h-10 bg-gray-100 rounded-full flex items-center justify-center mr-3">
+                <div className="cursor-pointer bg-white rounded-lg shadow-sm border border-gray-100 p-3 sm:p-4 hover:shadow-md transition-shadow flex flex-col justify-between h-full">
+                  <div className="flex items-center mb-2 sm:mb-3">
+                    <div className="w-8 h-8 sm:w-10 sm:h-10 bg-gray-100 rounded-full flex items-center justify-center mr-2 sm:mr-3">
                       {airline.logo ? (
                         <img 
                           src={airline.logo} 
                           alt={`${airline.name} logo`}
-                          className="w-8 h-8 object-contain"
+                          className="w-6 h-6 sm:w-8 sm:h-8 object-contain"
                         />
                       ) : (
-                        <Plane className="h-5 w-5 text-gray-400" />
+                        <Plane className="h-4 w-4 sm:h-5 sm:w-5 text-gray-400" />
                       )}
                     </div>
                     <div>
-                      <h3 className="font-medium">{airline.name}</h3>
+                      <h3 className="font-medium text-sm sm:text-base">{airline.name}</h3>
                       <div className="text-xs text-gray-500 flex items-center gap-1">
                         <span className="font-mono">{airline.code}</span>
                         {airline.country && (
                           <>
                             <span>•</span>
-                            <span>{airline.country}</span>
+                            <span className="hidden xs:inline">{airline.country}</span>
                           </>
                         )}
                       </div>
                     </div>
                   </div>
-                  <div className="mt-2 text-sm">
+                  <div className="mt-2 text-xs sm:text-sm">
                     <div className="flex justify-between mb-1">
                       <span className="text-gray-500">Max Dimensions:</span>
                       <span className="font-medium">
@@ -239,12 +241,12 @@ export const AirlineSearch = ({
               </DialogContent>
             </Dialog>
           )) : (
-            <div className="text-center py-12 bg-white rounded-md shadow-sm col-span-2">
-              <p className="text-gray-500">No airlines found matching your search criteria.</p>
+            <div className="text-center py-8 sm:py-12 bg-white rounded-md shadow-sm col-span-1 sm:col-span-2">
+              <p className="text-gray-500 text-sm sm:text-base">No airlines found matching your search criteria.</p>
               <Button variant="link" onClick={() => {
                 setSearchTerm('');
                 setDisplayedAirlines(featuredAirlines);
-              }} className="mt-2">
+              }} className="mt-2 text-xs sm:text-sm">
                 Show popular airlines instead
               </Button>
             </div>
