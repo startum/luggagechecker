@@ -36,20 +36,38 @@ const Compare = () => {
     }
   }, []);
   
+  // Live search as user types
+  useEffect(() => {
+    const performLiveSearch = async () => {
+      if (searchTerm.trim().length >= 2) {
+        try {
+          const results = await airlineService.searchAirlines({ search: searchTerm });
+          setSearchResults(results);
+        } catch (error) {
+          console.error('Error searching airlines:', error);
+          setSearchResults([]);
+        }
+      } else if (searchTerm.trim().length === 0) {
+        // When search is cleared, show popular airlines
+        try {
+          const allAirlines = await airlineService.getAllAirlines();
+          setSearchResults(allAirlines.slice(0, 8)); // Show first 8 airlines as popular
+        } catch (error) {
+          console.error('Error loading popular airlines:', error);
+          setSearchResults([]);
+        }
+      }
+    };
+
+    // Use debounce to avoid too many API calls
+    const timeoutId = setTimeout(performLiveSearch, 300);
+    return () => clearTimeout(timeoutId);
+  }, [searchTerm]);
+  
   const handleLuggageSubmit = (dimensions: LuggageDimensions) => {
     // Store dimensions
     sessionStorage.setItem('luggage-dimensions', JSON.stringify(dimensions));
     setLuggageDimensions(dimensions);
-  };
-  
-  const handleSearch = async () => {
-    try {
-      const results = await airlineService.searchAirlines({ search: searchTerm });
-      setSearchResults(results);
-    } catch (error) {
-      console.error('Error searching airlines:', error);
-      setSearchResults([]);
-    }
   };
   
   const addAirline = (airlineId: string) => {
@@ -81,6 +99,22 @@ const Compare = () => {
 
     fetchSelectedAirlines();
   }, [selectedAirlines]);
+  
+  // Load initial popular airlines when dialog opens
+  useEffect(() => {
+    const loadInitialAirlines = async () => {
+      if (dialogOpen && searchResults.length === 0) {
+        try {
+          const allAirlines = await airlineService.getAllAirlines();
+          setSearchResults(allAirlines.slice(0, 8)); // Show first 8 airlines
+        } catch (error) {
+          console.error('Error loading initial airlines:', error);
+        }
+      }
+    };
+    
+    loadInitialAirlines();
+  }, [dialogOpen, searchResults.length]);
   
   return (
     <Layout>
@@ -124,15 +158,10 @@ const Compare = () => {
                     <Input 
                       type="text" 
                       placeholder="Search airlines" 
-                      className="pl-10 pr-20"
+                      className="pl-10"
                       value={searchTerm}
                       onChange={(e) => setSearchTerm(e.target.value)}
                     />
-                    <div className="absolute right-2 top-1/2 transform -translate-y-1/2">
-                      <Button type="button" size="sm" onClick={handleSearch}>
-                        Search
-                      </Button>
-                    </div>
                   </div>
                   
                   <div className="max-h-96 overflow-y-auto pr-2 space-y-2">
