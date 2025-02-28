@@ -55,7 +55,7 @@ export const Hero = () => {
                 <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" />
                 <Input 
                   type="text" 
-                  placeholder="Search airlines (e.g., Ryanair, EasyJet)" 
+                  placeholder="Search airlines" 
                   className="pl-10 h-14 w-full text-base rounded-xl focus:ring-salmon"
                   value={searchTerm}
                   onChange={(e) => setSearchTerm(e.target.value)}
