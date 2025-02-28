@@ -34,15 +34,25 @@ export const AirlineSearch = ({
 
   // Initial load of airlines
   useEffect(() => {
+    console.log("Initial load of AirlineSearch");
     const loadAirlines = async () => {
       setLoading(true);
       try {
+        console.log("Fetching all airlines");
         const airlines = await airlineService.getAllAirlines();
+        console.log(`Loaded ${airlines.length} airlines`);
         setAllAirlines(airlines);
         
-        // Initial filtering and display
-        const initialResults = await filterAndSortAirlines(airlines, filterCriteria);
-        setDisplayedAirlines(initialResults);
+        // Initial filtering
+        const criteria = { ...filterCriteria };
+        if (initialSearch) {
+          setSearchTerm(initialSearch);
+          criteria.search = initialSearch;
+        }
+        
+        const filteredAirlines = filterAndSortAirlines(airlines, criteria);
+        console.log(`Initial filtered results: ${filteredAirlines.length} airlines`);
+        setDisplayedAirlines(filteredAirlines);
       } catch (error) {
         console.error('Error loading airlines:', error);
       } finally {
@@ -51,50 +61,41 @@ export const AirlineSearch = ({
     };
     
     loadAirlines();
-  }, []);
+  }, [initialSearch]);
 
-  // Update filter criteria whenever search term changes
-  useEffect(() => {
-    const updatedCriteria = { ...filterCriteria, search: searchTerm };
-    setFilterCriteria(updatedCriteria);
-    updateDisplayedAirlines(updatedCriteria);
-  }, [searchTerm]);
-
-  // Handle changes to other filter criteria (not search term)
-  useEffect(() => {
-    if (filterCriteria.restrictive !== undefined) {
-      updateDisplayedAirlines(filterCriteria);
-    }
-  }, [filterCriteria.restrictive]);
-
-  // Filter and sort airlines based on criteria
-  const filterAndSortAirlines = async (airlines: Airline[], criteria: FilterCriteria): Promise<Airline[]> => {
+  // Filter and sort function (synchronous for immediate UI updates)
+  const filterAndSortAirlines = (airlines: Airline[], criteria: FilterCriteria): Airline[] => {
+    console.log(`Filtering airlines with criteria:`, criteria);
     let results = [...airlines];
     
     // Apply search filter
     if (criteria.search) {
-      const searchTerm = criteria.search.toLowerCase();
+      const searchLower = criteria.search.toLowerCase();
+      console.log(`Filtering by search term: "${searchLower}"`);
       results = results.filter(airline => 
-        airline.name.toLowerCase().includes(searchTerm) || 
-        airline.code.toLowerCase().includes(searchTerm) ||
-        (airline.country && airline.country.toLowerCase().includes(searchTerm))
+        airline.name.toLowerCase().includes(searchLower) || 
+        airline.code.toLowerCase().includes(searchLower) ||
+        (airline.country && airline.country.toLowerCase().includes(searchLower))
       );
+      console.log(`After search filter: ${results.length} airlines`);
     }
     
     // Apply dimension filtering if needed
     if (filterByDimensions && luggageDimensions) {
+      console.log(`Filtering by dimensions: ${JSON.stringify(luggageDimensions)}`);
       results = results.filter(airline => 
         airline.carryOn.maxWidth >= luggageDimensions.width &&
         airline.carryOn.maxHeight >= luggageDimensions.height &&
         airline.carryOn.maxDepth >= luggageDimensions.depth &&
         airline.carryOn.maxWeight >= luggageDimensions.weight
       );
+      console.log(`After dimension filter: ${results.length} airlines`);
     }
     
     // Sort by restrictiveness if specified
     if (criteria.restrictive) {
+      console.log(`Sorting by restrictiveness`);
       results.sort((a, b) => {
-        // Calculate total allowed volume
         const volumeA = a.carryOn.maxWidth * a.carryOn.maxHeight * a.carryOn.maxDepth;
         const volumeB = b.carryOn.maxWidth * b.carryOn.maxHeight * b.carryOn.maxDepth;
         return volumeA - volumeB; // Most restrictive first
@@ -103,35 +104,48 @@ export const AirlineSearch = ({
     
     // Apply limit if specified
     if (limit && limit > 0) {
+      console.log(`Limiting results to ${limit} airlines`);
       results = results.slice(0, limit);
     }
     
     return results;
   };
 
-  // Function to update airlines based on current criteria
-  const updateDisplayedAirlines = async (criteria: FilterCriteria) => {
-    setLoading(true);
-    try {
-      const results = await filterAndSortAirlines(allAirlines, criteria);
-      setDisplayedAirlines(results);
-    } catch (error) {
-      console.error('Error updating airlines:', error);
-    } finally {
-      setLoading(false);
+  // Re-filter when search term changes
+  useEffect(() => {
+    console.log(`Search term changed to: "${searchTerm}"`);
+    // Immediately update filter criteria and displayed airlines
+    const newCriteria = { ...filterCriteria, search: searchTerm };
+    setFilterCriteria(newCriteria);
+    
+    if (!loading && allAirlines.length > 0) {
+      const filteredResults = filterAndSortAirlines(allAirlines, newCriteria);
+      console.log(`New filtered results: ${filteredResults.length} airlines`);
+      setDisplayedAirlines(filteredResults);
     }
-  };
+  }, [searchTerm]);
+
+  // Handle restrictiveness toggle
+  useEffect(() => {
+    console.log(`Restrictive filter changed to: ${filterCriteria.restrictive}`);
+    if (!loading && allAirlines.length > 0) {
+      const filteredResults = filterAndSortAirlines(allAirlines, filterCriteria);
+      setDisplayedAirlines(filteredResults);
+    }
+  }, [filterCriteria.restrictive]);
 
   // Toggle sort by restrictiveness
   const toggleRestrictive = () => {
-    setFilterCriteria({ 
-      ...filterCriteria, 
-      restrictive: !filterCriteria.restrictive 
-    });
+    console.log(`Toggling restrictive filter`);
+    setFilterCriteria(prev => ({ 
+      ...prev, 
+      restrictive: !prev.restrictive 
+    }));
   };
 
   // Clear all filters
   const clearFilters = () => {
+    console.log(`Clearing all filters`);
     setSearchTerm('');
     setFilterCriteria({ search: '', restrictive: false });
   };
@@ -183,8 +197,6 @@ export const AirlineSearch = ({
                   Show most restrictive first
                 </Label>
               </div>
-              
-              {/* More filter options could be added here */}
             </div>
           </div>
         )}

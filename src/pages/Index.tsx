@@ -19,10 +19,7 @@ const Index = () => {
     depth: 20,
     weight: 10
   });
-  const [filterCriteria, setFilterCriteria] = useState({
-    search: '',
-    restrictive: false
-  });
+  const [searchTerm, setSearchTerm] = useState('');
   
   useEffect(() => {
     // Check if user has any favorites
@@ -81,7 +78,7 @@ const Index = () => {
                 </div>
               </div>
               <AirlineSearch 
-                initialSearch={filterCriteria.search}
+                initialSearch={searchTerm}
                 filterByDimensions={true}
                 luggageDimensions={currentDimensions}
                 limit={6}
