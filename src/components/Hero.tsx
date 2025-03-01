@@ -1,3 +1,4 @@
+
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Search, Plane, Luggage, ArrowRight, Check, Sun } from 'lucide-react';
@@ -102,7 +103,7 @@ export const Hero = () => {
                 setSearchTerm(e.target.value);
                 e.stopPropagation();
               }} onClick={e => e.stopPropagation()} aria-label="Search airlines for luggage size requirements" />
-                <Button type="submit" size="lg" className="h-14 text-base px-6 font-semibold mt-2 sm:mt-0 sm:absolute sm:right-0 sm:top-0 sm:rounded-l-none bg-blue-500 hover:bg-blue-600 text-white">
+                <Button type="submit" size="lg" className="h-14 text-base px-6 font-semibold mt-2 sm:mt-0 sm:absolute sm:right-0 sm:top-0 sm:rounded-l-none bg-yellow-500 hover:bg-yellow-600 text-white">
                   Check Luggage Size <ArrowRight className="ml-2 h-5 w-5" />
                 </Button>
                 
