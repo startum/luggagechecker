@@ -5,7 +5,6 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import airlineService from '@/utils/airlineData';
 import { Airline } from '@/utils/types';
-
 export const Hero = () => {
   const [searchTerm, setSearchTerm] = useState('');
   const [searchResults, setSearchResults] = useState<Airline[]>([]);
@@ -35,7 +34,6 @@ export const Hero = () => {
     const timeoutId = setTimeout(performLiveSearch, 300);
     return () => clearTimeout(timeoutId);
   }, [searchTerm]);
-
   const handleSearch = (e: React.FormEvent) => {
     e.preventDefault();
     if (searchTerm.trim()) {
@@ -46,7 +44,6 @@ export const Hero = () => {
       navigate('/results');
     }
   };
-
   const handleSelectAirline = (airline: Airline) => {
     setSearchTerm(airline.name);
     setShowResults(false);
@@ -59,7 +56,6 @@ export const Hero = () => {
     document.addEventListener('click', handleClickOutside);
     return () => document.removeEventListener('click', handleClickOutside);
   }, []);
-
   return <section className="relative py-20 overflow-hidden bg-white">
       {/* Gradient Top */}
       <div className="absolute top-0 left-0 right-0 h-24 bg-gradient-to-b from-teal/10 to-white"></div>
@@ -80,7 +76,7 @@ export const Hero = () => {
             <span className="inline-block px-5 py-2 rounded-full bg-salmon/10 text-salmon font-medium mb-8 animate-fade-in">
               <div className="flex items-center gap-2">
                 <Luggage className="h-5 w-5" />
-                <span>Online Luggage Size Checker</span>
+                <span>Online Baggage Sizes</span>
               </div>
             </span>
             
