@@ -92,14 +92,19 @@ export const Hero = () => {
             animationDelay: '0.2s'
           }}>
               <form onSubmit={handleSearch} className="relative flex-grow w-full">
-                <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-zinc-400" />
-                <Input type="text" placeholder="Search airlines for luggage requirements" className="pl-10 h-14 w-full text-base rounded-xl border-zinc-200 focus:border-teal-500 focus:ring-teal-500" value={searchTerm} onChange={e => {
-                setSearchTerm(e.target.value);
-                e.stopPropagation();
-              }} onClick={e => e.stopPropagation()} aria-label="Search airlines for luggage size requirements" />
-                <Button type="submit" size="lg" className="h-14 text-base px-6 font-semibold mt-2 sm:mt-0 sm:absolute sm:right-0 sm:top-0 sm:rounded-l-none bg-amber-400 hover:bg-amber-500 text-zinc-900">
-                  Check Luggage Size <ArrowRight className="ml-2 h-5 w-5" />
-                </Button>
+                <div className="flex flex-col sm:flex-row gap-2 w-full">
+                  <div className="relative flex-grow">
+                    <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-zinc-400" />
+                    <Input type="text" placeholder="Search airlines for luggage requirements" className="pl-10 h-14 w-full text-base rounded-xl border-zinc-200 focus:border-teal-500 focus:ring-teal-500" value={searchTerm} onChange={e => {
+                    setSearchTerm(e.target.value);
+                    e.stopPropagation();
+                  }} onClick={e => e.stopPropagation()} aria-label="Search airlines for luggage size requirements" />
+                  </div>
+                  <Button type="submit" size="lg" className="h-14 text-base px-6 font-semibold bg-amber-400 hover:bg-amber-500 text-zinc-900">
+                    <Search className="mr-2 h-5 w-5" />
+                    <span>Check</span>
+                  </Button>
+                </div>
                 
                 {showResults && searchResults.length > 0 && <div className="absolute left-0 right-0 top-full mt-1 bg-white shadow-lg rounded-lg z-50 max-h-60 overflow-y-auto" onClick={e => e.stopPropagation()}>
                     {searchResults.map(airline => <div key={airline.id} className="flex items-center px-4 py-3 hover:bg-zinc-50 cursor-pointer border-b border-zinc-100 last:border-b-0" onClick={() => handleSelectAirline(airline)}>
