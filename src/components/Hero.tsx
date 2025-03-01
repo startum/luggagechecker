@@ -5,13 +5,13 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import airlineService from '@/utils/airlineData';
 import { Airline } from '@/utils/types';
+
 export const Hero = () => {
   const [searchTerm, setSearchTerm] = useState('');
   const [searchResults, setSearchResults] = useState<Airline[]>([]);
   const [showResults, setShowResults] = useState(false);
   const navigate = useNavigate();
 
-  // Live search as user types
   useEffect(() => {
     const performLiveSearch = async () => {
       if (searchTerm.trim().length >= 2) {
@@ -30,10 +30,10 @@ export const Hero = () => {
       }
     };
 
-    // Use debounce to avoid too many API calls
     const timeoutId = setTimeout(performLiveSearch, 300);
     return () => clearTimeout(timeoutId);
   }, [searchTerm]);
+
   const handleSearch = (e: React.FormEvent) => {
     e.preventDefault();
     if (searchTerm.trim()) {
@@ -44,23 +44,22 @@ export const Hero = () => {
       navigate('/results');
     }
   };
+
   const handleSelectAirline = (airline: Airline) => {
     setSearchTerm(airline.name);
     setShowResults(false);
     navigate(`/results?search=${encodeURIComponent(airline.name)}`);
   };
 
-  // Close dropdown when clicking outside
   useEffect(() => {
     const handleClickOutside = () => setShowResults(false);
     document.addEventListener('click', handleClickOutside);
     return () => document.removeEventListener('click', handleClickOutside);
   }, []);
+
   return <section className="relative py-20 overflow-hidden bg-white">
-      {/* Gradient Top */}
       <div className="absolute top-0 left-0 right-0 h-24 bg-gradient-to-b from-teal/10 to-white"></div>
       
-      {/* Background Elements */}
       <div className="absolute top-20 left-20 w-64 h-64 bg-yellow/30 rounded-full mix-blend-multiply filter blur-xl opacity-30 animate-floating"></div>
       <div className="absolute -bottom-10 right-10 w-72 h-72 bg-teal/20 rounded-full mix-blend-multiply filter blur-xl opacity-30 animate-floating" style={{
       animationDelay: '1.5s'
@@ -71,7 +70,6 @@ export const Hero = () => {
       
       <div className="layout-container relative z-10">
         <div className="flex flex-col lg:flex-row items-center max-w-6xl mx-auto">
-          {/* Left Column: Text Content */}
           <div className="flex flex-col items-center lg:items-start text-center lg:text-left lg:w-1/2 mb-12 lg:mb-0">
             <span className="inline-block px-5 py-2 rounded-full bg-teal/10 font-medium mb-8 animate-fade-in text-[#48b3bc]">
               <div className="flex items-center gap-2">
@@ -102,7 +100,6 @@ export const Hero = () => {
                   Check Luggage Size <ArrowRight className="ml-2 h-5 w-5" />
                 </Button>
                 
-                {/* Autocomplete dropdown */}
                 {showResults && searchResults.length > 0 && <div className="absolute left-0 right-0 top-full mt-1 bg-white shadow-lg rounded-lg z-50 max-h-60 overflow-y-auto" onClick={e => e.stopPropagation()}>
                     {searchResults.map(airline => <div key={airline.id} className="flex items-center px-4 py-3 hover:bg-gray-50 cursor-pointer border-b border-gray-100 last:border-b-0" onClick={() => handleSelectAirline(airline)}>
                         <div className="w-8 h-8 rounded overflow-hidden mr-3 flex-shrink-0">
@@ -120,7 +117,6 @@ export const Hero = () => {
             </div>
           </div>
           
-          {/* Right Column: Image */}
           <div className="lg:w-1/2 flex justify-center lg:justify-end animate-fade-in">
             <div className="relative w-full max-w-md">
               <div className="absolute -top-6 -right-6 w-12 h-12 bg-yellow rounded-full flex items-center justify-center z-10 animate-pulse-soft">
@@ -137,7 +133,6 @@ export const Hero = () => {
           </div>
         </div>
         
-        {/* Feature Cards */}
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-8 mt-20 w-full">
           <div className="bg-white p-8 rounded-xl animate-fade-in cursor-pointer hover:-translate-y-1 transition-all duration-300 border border-[#F1F0FB] shadow-[2px_2px_10px_rgba(0,0,0,0.05)]" style={{
           animationDelay: '0.3s'
