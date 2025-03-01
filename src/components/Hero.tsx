@@ -5,6 +5,7 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import airlineService from '@/utils/airlineData';
 import { Airline } from '@/utils/types';
+
 export const Hero = () => {
   const [searchTerm, setSearchTerm] = useState('');
   const [searchResults, setSearchResults] = useState<Airline[]>([]);
@@ -34,6 +35,7 @@ export const Hero = () => {
     const timeoutId = setTimeout(performLiveSearch, 300);
     return () => clearTimeout(timeoutId);
   }, [searchTerm]);
+
   const handleSearch = (e: React.FormEvent) => {
     e.preventDefault();
     if (searchTerm.trim()) {
@@ -44,6 +46,7 @@ export const Hero = () => {
       navigate('/results');
     }
   };
+
   const handleSelectAirline = (airline: Airline) => {
     setSearchTerm(airline.name);
     setShowResults(false);
@@ -56,6 +59,7 @@ export const Hero = () => {
     document.addEventListener('click', handleClickOutside);
     return () => document.removeEventListener('click', handleClickOutside);
   }, []);
+
   return <section className="relative py-20 overflow-hidden bg-white">
       {/* Gradient Top */}
       <div className="absolute top-0 left-0 right-0 h-24 bg-gradient-to-b from-teal/10 to-white"></div>
@@ -98,7 +102,7 @@ export const Hero = () => {
                 setSearchTerm(e.target.value);
                 e.stopPropagation();
               }} onClick={e => e.stopPropagation()} aria-label="Search airlines for luggage size requirements" />
-                <Button type="submit" size="lg" className="h-14 text-base px-6 font-semibold mt-2 sm:mt-0 sm:absolute sm:right-0 sm:top-0 sm:rounded-l-none text-white shadow-[4px_4px_0px_0px_rgba(6,188,193,0.7)] bg-teal">
+                <Button type="submit" size="lg" className="h-14 text-base px-6 font-semibold mt-2 sm:mt-0 sm:absolute sm:right-0 sm:top-0 sm:rounded-l-none bg-blue-500 hover:bg-blue-600 text-white">
                   Check Luggage Size <ArrowRight className="ml-2 h-5 w-5" />
                 </Button>
                 
