@@ -1,3 +1,4 @@
+
 import React from 'react';
 import { Navbar } from './Navbar';
 import { Toaster } from "sonner";
@@ -16,9 +17,9 @@ export const Layout: React.FC<LayoutProps> = ({
         <div className="layout-container">
           <div className="flex flex-col md:flex-row justify-between items-center gap-4 sm:gap-6">
             <div className="flex items-center flex-col md:flex-row text-center md:text-left">
-              <img alt="Luggage Checker" className="h-12 sm:h-16 mr-0 md:mr-2 mb-2 md:mb-0" src="/lovable-uploads/b792be04-2c20-425b-b87b-cc01cc6b3ad3.png" />
+              <img alt="Size My Bag" className="h-12 sm:h-16 mr-0 md:mr-2 mb-2 md:mb-0" src="/lovable-uploads/b792be04-2c20-425b-b87b-cc01cc6b3ad3.png" />
               <div className="text-xs sm:text-sm text-gray-500">
-                © {new Date().getFullYear()} Luggage Checker. All rights reserved.
+                © {new Date().getFullYear()} Size My Bag. All rights reserved.
               </div>
             </div>
             <div className="flex gap-4 sm:gap-6 flex-wrap justify-center">
