@@ -76,17 +76,17 @@ export const Hero = () => {
             <span className="inline-block px-5 py-2 rounded-full bg-salmon/10 text-salmon font-medium mb-8 animate-fade-in">
               <div className="flex items-center gap-2">
                 <Luggage className="h-5 w-5" />
-                <span>Check Your Luggage Sizes</span>
+                <span>Online Luggage Size Checker</span>
               </div>
             </span>
             
             <h1 className="text-4xl md:text-5xl lg:text-6xl font-gordita font-bold tracking-tight mb-8 animate-slide-up">
-              Will Your Bag <span className="text-salmon">Fly</span> With You?
+              Free Luggage Size Checker For All Airlines
             </h1>
             
             <p className="text-xl text-gray-600 mb-10 max-w-2xl animate-slide-up font-roboto" style={{ animationDelay: '0.1s' }}>
-              Instantly check if your luggage meets size and weight requirements for airlines worldwide. 
-              <span className="font-bold text-salmon"> No more baggage surprises!</span>
+              Instantly check if your luggage dimensions meet size and weight requirements for airlines worldwide. 
+              <span className="font-bold text-salmon"> No more excess baggage fees!</span>
             </p>
             
             <div className="flex flex-col sm:flex-row gap-4 w-full max-w-md animate-slide-up" style={{ animationDelay: '0.2s' }}>
@@ -94,7 +94,7 @@ export const Hero = () => {
                 <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" />
                 <Input 
                   type="text" 
-                  placeholder="Search airlines" 
+                  placeholder="Search airlines for luggage requirements" 
                   className="pl-10 h-14 w-full text-base rounded-xl focus:ring-salmon"
                   value={searchTerm}
                   onChange={(e) => {
@@ -102,13 +102,14 @@ export const Hero = () => {
                     e.stopPropagation();
                   }}
                   onClick={(e) => e.stopPropagation()}
+                  aria-label="Search airlines for luggage size requirements"
                 />
                 <Button 
                   type="submit" 
                   size="lg" 
                   className="h-14 text-base px-6 font-semibold mt-2 sm:mt-0 sm:absolute sm:right-0 sm:top-0 sm:rounded-l-none bg-salmon text-white shadow-[4px_4px_0px_0px_rgba(6,188,193,0.7)]"
                 >
-                  Find Airlines <ArrowRight className="ml-2 h-5 w-5" />
+                  Check Luggage Size <ArrowRight className="ml-2 h-5 w-5" />
                 </Button>
                 
                 {/* Autocomplete dropdown */}
@@ -150,7 +151,7 @@ export const Hero = () => {
               </div>
               <img 
                 src="/lovable-uploads/ce753aea-3456-4e73-83ea-5ca2237f05e9.png"
-                alt="Boarding pass and passport at airport"
+                alt="Luggage size checker tool with boarding pass and passport"
                 className="rounded-2xl"
               />
               <div className="absolute -bottom-4 -left-4 bg-white p-4 rounded-lg gradient-salmon-yellow shadow-lg">
@@ -178,8 +179,8 @@ export const Hero = () => {
             <div className="w-16 h-16 bg-salmon/20 rounded-lg flex items-center justify-center mb-5">
               <Luggage className="h-8 w-8 text-salmon" />
             </div>
-            <h3 className="text-xl font-gordita font-semibold mb-3">Measure Your Luggage</h3>
-            <p className="text-gray-600 font-roboto">Enter your bag's dimensions and weight to check against airline limits.</p>
+            <h3 className="text-xl font-gordita font-semibold mb-3">Luggage Size Checker</h3>
+            <p className="text-gray-600 font-roboto">Free online tool to check if your bag dimensions and weight meet airline requirements.</p>
           </div>
           
           <div 
@@ -190,8 +191,8 @@ export const Hero = () => {
             <div className="w-16 h-16 bg-teal/20 rounded-lg flex items-center justify-center mb-5">
               <Plane className="h-8 w-8 text-teal" />
             </div>
-            <h3 className="text-xl font-gordita font-semibold mb-3">Compare Sizes</h3>
-            <p className="text-gray-600 font-roboto">Side-by-side comparison of baggage policies across multiple airlines.</p>
+            <h3 className="text-xl font-gordita font-semibold mb-3">Compare Luggage Sizes</h3>
+            <p className="text-gray-600 font-roboto">Side-by-side comparison of baggage size policies across multiple airlines.</p>
           </div>
           
           <div 
@@ -202,8 +203,8 @@ export const Hero = () => {
             <div className="w-16 h-16 bg-salmon/20 rounded-lg flex items-center justify-center mb-5">
               <Search className="h-8 w-8 text-salmon" />
             </div>
-            <h3 className="text-xl font-gordita font-semibold mb-3">Find Your Airline</h3>
-            <p className="text-gray-600 font-roboto">View comprehensive information about carry-on and checked baggage policies.</p>
+            <h3 className="text-xl font-gordita font-semibold mb-3">Airline Luggage Sizes</h3>
+            <p className="text-gray-600 font-roboto">View comprehensive information about carry-on and checked baggage dimensions.</p>
           </div>
         </div>
       </div>
