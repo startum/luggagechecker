@@ -29,7 +29,7 @@ export const Navbar = () => {
         <div className="flex h-20 items-center justify-between">
           <div className="flex items-center gap-2">
             <Link to="/" className="flex items-center">
-              <img alt="Luggage Checker" className="h-28 object-contain" src="/lovable-uploads/e689e6ff-e862-4f2a-9ba8-b40e294263e2.png" />
+              <img alt="Luggage Checker" className="h-28 object-contain" src="/lovable-uploads/cb33537c-e63a-46b4-a6fc-49322aed3261.png" />
             </Link>
           </div>
           
