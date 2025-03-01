@@ -86,7 +86,7 @@ export const Hero = () => {
             animationDelay: '0.1s'
           }}>
               Check if your luggage dimensions meet size and weight requirements for popular airlines. 
-              <span className="font-bold text-salmon"> Avoid excess baggage fees!</span>
+              <span className="font-bold text-[#48b3bc]"> Avoid excess baggage fees!</span>
             </p>
             
             <div className="flex flex-col sm:flex-row gap-4 w-full max-w-md animate-slide-up" style={{
