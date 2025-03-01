@@ -5,6 +5,7 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import airlineService from '@/utils/airlineData';
 import { Airline } from '@/utils/types';
+
 export const Hero = () => {
   const [searchTerm, setSearchTerm] = useState('');
   const [searchResults, setSearchResults] = useState<Airline[]>([]);
@@ -34,6 +35,7 @@ export const Hero = () => {
     const timeoutId = setTimeout(performLiveSearch, 300);
     return () => clearTimeout(timeoutId);
   }, [searchTerm]);
+
   const handleSearch = (e: React.FormEvent) => {
     e.preventDefault();
     if (searchTerm.trim()) {
@@ -44,6 +46,7 @@ export const Hero = () => {
       navigate('/results');
     }
   };
+
   const handleSelectAirline = (airline: Airline) => {
     setSearchTerm(airline.name);
     setShowResults(false);
@@ -56,6 +59,7 @@ export const Hero = () => {
     document.addEventListener('click', handleClickOutside);
     return () => document.removeEventListener('click', handleClickOutside);
   }, []);
+
   return <section className="relative py-20 overflow-hidden bg-white">
       {/* Gradient Top */}
       <div className="absolute top-0 left-0 right-0 h-24 bg-gradient-to-b from-teal/10 to-white"></div>
@@ -80,13 +84,13 @@ export const Hero = () => {
               </div>
             </span>
             
-            <h1 className="text-4xl md:text-5xl lg:text-6xl font-gordita font-bold tracking-tight mb-8 animate-slide-up">Luggage Size Checker For All Airlines</h1>
+            <h1 className="text-4xl md:text-5xl lg:text-6xl font-gordita font-bold tracking-tight mb-8 animate-slide-up">Luggage Size Checker</h1>
             
             <p className="text-xl text-gray-600 mb-10 max-w-2xl animate-slide-up font-roboto" style={{
             animationDelay: '0.1s'
           }}>
-              Instantly check if your luggage dimensions meet size and weight requirements for airlines worldwide. 
-              <span className="font-bold text-salmon"> No more excess baggage fees!</span>
+              Check if your luggage dimensions meet size and weight requirements for popular airlines. 
+              <span className="font-bold text-salmon"> Avoid excess baggage fees!</span>
             </p>
             
             <div className="flex flex-col sm:flex-row gap-4 w-full max-w-md animate-slide-up" style={{
@@ -153,7 +157,7 @@ export const Hero = () => {
               <Luggage className="h-8 w-8 text-salmon" />
             </div>
             <h3 className="text-xl font-gordita font-semibold mb-3">Luggage Size Checker</h3>
-            <p className="text-gray-600 font-roboto">Free online tool to check if your bag dimensions and weight meet airline requirements.</p>
+            <p className="text-gray-600 font-roboto">Online tool to check if your bag dimensions and weight meet airline requirements.</p>
           </div>
           
           <div className="bg-white p-8 rounded-xl animate-fade-in cursor-pointer hover:-translate-y-1 transition-all duration-300 border border-[#F1F0FB] shadow-[2px_2px_10px_rgba(0,0,0,0.05)]" style={{
