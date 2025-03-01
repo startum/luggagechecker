@@ -67,44 +67,57 @@ export default {
 					border: 'hsl(var(--sidebar-border))',
 					ring: 'hsl(var(--sidebar-ring))'
 				},
-				// Custom app colors with new palette
+				// Custom app colors based on the provided logo
 				coral: {
-					DEFAULT: '#FF715B', // Updated to salmon
+					DEFAULT: '#FF715B',
 					light: '#FFB4A2',
 					dark: '#E63946'
 				},
 				seafoam: {
-					DEFAULT: '#06BCC1', // Updated to teal
+					DEFAULT: '#06BCC1',
 					light: '#AEE5D8',
 					dark: '#1A9AAA'
 				},
 				sunshine: {
-					DEFAULT: '#FFD166', // Yellow
+					DEFAULT: '#FFD166',
 					light: '#FFFCEB',
 					dark: '#FFC233'
 				},
 				lavender: {
-					DEFAULT: '#976391', // Updated to purple
+					DEFAULT: '#976391',
 					light: '#B8B8FF',
 					dark: '#7E4F7B'
 				},
 				teal: {
-					DEFAULT: '#06BCC1', // New teal
+					DEFAULT: '#06BCC1', // From logo
 					light: '#6BD5E1',
 					dark: '#00706F'
 				},
 				navy: {
-					DEFAULT: '#0A3F70', // Navy blue
+					DEFAULT: '#0A3F70',
 					light: '#0F5A9E',
 					dark: '#062A4B'
 				},
 				salmon: {
-					DEFAULT: '#FF715B', // New salmon
+					DEFAULT: '#FF715B', // From logo - smile color
 					light: '#FFA090',
 					dark: '#E55A45'
 				},
+				amber: {
+					DEFAULT: '#FFBF55', // From logo - suitcase color
+					'50': '#FFFAEB',
+					'100': '#FFF2D1',
+					'200': '#FFE4A3',
+					'300': '#FFD26F',
+					'400': '#FFC847',
+					'500': '#FFBF55', // Main amber from logo
+					'600': '#E6A53D',
+					'700': '#CC8C26',
+					'800': '#A67113',
+					'900': '#805C08'
+				},
 				purple: {
-					DEFAULT: '#976391', // New purple
+					DEFAULT: '#976391',
 					light: '#B185AB',
 					dark: '#7D4E78'
 				}
