@@ -1,4 +1,3 @@
-
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Search, Plane, Luggage, ArrowRight, Check, Sun } from 'lucide-react';
@@ -6,13 +5,11 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import airlineService from '@/utils/airlineData';
 import { Airline } from '@/utils/types';
-
 export const Hero = () => {
   const [searchTerm, setSearchTerm] = useState('');
   const [searchResults, setSearchResults] = useState<Airline[]>([]);
   const [showResults, setShowResults] = useState(false);
   const navigate = useNavigate();
-
   useEffect(() => {
     const performLiveSearch = async () => {
       if (searchTerm.trim().length >= 2) {
@@ -30,11 +27,9 @@ export const Hero = () => {
         setShowResults(false);
       }
     };
-
     const timeoutId = setTimeout(performLiveSearch, 300);
     return () => clearTimeout(timeoutId);
   }, [searchTerm]);
-
   const handleSearch = (e: React.FormEvent) => {
     e.preventDefault();
     if (searchTerm.trim()) {
@@ -45,19 +40,16 @@ export const Hero = () => {
       navigate('/results');
     }
   };
-
   const handleSelectAirline = (airline: Airline) => {
     setSearchTerm(airline.name);
     setShowResults(false);
     navigate(`/results?search=${encodeURIComponent(airline.name)}`);
   };
-
   useEffect(() => {
     const handleClickOutside = () => setShowResults(false);
     document.addEventListener('click', handleClickOutside);
     return () => document.removeEventListener('click', handleClickOutside);
   }, []);
-
   return <section className="relative py-20 overflow-hidden bg-gradient-to-b from-amber-50 to-white">
       <div className="absolute top-0 left-0 right-0 h-24 bg-gradient-to-b from-teal-100/30 to-transparent"></div>
       
@@ -102,7 +94,7 @@ export const Hero = () => {
                   </div>
                   <Button type="submit" size="lg" className="h-14 text-base px-6 font-semibold bg-amber-400 hover:bg-amber-500 text-zinc-900">
                     <Search className="mr-2 h-5 w-5" />
-                    <span>Check</span>
+                    <span>Search</span>
                   </Button>
                 </div>
                 
