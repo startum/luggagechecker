@@ -1,12 +1,15 @@
+
 import { useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { Menu, X, Luggage, Search, Heart, Home, PlaneTakeoff } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { cn } from '@/lib/utils';
+
 export const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const location = useLocation();
   const isActive = (path: string) => location.pathname === path;
+  
   const navLinks = [{
     name: 'Home',
     path: '/',
@@ -24,7 +27,8 @@ export const Navbar = () => {
     path: '/favorites',
     icon: <Heart className="w-4 h-4 mr-2" />
   }];
-  return <header className="sticky top-0 z-40 w-full bg-white border-b border-teal">
+  
+  return <header className="fixed top-0 z-40 w-full bg-white border-b border-teal">
       <div className="layout-container">
         <div className="flex h-20 items-center justify-between">
           <div className="flex items-center gap-2">
