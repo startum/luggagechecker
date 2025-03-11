@@ -1,7 +1,6 @@
-
 import { useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { Menu, X, Luggage, Search, Heart, Home, PlaneTakeoff } from 'lucide-react';
+import { Menu, X, Luggage, Search, Heart, Home, PlaneTakeoff, FileText } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { cn } from '@/lib/utils';
 
@@ -26,6 +25,10 @@ export const Navbar = () => {
     name: 'Favorites',
     path: '/favorites',
     icon: <Heart className="w-4 h-4 mr-2" />
+  }, {
+    name: 'Article',
+    path: '/article',
+    icon: <FileText className="w-4 h-4 mr-2" />
   }];
   
   return <header className="fixed top-0 z-40 w-full bg-white border-b border-zinc-200">
