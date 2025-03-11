@@ -1,25 +1,16 @@
-
 import React from 'react';
 import { Layout } from '@/components/Layout';
 import { Button } from '@/components/ui/button';
 import { Link } from 'react-router-dom';
-
 const Article = () => {
-  return (
-    <Layout>
+  return <Layout>
       <div className="layout-container py-8 sm:py-12">
         <article className="prose prose-zinc lg:prose-lg max-w-4xl mx-auto">
           <h1 className="text-3xl sm:text-4xl font-bold mb-6">Understanding Luggage Size Requirements</h1>
           
-          <div className="mb-4 text-zinc-500">
-            Published on 11/03/2025
-          </div>
+          
 
-          <img 
-            src="/lovable-uploads/ce753aea-3456-4e73-83ea-5ca2237f05e9.png"
-            alt="Luggage Size Guide"
-            className="w-full rounded-xl mb-8"
-          />
+          <img src="/lovable-uploads/ce753aea-3456-4e73-83ea-5ca2237f05e9.png" alt="Luggage Size Guide" className="w-full rounded-xl mb-8" />
 
           <div className="space-y-6">
             <h2 className="text-2xl font-semibold mt-8 mb-4">Why Luggage Size Matters When Traveling</h2>
@@ -136,8 +127,6 @@ const Article = () => {
           </div>
         </article>
       </div>
-    </Layout>
-  );
+    </Layout>;
 };
-
 export default Article;
