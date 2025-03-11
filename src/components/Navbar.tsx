@@ -1,3 +1,4 @@
+
 import { useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { Menu, X, Luggage, Search, Heart, Home, PlaneTakeoff, FileText } from 'lucide-react';
@@ -26,7 +27,7 @@ export const Navbar = () => {
     path: '/favorites',
     icon: <Heart className="w-4 h-4 mr-2" />
   }, {
-    name: 'Article',
+    name: 'Tips & Tricks',
     path: '/article',
     icon: <FileText className="w-4 h-4 mr-2" />
   }];
