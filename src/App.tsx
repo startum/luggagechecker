@@ -8,6 +8,7 @@ import Index from "./pages/Index";
 import Results from "./pages/Results";
 import Compare from "./pages/Compare";
 import Article from "./pages/Article";
+import PrivacyPolicy from "./pages/PrivacyPolicy";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -24,6 +25,7 @@ const App = () => (
           <Route path="/results/:airlineId" element={<Results />} />
           <Route path="/compare" element={<Compare />} />
           <Route path="/article" element={<Article />} />
+          <Route path="/privacy-policy" element={<PrivacyPolicy />} />
           <Route path="/favorites" element={<Results />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
