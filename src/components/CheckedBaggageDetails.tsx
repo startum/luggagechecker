@@ -1,12 +1,15 @@
 
 import { LuggagePolicy } from '@/utils/types';
 import { Scale } from 'lucide-react';
+import { useUnit } from '@/contexts/UnitContext';
 
 interface CheckedBaggageDetailsProps {
   baggageOptions: LuggagePolicy[];
 }
 
 export const CheckedBaggageDetails = ({ baggageOptions }: CheckedBaggageDetailsProps) => {
+  const { formatValue } = useUnit();
+  
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
       <div>
@@ -20,20 +23,20 @@ export const CheckedBaggageDetails = ({ baggageOptions }: CheckedBaggageDetailsP
                 )}
                 <div className="flex items-center justify-between mb-3">
                   <span className="text-gray-500">Max Width:</span>
-                  <span className="font-bold">{bag.maxWidth} cm</span>
+                  <span className="font-bold">{formatValue(bag.maxWidth, 'length')}</span>
                 </div>
                 <div className="flex items-center justify-between mb-3">
                   <span className="text-gray-500">Max Height:</span>
-                  <span className="font-bold">{bag.maxHeight} cm</span>
+                  <span className="font-bold">{formatValue(bag.maxHeight, 'length')}</span>
                 </div>
                 <div className="flex items-center justify-between mb-3">
                   <span className="text-gray-500">Max Depth:</span>
-                  <span className="font-bold">{bag.maxDepth} cm</span>
+                  <span className="font-bold">{formatValue(bag.maxDepth, 'length')}</span>
                 </div>
                 <div className="flex items-center justify-between">
                   <span className="text-gray-500">Total dimensions:</span>
                   <span className="font-bold">
-                    {bag.maxWidth + bag.maxHeight + bag.maxDepth} cm
+                    {formatValue(bag.maxWidth + bag.maxHeight + bag.maxDepth, 'length')}
                   </span>
                 </div>
               </div>
@@ -57,7 +60,7 @@ export const CheckedBaggageDetails = ({ baggageOptions }: CheckedBaggageDetailsP
                 )}
                 <div className="flex items-center mb-4">
                   <Scale className="h-10 w-10 text-primary mr-3" />
-                  <span className="text-2xl font-bold">{bag.maxWeight} kg</span>
+                  <span className="text-2xl font-bold">{formatValue(bag.maxWeight, 'weight')}</span>
                 </div>
                 
                 {bag.notes && (

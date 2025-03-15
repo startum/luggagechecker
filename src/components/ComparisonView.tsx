@@ -4,6 +4,7 @@ import { Check, X, ExternalLink } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { LuggageDimensions, ComparisonResult } from '@/utils/types';
 import airlineService from '@/utils/airlineData';
+import { useUnit } from '@/contexts/UnitContext';
 
 interface ComparisonViewProps {
   luggageDimensions: LuggageDimensions;
@@ -13,6 +14,7 @@ interface ComparisonViewProps {
 export const ComparisonView = ({ luggageDimensions, airlineIds }: ComparisonViewProps) => {
   const [results, setResults] = useState<ComparisonResult[]>([]);
   const [loading, setLoading] = useState(true);
+  const { formatValue } = useUnit();
   
   useEffect(() => {
     const loadComparison = async () => {
@@ -43,7 +45,7 @@ export const ComparisonView = ({ luggageDimensions, airlineIds }: ComparisonView
       <div className="p-6 border-b">
         <h3 className="text-lg font-semibold mb-2">Comparison Results</h3>
         <p className="text-sm text-gray-500">
-          Your luggage dimensions: {luggageDimensions.width} × {luggageDimensions.height} × {luggageDimensions.depth} cm, {luggageDimensions.weight} kg
+          Your luggage dimensions: {formatValue(luggageDimensions.width, 'length')} × {formatValue(luggageDimensions.height, 'length')} × {formatValue(luggageDimensions.depth, 'length')}, {formatValue(luggageDimensions.weight, 'weight')}
         </p>
       </div>
       

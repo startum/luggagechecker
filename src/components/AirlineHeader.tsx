@@ -4,6 +4,7 @@ import { Button } from '@/components/ui/button';
 import { Airline } from '@/utils/types';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { CheckedBaggageDetails } from './CheckedBaggageDetails';
+import { useUnit } from '@/contexts/UnitContext';
 
 interface AirlineHeaderProps {
   airline: Airline;
@@ -12,6 +13,8 @@ interface AirlineHeaderProps {
 }
 
 export const AirlineHeader = ({ airline, isFavorite, onToggleFavorite }: AirlineHeaderProps) => {
+  const { formatValue } = useUnit();
+  
   return (
     <div className="space-y-6">
       <div className="bg-white p-6 rounded-lg shadow-md">
@@ -85,20 +88,20 @@ export const AirlineHeader = ({ airline, isFavorite, onToggleFavorite }: Airline
                 <div className="bg-gray-50 p-5 rounded-lg">
                   <div className="flex items-center justify-between mb-3">
                     <span className="text-gray-500">Max Width:</span>
-                    <span className="font-bold">{airline.carryOn.maxWidth} cm</span>
+                    <span className="font-bold">{formatValue(airline.carryOn.maxWidth, 'length')}</span>
                   </div>
                   <div className="flex items-center justify-between mb-3">
                     <span className="text-gray-500">Max Height:</span>
-                    <span className="font-bold">{airline.carryOn.maxHeight} cm</span>
+                    <span className="font-bold">{formatValue(airline.carryOn.maxHeight, 'length')}</span>
                   </div>
                   <div className="flex items-center justify-between mb-3">
                     <span className="text-gray-500">Max Depth:</span>
-                    <span className="font-bold">{airline.carryOn.maxDepth} cm</span>
+                    <span className="font-bold">{formatValue(airline.carryOn.maxDepth, 'length')}</span>
                   </div>
                   <div className="flex items-center justify-between">
                     <span className="text-gray-500">Total dimensions:</span>
                     <span className="font-bold">
-                      {airline.carryOn.maxWidth + airline.carryOn.maxHeight + airline.carryOn.maxDepth} cm
+                      {formatValue(airline.carryOn.maxWidth + airline.carryOn.maxHeight + airline.carryOn.maxDepth, 'length')}
                     </span>
                   </div>
                 </div>
@@ -109,7 +112,7 @@ export const AirlineHeader = ({ airline, isFavorite, onToggleFavorite }: Airline
                 <div className="bg-gray-50 p-5 rounded-lg">
                   <div className="flex items-center mb-4">
                     <Scale className="h-10 w-10 text-primary mr-3" />
-                    <span className="text-2xl font-bold">{airline.carryOn.maxWeight} kg</span>
+                    <span className="text-2xl font-bold">{formatValue(airline.carryOn.maxWeight, 'weight')}</span>
                   </div>
                   
                   {airline.carryOn.notes && (

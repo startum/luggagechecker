@@ -1,11 +1,14 @@
 
 import { LuggageDimensions } from '@/utils/types';
+import { useUnit } from '@/contexts/UnitContext';
 
 interface LuggageVisualizerProps {
   dimensions: LuggageDimensions;
 }
 
 export const LuggageVisualizer = ({ dimensions }: LuggageVisualizerProps) => {
+  const { formatValue } = useUnit();
+  
   return (
     <div className="bg-gray-50 p-4 rounded-lg mb-6">
       <h4 className="text-sm font-medium mb-3">Visual Representation</h4>
@@ -21,10 +24,10 @@ export const LuggageVisualizer = ({ dimensions }: LuggageVisualizerProps) => {
           }}
         >
           <div className="text-xs absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-seafoam-dark font-medium">
-            {dimensions.width} × {dimensions.height} cm
+            {formatValue(dimensions.width, 'length')} × {formatValue(dimensions.height, 'length')}
           </div>
           <div className="absolute bottom-0 right-0 transform translate-x-full text-xs p-1 text-gray-500">
-            {dimensions.depth} cm
+            {formatValue(dimensions.depth, 'length')}
           </div>
         </div>
       </div>

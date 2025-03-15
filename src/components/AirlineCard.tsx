@@ -5,6 +5,7 @@ import { Button } from '@/components/ui/button';
 import { Airline } from '@/utils/types';
 import airlineService from '@/utils/airlineData';
 import { useState } from 'react';
+import { useUnit } from '@/contexts/UnitContext';
 
 interface AirlineCardProps {
   airline: Airline;
@@ -15,6 +16,7 @@ interface AirlineCardProps {
 export const AirlineCard = ({ airline, delay = 0, compact = false }: AirlineCardProps) => {
   const navigate = useNavigate();
   const [isFavorite, setIsFavorite] = useState(airlineService.isFavorite(airline.id));
+  const { formatValue } = useUnit();
   
   const handleViewDetails = () => {
     navigate(`/results/${airline.id}`);
@@ -114,12 +116,12 @@ export const AirlineCard = ({ airline, delay = 0, compact = false }: AirlineCard
           <div className="bg-slate-100 p-4 rounded-md">
             <p className="text-sm text-gray-500 mb-1">Carry-on max size</p>
             <p className="text-base font-bold">
-              {airline.carryOn.maxWidth} × {airline.carryOn.maxHeight} × {airline.carryOn.maxDepth} cm
+              {formatValue(airline.carryOn.maxWidth, 'length')} × {formatValue(airline.carryOn.maxHeight, 'length')} × {formatValue(airline.carryOn.maxDepth, 'length')}
             </p>
           </div>
           <div className="bg-slate-100 p-4 rounded-md">
             <p className="text-sm text-gray-500 mb-1">Carry-on max weight</p>
-            <p className="text-base font-bold">{airline.carryOn.maxWeight} kg</p>
+            <p className="text-base font-bold">{formatValue(airline.carryOn.maxWeight, 'weight')}</p>
           </div>
         </div>
         
