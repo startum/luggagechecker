@@ -2,6 +2,7 @@
 import { Check, X } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Airline, LuggageDimensions } from '@/utils/types';
+import { useUnit } from '@/contexts/UnitContext';
 
 interface LuggageComparisonResultProps {
   airline: Airline;
@@ -9,6 +10,8 @@ interface LuggageComparisonResultProps {
 }
 
 export const LuggageComparisonResult = ({ airline, luggageDimensions }: LuggageComparisonResultProps) => {
+  const { formatValue } = useUnit();
+  
   // Check if luggage fits
   const luggageFits = 
     luggageDimensions.width <= airline.carryOn.maxWidth &&
@@ -49,16 +52,16 @@ export const LuggageComparisonResult = ({ airline, luggageDimensions }: LuggageC
       {!luggageFits && (
         <div className="space-y-2 text-sm text-salmon-dark">
           {luggageDimensions.width > airline.carryOn.maxWidth && (
-            <p>Width exceeds by {luggageDimensions.width - airline.carryOn.maxWidth}cm</p>
+            <p>Width exceeds by {formatValue(luggageDimensions.width - airline.carryOn.maxWidth, 'length')}</p>
           )}
           {luggageDimensions.height > airline.carryOn.maxHeight && (
-            <p>Height exceeds by {luggageDimensions.height - airline.carryOn.maxHeight}cm</p>
+            <p>Height exceeds by {formatValue(luggageDimensions.height - airline.carryOn.maxHeight, 'length')}</p>
           )}
           {luggageDimensions.depth > airline.carryOn.maxDepth && (
-            <p>Depth exceeds by {luggageDimensions.depth - airline.carryOn.maxDepth}cm</p>
+            <p>Depth exceeds by {formatValue(luggageDimensions.depth - airline.carryOn.maxDepth, 'length')}</p>
           )}
           {luggageDimensions.weight > airline.carryOn.maxWeight && (
-            <p>Weight exceeds by {luggageDimensions.weight - airline.carryOn.maxWeight}kg</p>
+            <p>Weight exceeds by {formatValue(luggageDimensions.weight - airline.carryOn.maxWeight, 'weight')}</p>
           )}
         </div>
       )}

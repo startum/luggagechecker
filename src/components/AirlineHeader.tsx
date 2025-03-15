@@ -1,5 +1,5 @@
 
-import { Heart, ExternalLink, MapPin, Plane, Package, Luggage, Scale } from 'lucide-react';
+import { Heart, ExternalLink, MapPin, Plane, Package, Luggage, Scale, Ruler, Weight } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Airline } from '@/utils/types';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
@@ -13,7 +13,7 @@ interface AirlineHeaderProps {
 }
 
 export const AirlineHeader = ({ airline, isFavorite, onToggleFavorite }: AirlineHeaderProps) => {
-  const { formatValue } = useUnit();
+  const { unitSystem, toggleUnitSystem, formatValue } = useUnit();
   
   return (
     <div className="space-y-6">
@@ -48,6 +48,25 @@ export const AirlineHeader = ({ airline, isFavorite, onToggleFavorite }: Airline
           </div>
           
           <div className="flex gap-3">
+            <Button
+              variant="outline"
+              size="sm"
+              onClick={toggleUnitSystem}
+              className="flex items-center gap-1.5"
+            >
+              {unitSystem === 'metric' ? (
+                <>
+                  <Ruler className="h-3.5 w-3.5" />
+                  <span>cm/kg</span>
+                </>
+              ) : (
+                <>
+                  <Weight className="h-3.5 w-3.5" />
+                  <span>in/lb</span>
+                </>
+              )}
+            </Button>
+            
             <Button
               variant="outline"
               size="sm"
