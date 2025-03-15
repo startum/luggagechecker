@@ -1,6 +1,6 @@
 
 import { useState, useEffect } from 'react';
-import { Check, X, ExternalLink } from 'lucide-react';
+import { Check, X, ExternalLink, Ruler, Weight } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { LuggageDimensions, ComparisonResult } from '@/utils/types';
 import airlineService from '@/utils/airlineData';
@@ -14,7 +14,7 @@ interface ComparisonViewProps {
 export const ComparisonView = ({ luggageDimensions, airlineIds }: ComparisonViewProps) => {
   const [results, setResults] = useState<ComparisonResult[]>([]);
   const [loading, setLoading] = useState(true);
-  const { formatValue } = useUnit();
+  const { unitSystem, toggleUnitSystem, formatValue } = useUnit();
   
   useEffect(() => {
     const loadComparison = async () => {
@@ -42,11 +42,31 @@ export const ComparisonView = ({ luggageDimensions, airlineIds }: ComparisonView
   
   return (
     <div className="bg-white rounded-lg shadow-md overflow-hidden animate-fade-in">
-      <div className="p-6 border-b">
-        <h3 className="text-lg font-semibold mb-2">Comparison Results</h3>
-        <p className="text-sm text-gray-500">
-          Your luggage dimensions: {formatValue(luggageDimensions.width, 'length')} × {formatValue(luggageDimensions.height, 'length')} × {formatValue(luggageDimensions.depth, 'length')}, {formatValue(luggageDimensions.weight, 'weight')}
-        </p>
+      <div className="p-6 border-b flex justify-between items-center">
+        <div>
+          <h3 className="text-lg font-semibold mb-2">Comparison Results</h3>
+          <p className="text-sm text-gray-500">
+            Your luggage dimensions: {formatValue(luggageDimensions.width, 'length')} × {formatValue(luggageDimensions.height, 'length')} × {formatValue(luggageDimensions.depth, 'length')}, {formatValue(luggageDimensions.weight, 'weight')}
+          </p>
+        </div>
+        <Button
+          variant="outline"
+          size="sm"
+          onClick={toggleUnitSystem}
+          className="flex items-center gap-1.5"
+        >
+          {unitSystem === 'metric' ? (
+            <>
+              <Ruler className="h-3.5 w-3.5" />
+              <span>cm/kg</span>
+            </>
+          ) : (
+            <>
+              <Weight className="h-3.5 w-3.5" />
+              <span>in/lb</span>
+            </>
+          )}
+        </Button>
       </div>
       
       <div className="divide-y">
@@ -90,12 +110,12 @@ export const ComparisonView = ({ luggageDimensions, airlineIds }: ComparisonView
               <div className="bg-slate-100 p-3 rounded-md">
                 <p className="text-xs text-gray-500 mb-1">Carry-on max size</p>
                 <p className="text-sm font-medium">
-                  {result.airline.carryOn.maxWidth} × {result.airline.carryOn.maxHeight} × {result.airline.carryOn.maxDepth} cm
+                  {formatValue(result.airline.carryOn.maxWidth, 'length')} × {formatValue(result.airline.carryOn.maxHeight, 'length')} × {formatValue(result.airline.carryOn.maxDepth, 'length')}
                 </p>
               </div>
               <div className="bg-slate-100 p-3 rounded-md">
                 <p className="text-xs text-gray-500 mb-1">Carry-on max weight</p>
-                <p className="text-sm font-medium">{result.airline.carryOn.maxWeight} kg</p>
+                <p className="text-sm font-medium">{formatValue(result.airline.carryOn.maxWeight, 'weight')}</p>
               </div>
             </div>
             
