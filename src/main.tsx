@@ -10,13 +10,14 @@ if (rootElement) {
   // Create root outside of any asynchronous context
   const root = createRoot(rootElement);
   
-  // Use requestIdleCallback for non-critical rendering when browser is idle
-  if (window.requestIdleCallback) {
-    window.requestIdleCallback(() => {
+  // Check if the browser supports the Navigation API
+  if ('connection' in navigator && (navigator.connection as any).saveData) {
+    // For users on data-saving mode, delay non-critical rendering
+    setTimeout(() => {
       root.render(<App />);
-    });
+    }, 0);
   } else {
-    // Fallback for browsers that don't support requestIdleCallback
+    // For normal connections, render immediately
     root.render(<App />);
   }
 }

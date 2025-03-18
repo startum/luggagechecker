@@ -1,18 +1,18 @@
 
-import React from 'react';
+import React, { lazy, Suspense } from 'react';
 import { Navbar } from './Navbar';
 import { Toaster } from "sonner";
 import { Link } from 'react-router-dom';
 import { UnitProvider } from '@/contexts/UnitContext';
 import { useCriticalAssets } from '@/hooks/use-critical-assets';
 
+// Interface definition
 interface LayoutProps {
   children: React.ReactNode;
 }
 
-export const Layout: React.FC<LayoutProps> = ({
-  children
-}) => {
+// Optimized Layout component
+export const Layout: React.FC<LayoutProps> = ({ children }) => {
   // Preload critical assets
   useCriticalAssets();
   
@@ -34,6 +34,7 @@ export const Layout: React.FC<LayoutProps> = ({
                   width="64"
                   height="64"
                   loading="lazy"
+                  decoding="async"
                 />
                 <div className="text-xs sm:text-sm text-zinc-500">
                   © {new Date().getFullYear()} Size My Bag. All rights reserved.

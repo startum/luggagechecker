@@ -1,5 +1,5 @@
 
-import { useState } from 'react';
+import { useState, useCallback } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { Menu, X, Home, PlaneTakeoff, Search, Heart, Lightbulb } from 'lucide-react';
 import { Button } from '@/components/ui/button';
@@ -8,7 +8,7 @@ import { cn } from '@/lib/utils';
 export const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const location = useLocation();
-  const isActive = (path: string) => location.pathname === path;
+  const isActive = useCallback((path: string) => location.pathname === path, [location.pathname]);
   
   const navLinks = [{
     name: 'Home',
@@ -32,6 +32,10 @@ export const Navbar = () => {
     icon: <Lightbulb className="w-4 h-4 mr-2" />
   }];
   
+  const toggleMenu = useCallback(() => {
+    setIsMenuOpen(prev => !prev);
+  }, []);
+  
   return <header className="fixed top-0 z-40 w-full bg-white border-b border-zinc-200">
       <div className="layout-container">
         <div className="flex h-20 items-center justify-between">
@@ -45,6 +49,7 @@ export const Navbar = () => {
                 height="56"
                 fetchPriority="high"
                 loading="eager"
+                decoding="async"
               />
               <span className="ml-2 text-xl font-bold text-zinc-900">Size My Bag</span>
             </Link>
@@ -52,15 +57,30 @@ export const Navbar = () => {
           
           {/* Desktop Navigation */}
           <nav className="hidden md:flex items-center gap-6">
-            {navLinks.map(link => <Link key={link.path} to={link.path} className={cn("flex items-center text-base font-medium transition-colors hover:text-teal-600 px-3 py-2 rounded-lg", isActive(link.path) ? "text-teal-600 bg-teal-50" : "text-zinc-700")}>
+            {navLinks.map(link => (
+              <Link 
+                key={link.path} 
+                to={link.path} 
+                className={cn(
+                  "flex items-center text-base font-medium transition-colors hover:text-teal-600 px-3 py-2 rounded-lg", 
+                  isActive(link.path) ? "text-teal-600 bg-teal-50" : "text-zinc-700"
+                )}
+              >
                 {link.icon}
                 {link.name}
-              </Link>)}
+              </Link>
+            ))}
           </nav>
           
           {/* Mobile Menu Button */}
           <div className="md:hidden">
-            <Button variant="ghost" size="icon" onClick={() => setIsMenuOpen(!isMenuOpen)} aria-label="Toggle Menu" className="text-zinc-700">
+            <Button 
+              variant="ghost" 
+              size="icon" 
+              onClick={toggleMenu} 
+              aria-label="Toggle Menu" 
+              className="text-zinc-700"
+            >
               {isMenuOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
             </Button>
           </div>
@@ -68,13 +88,25 @@ export const Navbar = () => {
       </div>
       
       {/* Mobile Navigation - Only render when needed */}
-      {isMenuOpen && <div className="md:hidden animate-fade-in">
+      {isMenuOpen && (
+        <div className="md:hidden animate-fade-in">
           <nav className="flex flex-col gap-2 p-4 bg-white border-t border-zinc-100">
-            {navLinks.map(link => <Link key={link.path} to={link.path} onClick={() => setIsMenuOpen(false)} className={cn("flex items-center px-4 py-2 rounded-lg text-base font-medium transition-colors", isActive(link.path) ? "bg-teal-50 text-teal-600" : "hover:bg-zinc-50 hover:text-teal-600")}>
+            {navLinks.map(link => (
+              <Link 
+                key={link.path} 
+                to={link.path} 
+                onClick={toggleMenu} 
+                className={cn(
+                  "flex items-center px-4 py-2 rounded-lg text-base font-medium transition-colors", 
+                  isActive(link.path) ? "bg-teal-50 text-teal-600" : "hover:bg-zinc-50 hover:text-teal-600"
+                )}
+              >
                 {link.icon}
                 {link.name}
-              </Link>)}
+              </Link>
+            ))}
           </nav>
-        </div>}
+        </div>
+      )}
     </header>;
 };
