@@ -13,8 +13,7 @@ export default defineConfig(({ mode }) => ({
   },
   plugins: [
     react({
-      // Use the fastest possible development experience
-      fastRefresh: true,
+      // Use SWC's default optimizations
     }),
     imagetools({
       // Optimize images
