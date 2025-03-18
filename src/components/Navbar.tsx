@@ -41,6 +41,8 @@ export const Navbar = () => {
                 src="/lovable-uploads/865cd358-f080-4e87-9b8b-71210a0bd24f.png" 
                 alt="Size My Bag" 
                 className="h-14 object-contain"
+                loading="eager"
+                decoding="async"
               />
               <span className="ml-2 text-xl font-bold text-zinc-900">Size My Bag</span>
             </Link>
