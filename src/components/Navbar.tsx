@@ -1,7 +1,7 @@
 
 import { useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { Menu, X, Luggage, Search, Heart, Home, PlaneTakeoff, Lightbulb } from 'lucide-react';
+import { Menu, X, Home, PlaneTakeoff, Search, Heart, Lightbulb } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { cn } from '@/lib/utils';
 
@@ -44,6 +44,7 @@ export const Navbar = () => {
                 width="56"
                 height="56"
                 fetchPriority="high"
+                loading="eager"
               />
               <span className="ml-2 text-xl font-bold text-zinc-900">Size My Bag</span>
             </Link>
@@ -66,7 +67,7 @@ export const Navbar = () => {
         </div>
       </div>
       
-      {/* Mobile Navigation */}
+      {/* Mobile Navigation - Only render when needed */}
       {isMenuOpen && <div className="md:hidden animate-fade-in">
           <nav className="flex flex-col gap-2 p-4 bg-white border-t border-zinc-100">
             {navLinks.map(link => <Link key={link.path} to={link.path} onClick={() => setIsMenuOpen(false)} className={cn("flex items-center px-4 py-2 rounded-lg text-base font-medium transition-colors", isActive(link.path) ? "bg-teal-50 text-teal-600" : "hover:bg-zinc-50 hover:text-teal-600")}>

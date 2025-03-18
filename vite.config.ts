@@ -26,19 +26,34 @@ export default defineConfig(({ mode }) => ({
     // Improve build output
     sourcemap: false,
     minify: 'terser',
+    terserOptions: {
+      compress: {
+        // Remove console logs in production
+        drop_console: true, 
+        // This helps with mobile optimization
+        passes: 2
+      }
+    },
     rollupOptions: {
       output: {
-        manualChunks: {
-          vendor: ['react', 'react-dom', 'react-router-dom'],
-          ui: [
-            '@radix-ui/react-accordion', 
-            '@radix-ui/react-dialog',
-            '@radix-ui/react-dropdown-menu',
-            '@radix-ui/react-popover',
-            '@radix-ui/react-tooltip'
-          ],
+        manualChunks: (id) => {
+          // Optimize chunking for better mobile performance
+          if (id.includes('node_modules')) {
+            if (id.includes('react') || id.includes('react-dom') || id.includes('react-router')) {
+              return 'vendor-react';
+            }
+            if (id.includes('@radix-ui')) {
+              return 'vendor-radix';
+            }
+            if (id.includes('lucide')) {
+              return 'vendor-icons';
+            }
+            return 'vendor-other';
+          }
         },
       },
     },
+    // Optimize for mobile
+    target: 'es2015',
   },
 }));

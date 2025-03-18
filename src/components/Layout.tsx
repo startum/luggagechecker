@@ -4,6 +4,7 @@ import { Navbar } from './Navbar';
 import { Toaster } from "sonner";
 import { Link } from 'react-router-dom';
 import { UnitProvider } from '@/contexts/UnitContext';
+import { useCriticalAssets } from '@/hooks/use-critical-assets';
 
 interface LayoutProps {
   children: React.ReactNode;
@@ -12,6 +13,9 @@ interface LayoutProps {
 export const Layout: React.FC<LayoutProps> = ({
   children
 }) => {
+  // Preload critical assets
+  useCriticalAssets();
+  
   return (
     <UnitProvider>
       <div className="min-h-screen flex flex-col bg-zinc-50 font-roboto">
@@ -44,11 +48,11 @@ export const Layout: React.FC<LayoutProps> = ({
           </div>
         </footer>
         <Toaster position="top-center" toastOptions={{
-        style: {
-          borderRadius: '0.75rem',
-          background: 'linear-gradient(to right, rgba(255, 113, 91, 0.1), rgba(255, 209, 102, 0.1))'
-        }
-      }} />
+          style: {
+            borderRadius: '0.75rem',
+            background: 'linear-gradient(to right, rgba(255, 113, 91, 0.1), rgba(255, 209, 102, 0.1))'
+          }
+        }} />
       </div>
     </UnitProvider>
   );
