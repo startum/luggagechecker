@@ -43,7 +43,7 @@ export const Navbar = () => {
                 className="h-14 object-contain"
                 width="56"
                 height="56"
-                fetchpriority="high"
+                fetchPriority="high"
               />
               <span className="ml-2 text-xl font-bold text-zinc-900">Size My Bag</span>
             </Link>
