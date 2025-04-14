@@ -27,7 +27,7 @@ const App = () => (
           <Route path="/results/:airlineId" element={<Results />} />
           <Route path="/compare" element={<Compare />} />
           <Route path="/article" element={<Article />} />
-          <Route path="/article/:id" element={<SingleArticle />} />
+          <Route path="/article/:slug" element={<SingleArticle />} />
           <Route path="/privacy-policy" element={<PrivacyPolicy />} />
           <Route path="/terms" element={<TermsAndConditions />} />
           <Route path="/favorites" element={<Results />} />

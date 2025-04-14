@@ -1,15 +1,17 @@
-
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Layout } from '@/components/Layout';
 import { Button } from '@/components/ui/button';
 import { Link, useParams, useNavigate } from 'react-router-dom';
+import { Helmet } from 'react-helmet-async';
 
 // This would typically come from a database or API
 const articles = {
-  "1": {
+  "understanding-luggage-size-requirements": {
     id: 1,
     title: "Understanding Luggage Size Requirements",
+    slug: "understanding-luggage-size-requirements",
     image: "/lovable-uploads/ce753aea-3456-4e73-83ea-5ca2237f05e9.png",
+    metaDescription: "Learn about airline luggage size requirements, how to measure your baggage correctly, and avoid extra fees at the airport with our comprehensive guide.",
     content: `
       <h2 class="text-2xl font-semibold mt-8 mb-4">Why Luggage Size Matters When Traveling</h2>
       <p class="text-lg leading-relaxed">
@@ -116,10 +118,12 @@ const articles = {
       </p>
     `
   },
-  "2": {
+  "budget-airlines-navigating-strict-baggage-policies": {
     id: 2,
     title: "Budget Airlines: Navigating Strict Baggage Policies",
+    slug: "budget-airlines-navigating-strict-baggage-policies",
     image: "/lovable-uploads/784f93a6-8163-4976-a298-e7d87944eb53.png",
+    metaDescription: "Navigate strict baggage policies of budget airlines with our expert tips. Learn how to pack efficiently and avoid unexpected fees on your next trip.",
     content: `
       <h2 class="text-2xl font-semibold mt-8 mb-4">Understanding Budget Airline Baggage Policies</h2>
       <p class="text-lg leading-relaxed">
@@ -150,10 +154,12 @@ const articles = {
       </p>
     `
   },
-  "3": {
+  "international-travel-luggage-requirements-by-region": {
     id: 3,
     title: "International Travel: Luggage Requirements By Region",
+    slug: "international-travel-luggage-requirements-by-region",
     image: "/lovable-uploads/b829ab14-a7e8-4e32-9eb6-b2607ad53970.png",
+    metaDescription: "Explore luggage requirements for different regions around the world. Get prepared for your international travel with our comprehensive region-by-region guide.",
     content: `
       <h2 class="text-2xl font-semibold mt-8 mb-4">Regional Variations in Luggage Requirements</h2>
       <p class="text-lg leading-relaxed">
@@ -194,23 +200,35 @@ const articles = {
 };
 
 const SingleArticle = () => {
-  const { id } = useParams();
+  const { slug } = useParams();
   const navigate = useNavigate();
   
-  // Get the current article based on the ID from the URL
-  const article = id && articles[id as keyof typeof articles];
+  // Get the current article based on the slug from the URL
+  const article = slug && articles[slug as keyof typeof articles];
   
   // If no article is found, redirect to the articles page
-  if (!article) {
-    React.useEffect(() => {
+  useEffect(() => {
+    if (!article) {
       navigate('/article');
-    }, [navigate]);
-    
+    }
+  }, [article, navigate]);
+  
+  if (!article) {
     return null;
   }
   
   return (
     <Layout>
+      <Helmet>
+        <title>{article.title} | Luggage Size Checker</title>
+        <meta name="description" content={article.metaDescription} />
+        <meta property="og:title" content={article.title} />
+        <meta property="og:description" content={article.metaDescription} />
+        <meta property="og:image" content={article.image} />
+        <meta property="og:type" content="article" />
+        <link rel="canonical" href={`https://sizemybag.com/article/${article.slug}`} />
+      </Helmet>
+      
       <div className="layout-container py-8 sm:py-12">
         <article className="prose prose-zinc lg:prose-lg max-w-4xl mx-auto">
           <Button 
