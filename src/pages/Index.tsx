@@ -1,4 +1,3 @@
-
 import { Hero } from '@/components/Hero';
 import { Layout } from '@/components/Layout';
 import { AirlineSearch } from '@/components/AirlineSearch';
@@ -74,7 +73,7 @@ const Index = () => {
               <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 sm:gap-4 mb-4 sm:mb-8">
                 <h2 className="text-2xl sm:text-3xl font-semibold">Popular Airlines</h2>
                 <div className="text-sm sm:text-base text-gray-500">
-                  <span className="hidden sm:inline">Showing airlines that fit your luggage: </span>
+                  <span className="hidden sm:inline">Showing airlines that fit your luggage: </span> 
                   <span className="sm:hidden">Luggage size: </span>
                   {currentDimensions.width} × {currentDimensions.height} × {currentDimensions.depth} cm, 
                   {currentDimensions.weight} kg
@@ -323,6 +322,24 @@ const Index = () => {
               </Button>
             </div>
           </article>
+        </div>
+      </section>
+
+      {/* Scout Forge Badge Section */}
+      <section className="py-10 sm:py-15 md:py-20 bg-white flex justify-center items-center">
+        <div className="layout-container text-center">
+          <a 
+            href="https://scoutforge.net/reviews/sizemybag/" 
+            title="Trusted and reviewed by Scout Forge"
+            className="inline-block"
+          >
+            <img 
+              src="https://scoutforge.net/wp-content/themes/wp-theme/assets/img/badges/badge-light.webp" 
+              style={{ maxWidth: '300px' }} 
+              alt="Trusted and Reviewed by Scout Forge" 
+              className="mx-auto"
+            />
+          </a>
         </div>
       </section>
     </Layout>
