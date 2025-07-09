@@ -46,7 +46,11 @@ export const LuggageInput = ({ onSubmit, initialDimensions }: LuggageInputProps)
   };
   
   return (
-    <div className="bg-white p-6 rounded-xl shadow-sm border border-gray-100 animate-fade-in LuggageInput">
+    <div 
+      className="bg-white p-6 rounded-xl shadow-sm border border-gray-100 animate-fade-in LuggageInput"
+      aria-label="Luggage Size Checker Tool"
+      role="region"
+    >
       <div className="flex items-center justify-between mb-4">
         <h3 className="text-lg font-semibold">Enter Your Luggage Dimensions</h3>
         <Button 
