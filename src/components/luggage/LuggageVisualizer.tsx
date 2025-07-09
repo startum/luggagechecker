@@ -10,7 +10,11 @@ export const LuggageVisualizer = ({ dimensions }: LuggageVisualizerProps) => {
   const { formatValue } = useUnit();
   
   return (
-    <div className="bg-gray-50 p-4 rounded-lg mb-6">
+    <div 
+      className="bg-gray-50 p-4 rounded-lg mb-6"
+      role="img"
+      aria-label="Interactive online luggage size checker to compare cabin baggage dimensions with airline restrictions"
+    >
       <h4 className="text-sm font-medium mb-3">Visual Representation</h4>
       <div className="flex items-center justify-center">
         <div 
