@@ -10,7 +10,6 @@ import { useEffect, useState } from 'react';
 import { Check } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Link } from 'react-router-dom';
-import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion';
 
 const Index = () => {
   const navigate = useNavigate();
@@ -99,55 +98,6 @@ const Index = () => {
           </div>
         </section>
       )}
-      
-      {/* How to Measure Your Luggage Section */}
-      <section className="py-10 sm:py-15 md:py-20 bg-white">
-        <div className="layout-container">
-          <div className="max-w-4xl mx-auto">
-            <h2 className="text-2xl sm:text-3xl font-bold mb-6 sm:mb-8 text-center">✈️ How to Measure Your Luggage</h2>
-            <p className="text-lg leading-relaxed mb-6 text-center text-gray-600">
-              Follow these 5 simple steps to check if your luggage will fit airline rules:
-            </p>
-            
-            <div className="space-y-4 max-w-2xl mx-auto">
-              <div className="flex items-start gap-4 p-4 bg-gray-50 rounded-lg">
-                <div className="w-8 h-8 bg-teal text-white rounded-full flex items-center justify-center flex-shrink-0 font-semibold">
-                  1
-                </div>
-                <p className="text-lg">Place your luggage upright on a flat surface.</p>
-              </div>
-              
-              <div className="flex items-start gap-4 p-4 bg-gray-50 rounded-lg">
-                <div className="w-8 h-8 bg-teal text-white rounded-full flex items-center justify-center flex-shrink-0 font-semibold">
-                  2
-                </div>
-                <p className="text-lg">Use a tape measure to measure from the ground to the top handle (height).</p>
-              </div>
-              
-              <div className="flex items-start gap-4 p-4 bg-gray-50 rounded-lg">
-                <div className="w-8 h-8 bg-teal text-white rounded-full flex items-center justify-center flex-shrink-0 font-semibold">
-                  3
-                </div>
-                <p className="text-lg">Measure the width from side to side.</p>
-              </div>
-              
-              <div className="flex items-start gap-4 p-4 bg-gray-50 rounded-lg">
-                <div className="w-8 h-8 bg-teal text-white rounded-full flex items-center justify-center flex-shrink-0 font-semibold">
-                  4
-                </div>
-                <p className="text-lg">Measure the depth from front to back, including wheels and handles.</p>
-              </div>
-              
-              <div className="flex items-start gap-4 p-4 bg-gray-50 rounded-lg">
-                <div className="w-8 h-8 bg-teal text-white rounded-full flex items-center justify-center flex-shrink-0 font-semibold">
-                  5
-                </div>
-                <p className="text-lg">Record these dimensions in inches or centimeters.</p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
       
       {/* Info Section with Image */}
       <section className="py-10 sm:py-15 md:py-20">
@@ -375,47 +325,8 @@ const Index = () => {
         </div>
       </section>
 
-      {/* FAQ Section */}
-      <section className="py-10 sm:py-15 md:py-20 bg-white">
-        <div className="layout-container">
-          <div className="max-w-4xl mx-auto">
-            <h2 className="text-2xl sm:text-3xl font-bold mb-6 sm:mb-8 text-center">🧳 Frequently Asked Questions</h2>
-            
-            <Accordion type="single" collapsible className="w-full">
-              <AccordionItem value="item-1">
-                <AccordionTrigger>❓ Do wheels count in luggage measurements?</AccordionTrigger>
-                <AccordionContent>
-                  Yes, most airlines include wheels and handles in your total baggage dimensions.
-                </AccordionContent>
-              </AccordionItem>
-              
-              <AccordionItem value="item-2">
-                <AccordionTrigger>❓ What's the standard carry-on size for airlines?</AccordionTrigger>
-                <AccordionContent>
-                  Typically 22 x 14 x 9 inches (56 x 36 x 23 cm), but it varies—always check your airline's website.
-                </AccordionContent>
-              </AccordionItem>
-              
-              <AccordionItem value="item-3">
-                <AccordionTrigger>❓ What happens if my bag is too big?</AccordionTrigger>
-                <AccordionContent>
-                  You may be charged an oversized baggage fee or be required to check your bag at the gate.
-                </AccordionContent>
-              </AccordionItem>
-              
-              <AccordionItem value="item-4">
-                <AccordionTrigger>❓ Is carry-on size the same for international flights?</AccordionTrigger>
-                <AccordionContent>
-                  No. International flights, especially on budget airlines, often have stricter carry-on size limits.
-                </AccordionContent>
-              </AccordionItem>
-            </Accordion>
-          </div>
-        </div>
-      </section>
-
       {/* Scout Forge Badge Section */}
-      <section className="py-10 sm:py-15 md:py-20 bg-gray-50 flex justify-center items-center">
+      <section className="py-10 sm:py-15 md:py-20 bg-white flex justify-center items-center">
         <div className="layout-container text-center">
           <a 
             href="https://scoutforge.net/reviews/sizemybag/" 
