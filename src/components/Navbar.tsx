@@ -30,6 +30,10 @@ export const Navbar = () => {
     name: 'Tips & Tricks',
     path: '/article',
     icon: <Lightbulb className="w-4 h-4 mr-2" />
+  }, {
+    name: 'About',
+    path: '/about',
+    icon: <Lightbulb className="w-4 h-4 mr-2" />
   }];
   
   return <header className="fixed top-0 z-40 w-full bg-white border-b border-zinc-200">
