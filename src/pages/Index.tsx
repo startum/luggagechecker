@@ -44,20 +44,6 @@ const Index = () => {
     } catch (error) {
       console.error('Failed to load luggage dimensions:', error);
     }
-
-    // Load the Kit script
-    const script = document.createElement('script');
-    script.async = true;
-    script.setAttribute('data-uid', '1d2792f1de');
-    script.src = 'https://toffi.kit.com/1d2792f1de/index.js';
-    document.head.appendChild(script);
-
-    // Cleanup function to remove script when component unmounts
-    return () => {
-      if (script.parentNode) {
-        script.parentNode.removeChild(script);
-      }
-    };
   }, []);
   
   const handleLuggageSubmit = (dimensions: LuggageDimensions) => {
