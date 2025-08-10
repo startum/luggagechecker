@@ -12,6 +12,7 @@ import InfoSection from '@/components/InfoSection';
 import TravelConfidentlySection from '@/components/TravelConfidentlySection';
 import BlogSection from '@/components/BlogSection';
 import FAQSection from '@/components/FAQSection';
+import TransferBanner from '@/components/TransferBanner';
 import ScoutBadgeSection from '@/components/ScoutBadgeSection';
 
 const Index = () => {
@@ -115,6 +116,9 @@ const Index = () => {
 
       {/* FAQ Section */}
       <FAQSection />
+
+      {/* Transfer Banner Section */}
+      <TransferBanner />
 
       {/* Scout Forge Badge Section */}
       <ScoutBadgeSection />
