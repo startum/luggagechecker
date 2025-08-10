@@ -27,7 +27,7 @@ const TransferBanner = () => {
       <div className="layout-container">
         <div className="bg-white p-6 rounded-xl shadow-sm border border-gray-100">
           <h2 className="text-2xl sm:text-3xl font-semibold mb-6 text-center">
-            Need an airport transfer?
+            Transfer Bookings
           </h2>
           <div ref={containerRef} />
         </div>
