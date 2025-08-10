@@ -106,6 +106,25 @@ const Index = () => {
       {/* How to Measure Your Luggage Section */}
       <MeasurementGuide />
       
+      {/* Flight Compensation Section */}
+      <section className="py-10 sm:py-15 md:py-20 bg-gray-50">
+        <div className="layout-container">
+          <div className="text-center">
+            <h2 className="text-2xl sm:text-3xl font-semibold mb-6">
+              If your flight is delayed or cancelled, you could get €250–€600 compensation - check eligibility here.
+            </h2>
+            <a 
+              href="https://compensair.tpx.lt/TqDilEd2" 
+              target="_blank" 
+              rel="noopener noreferrer"
+              className="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-xl text-sm font-medium ring-offset-background transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 active:scale-95 bg-amber-400 text-zinc-900 hover:bg-amber-500 h-11 px-4 py-2"
+            >
+              Check Eligibility
+            </a>
+          </div>
+        </div>
+      </section>
+      
       {/* Info Section with Image */}
       <InfoSection />
       
