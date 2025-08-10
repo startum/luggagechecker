@@ -196,6 +196,16 @@ const Compare = () => {
                 Click "Add Airline" above to select airlines and compare how your luggage measures up against their baggage policies.
               </p>
             </div>}
+          
+          {/* Airalo eSIM Promotional Section */}
+          {selectedAirlines.length > 0 && (
+            <div className="bg-white p-6 rounded-xl shadow-sm border border-gray-100">
+              <h3 className="text-lg font-semibold mb-4">Travelling abroad? Save up to 90% on roaming - get an eSIM in 2 minutes with Airalo.</h3>
+              <div dangerouslySetInnerHTML={{
+                __html: `<script async src="https://tpemd.com/content?trs=448606&shmarker=664168.airalo-affiliate&locale=en&powered_by=true&color_button=%23f2685f&color_focused=%23f2685f&secondary=%23FFFFFF&dark=%2311100f&light=%23FFFFFF&special=%23FFFFFf&border_radius=5&plain=false&no_labels=true&promo_id=8588&campaign_id=541" charset="utf-8"></script>`
+              }} />
+            </div>
+          )}
         </div>
       </div>
     </Layout>;
