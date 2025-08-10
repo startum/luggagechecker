@@ -107,12 +107,12 @@ const Index = () => {
       <MeasurementGuide />
       
       {/* Flight Compensation Section */}
-      <section className="py-10 sm:py-15 md:py-20 bg-gray-50">
+      <section className="py-10 sm:py-15 md:py-20 bg-amber-50 border-t border-b border-amber-200">
         <div className="layout-container">
-          <div className="text-center">
-            <h2 className="text-2xl sm:text-3xl font-semibold mb-6">
+          <div className="bg-white p-6 rounded-xl shadow-sm border border-amber-200 text-center">
+            <h3 className="text-xl sm:text-2xl font-semibold mb-6 text-amber-900">
               If your flight is delayed or cancelled, you could get €250–€600 compensation - check eligibility here.
-            </h2>
+            </h3>
             <a 
               href="https://compensair.tpx.lt/TqDilEd2" 
               target="_blank" 
