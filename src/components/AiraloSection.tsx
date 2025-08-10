@@ -7,7 +7,7 @@ const AiraloSection = () => {
     // Create and load the Airalo script
     const script = document.createElement('script');
     script.async = true;
-    script.src = 'https://tpemd.com/content?trs=448606&shmarker=664168.airalo-affiliate&locale=en&powered_by=true&color_button=%23f2685f&color_focused=%23f2685f&secondary=%23FFFFFF&dark=%2311100f&light=%23FFFFFF&special=%23FFFFFf&border_radius=5&plain=false&no_labels=true&promo_id=8588&campaign_id=541';
+    script.src = 'https://tpemd.com/content?trs=448606&shmarker=664168&locale=en&color_scheme=orange&view=detail&h=Transfer%20bookings&powered_by=true&promo_id=1586&campaign_id=22';
     script.charset = 'utf-8';
 
     if (containerRef.current) {
