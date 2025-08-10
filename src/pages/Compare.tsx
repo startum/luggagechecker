@@ -199,9 +199,7 @@ const Compare = () => {
             </div>}
           
           {/* Airalo eSIM Promotional Section */}
-          {selectedAirlines.length > 0 && (
-            <AiraloSection />
-          )}
+          <AiraloSection />
         </div>
       </div>
     </Layout>;
