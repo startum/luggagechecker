@@ -23,7 +23,7 @@ const TransferBanner = () => {
   }, []);
 
   return (
-    <section className="py-10 sm:py-15 md:py-20 bg-white">
+    <section className="hidden md:block py-10 sm:py-15 md:py-20 bg-white">
       <div className="layout-container">
         <div className="bg-white p-6 rounded-xl shadow-sm border border-gray-100">
           <h2 className="text-2xl sm:text-3xl font-semibold mb-6 text-center">
