@@ -13,6 +13,7 @@ import TravelConfidentlySection from '@/components/TravelConfidentlySection';
 import BlogSection from '@/components/BlogSection';
 import FAQSection from '@/components/FAQSection';
 import ScoutBadgeSection from '@/components/ScoutBadgeSection';
+import TransferSection from '@/components/TransferSection';
 
 const Index = () => {
   const navigate = useNavigate();
@@ -104,6 +105,9 @@ const Index = () => {
       
       {/* How to Measure Your Luggage Section */}
       <MeasurementGuide />
+      
+      {/* Airport Transfer Section */}
+      <TransferSection />
       
       {/* Info Section with Image */}
       <InfoSection />
