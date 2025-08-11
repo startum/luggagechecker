@@ -1,95 +1,33 @@
 import { Layout } from '@/components/Layout';
 import { Helmet } from 'react-helmet-async';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
+import { Button } from '@/components/ui/button';
+import { Input } from '@/components/ui/input';
+import { Label } from '@/components/ui/label';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { Plane, Calendar, MapPin, Users } from 'lucide-react';
 
 const BookFlights = () => {
-  const [isScriptLoaded, setIsScriptLoaded] = useState(false);
-  const [scriptError, setScriptError] = useState(false);
+  const [searchParams, setSearchParams] = useState({
+    from: '',
+    to: '',
+    departDate: '',
+    returnDate: '',
+    passengers: '1'
+  });
 
-  useEffect(() => {
-    console.log('BookFlights component mounted, attempting to load script...');
+  const handleSearch = () => {
+    const query = new URLSearchParams({
+      from: searchParams.from,
+      to: searchParams.to,
+      depart: searchParams.departDate,
+      return: searchParams.returnDate,
+      passengers: searchParams.passengers
+    });
     
-    // Remove existing script if any
-    const existingScript = document.querySelector('script[src*="tpemd.com"]');
-    if (existingScript) {
-      console.log('Removing existing script');
-      existingScript.remove();
-    }
-
-    // Get the target container
-    const container = document.getElementById('flight-widget-container');
-    if (!container) {
-      console.error('Flight widget container not found');
-      setScriptError(true);
-      return;
-    }
-
-    console.log('Container found, creating script element...');
-
-    // Create and load the script dynamically
-    const script = document.createElement('script');
-    script.src = 'https://tpemd.com/content?currency=usd&trs=448606&shmarker=664168&locale=en&powered_by=true&limit=4&primary_color=00AE98&results_background_color=FFFFFF&form_background_color=FFFFFF&campaign_id=111&promo_id=3411';
-    script.async = true;
-    script.charset = 'utf-8';
-    
-    script.onload = () => {
-      console.log('Script loaded successfully');
-      setIsScriptLoaded(true);
-      setScriptError(false);
-      
-      // Try to move any content that might have been added to body into our container
-      setTimeout(() => {
-        console.log('Looking for widget elements...');
-        const possibleWidget = document.querySelector('div[id*="tpemd"], div[class*="tpemd"], form[action*="tpemd"]');
-        if (possibleWidget && !container.contains(possibleWidget)) {
-          console.log('Moving widget to container');
-          container.appendChild(possibleWidget);
-        } else if (!possibleWidget) {
-          console.log('No widget elements found after script load');
-        }
-      }, 2000);
-    };
-    
-    script.onerror = (error) => {
-      console.error('Script failed to load:', error);
-      setScriptError(true);
-      setIsScriptLoaded(false);
-    };
-
-    // Add global error handler to catch script runtime errors
-    const originalErrorHandler = window.onerror;
-    window.onerror = (message, source, lineno, colno, error) => {
-      console.error('Global error caught:', { message, source, lineno, colno, error });
-      if (source && source.includes('tpemd.com')) {
-        console.error('Error from flight booking script');
-        setScriptError(true);
-        setIsScriptLoaded(false);
-      }
-      if (originalErrorHandler) {
-        return originalErrorHandler(message, source, lineno, colno, error);
-      }
-      return false;
-    };
-
-    try {
-      // Append script to document head instead of container
-      console.log('Appending script to document head...');
-      document.head.appendChild(script);
-    } catch (error) {
-      console.error('Error appending script:', error);
-      setScriptError(true);
-    }
-
-    // Cleanup function
-    return () => {
-      console.log('Cleaning up script...');
-      if (script.parentNode) {
-        script.parentNode.removeChild(script);
-      }
-      // Restore original error handler
-      window.onerror = originalErrorHandler;
-    };
-  }, []);
+    // Open Kayak with search parameters
+    window.open(`https://www.kayak.com/flights/${searchParams.from}-${searchParams.to}/${searchParams.departDate}/${searchParams.returnDate}?sort=bestflight_a&fs=stops=0`, '_blank');
+  };
 
   return (
     <Layout>
@@ -111,41 +49,122 @@ const BookFlights = () => {
               </p>
             </div>
 
-            {/* Flight Widget Container */}
-            <div className="bg-white rounded-lg shadow-lg p-6 mb-8">
-              <div id="flight-widget-container" className="min-h-[400px]">
-                {!isScriptLoaded && !scriptError && (
-                  <div className="flex items-center justify-center h-64">
-                    <div className="text-center">
-                      <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-sky-600 mx-auto mb-4"></div>
-                      <p className="text-zinc-600">Loading flight search...</p>
-                    </div>
+            {/* Flight Search Form */}
+            <Card className="mb-8">
+              <CardHeader>
+                <CardTitle className="flex items-center gap-2">
+                  <Plane className="h-5 w-5" />
+                  Search Flights
+                </CardTitle>
+              </CardHeader>
+              <CardContent className="space-y-4">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  <div className="space-y-2">
+                    <Label htmlFor="from" className="flex items-center gap-2">
+                      <MapPin className="h-4 w-4" />
+                      From
+                    </Label>
+                    <Input
+                      id="from"
+                      placeholder="Departure city (e.g., NYC)"
+                      value={searchParams.from}
+                      onChange={(e) => setSearchParams(prev => ({ ...prev, from: e.target.value }))}
+                    />
                   </div>
-                )}
+                  <div className="space-y-2">
+                    <Label htmlFor="to" className="flex items-center gap-2">
+                      <MapPin className="h-4 w-4" />
+                      To
+                    </Label>
+                    <Input
+                      id="to"
+                      placeholder="Destination city (e.g., LAX)"
+                      value={searchParams.to}
+                      onChange={(e) => setSearchParams(prev => ({ ...prev, to: e.target.value }))}
+                    />
+                  </div>
+                </div>
                 
-                {scriptError && (
-                  <div className="text-center py-8">
-                    <p className="text-zinc-600 mb-4">Unable to load flight search widget.</p>
-                    <div className="space-y-2">
-                      <a 
-                        href="https://www.expedia.com/Flights" 
-                        target="_blank" 
-                        rel="noopener noreferrer"
-                        className="inline-block bg-sky-600 text-white px-6 py-2 rounded-lg hover:bg-sky-700 transition-colors mr-4"
-                      >
-                        Search on Expedia
-                      </a>
-                      <a 
-                        href="https://www.kayak.com/flights" 
-                        target="_blank" 
-                        rel="noopener noreferrer"
-                        className="inline-block bg-sky-600 text-white px-6 py-2 rounded-lg hover:bg-sky-700 transition-colors"
-                      >
-                        Search on Kayak
-                      </a>
-                    </div>
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                  <div className="space-y-2">
+                    <Label htmlFor="departDate" className="flex items-center gap-2">
+                      <Calendar className="h-4 w-4" />
+                      Departure Date
+                    </Label>
+                    <Input
+                      id="departDate"
+                      type="date"
+                      value={searchParams.departDate}
+                      onChange={(e) => setSearchParams(prev => ({ ...prev, departDate: e.target.value }))}
+                    />
                   </div>
-                )}
+                  <div className="space-y-2">
+                    <Label htmlFor="returnDate" className="flex items-center gap-2">
+                      <Calendar className="h-4 w-4" />
+                      Return Date
+                    </Label>
+                    <Input
+                      id="returnDate"
+                      type="date"
+                      value={searchParams.returnDate}
+                      onChange={(e) => setSearchParams(prev => ({ ...prev, returnDate: e.target.value }))}
+                    />
+                  </div>
+                  <div className="space-y-2">
+                    <Label htmlFor="passengers" className="flex items-center gap-2">
+                      <Users className="h-4 w-4" />
+                      Passengers
+                    </Label>
+                    <Input
+                      id="passengers"
+                      type="number"
+                      min="1"
+                      max="9"
+                      value={searchParams.passengers}
+                      onChange={(e) => setSearchParams(prev => ({ ...prev, passengers: e.target.value }))}
+                    />
+                  </div>
+                </div>
+                
+                <Button 
+                  onClick={handleSearch}
+                  className="w-full"
+                  disabled={!searchParams.from || !searchParams.to || !searchParams.departDate}
+                >
+                  <Plane className="h-4 w-4 mr-2" />
+                  Search Flights on Kayak
+                </Button>
+              </CardContent>
+            </Card>
+            
+            {/* Alternative Booking Options */}
+            <div className="bg-white rounded-lg shadow-lg p-6">
+              <h3 className="text-lg font-semibold mb-4">More Flight Search Options</h3>
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                <a 
+                  href="https://www.expedia.com/Flights" 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  className="flex items-center justify-center bg-sky-600 text-white px-6 py-3 rounded-lg hover:bg-sky-700 transition-colors"
+                >
+                  Search on Expedia
+                </a>
+                <a 
+                  href="https://www.kayak.com/flights" 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  className="flex items-center justify-center bg-sky-600 text-white px-6 py-3 rounded-lg hover:bg-sky-700 transition-colors"
+                >
+                  Search on Kayak
+                </a>
+                <a 
+                  href="https://www.skyscanner.com/flights" 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  className="flex items-center justify-center bg-sky-600 text-white px-6 py-3 rounded-lg hover:bg-sky-700 transition-colors"
+                >
+                  Search on Skyscanner
+                </a>
               </div>
             </div>
           </div>
