@@ -1,49 +1,28 @@
 import { Layout } from '@/components/Layout';
 import { Helmet } from 'react-helmet-async';
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef } from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Plane } from 'lucide-react';
 
 const BookFlights = () => {
-  const [isLoading, setIsLoading] = useState(true);
-  const [error, setError] = useState<string | null>(null);
-  const scriptLoaded = useRef(false);
+  const containerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    const loadTpemdScript = () => {
-      // Check if script is already loaded
-      if (scriptLoaded.current || document.querySelector('script[src*="tpemd.com"]')) {
-        setIsLoading(false);
-        return;
-      }
+    // Create and load the flight booking script
+    const script = document.createElement('script');
+    script.async = true;
+    script.src = 'https://tpemd.com/content?currency=usd&trs=448606&shmarker=664168&locale=en&stops=any&powered_by=true&limit=4&primary_color=00AE98&results_background_color=FFFFFF&form_background_color=FFFFFF&campaign_id=111&promo_id=3411';
+    script.charset = 'utf-8';
 
-      const script = document.createElement('script');
-      script.src = 'https://tpemd.com/content?currency=usd&trs=448606&shmarker=664168&locale=en&stops=any&powered_by=true&limit=4&primary_color=00AE98&results_background_color=FFFFFF&form_background_color=FFFFFF&campaign_id=111&promo_id=3411';
-      script.async = true;
-      script.charset = 'utf-8';
-      
-      script.onload = () => {
-        setIsLoading(false);
-        scriptLoaded.current = true;
-      };
-      
-      script.onerror = () => {
-        setError('Failed to load booking widget');
-        setIsLoading(false);
-      };
+    if (containerRef.current) {
+      containerRef.current.appendChild(script);
+    }
 
-      document.head.appendChild(script);
-    };
-
-    loadTpemdScript();
-
+    // Cleanup function to remove script when component unmounts
     return () => {
-      // Cleanup script on unmount
-      const script = document.querySelector('script[src*="tpemd.com"]');
-      if (script && script.parentNode) {
+      if (containerRef.current && script.parentNode) {
         script.parentNode.removeChild(script);
       }
-      scriptLoaded.current = false;
     };
   }, []);
 
@@ -76,20 +55,7 @@ const BookFlights = () => {
                 </CardTitle>
               </CardHeader>
               <CardContent>
-                <div id="tpemd-booking-widget" className="min-h-[400px] flex items-center justify-center">
-                  {isLoading && (
-                    <div className="text-center">
-                      <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-primary mx-auto mb-4"></div>
-                      <p className="text-muted-foreground">Loading flight search...</p>
-                    </div>
-                  )}
-                  {error && (
-                    <div className="text-center">
-                      <p className="text-destructive mb-4">{error}</p>
-                      <p className="text-muted-foreground">Please try refreshing the page.</p>
-                    </div>
-                  )}
-                </div>
+                <div ref={containerRef} className="min-h-[400px]" />
               </CardContent>
             </Card>
           </div>
