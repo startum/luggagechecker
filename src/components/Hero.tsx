@@ -1,7 +1,7 @@
 
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Search, Plane, Luggage, ArrowRight, Check, Sun } from 'lucide-react';
+import { Search, Plane, Luggage, ArrowRight, Check, Sun, CreditCard } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import airlineService from '@/utils/airlineData';
@@ -131,7 +131,7 @@ export const Hero = () => {
           </div>
         </div>
         
-        <div className="grid grid-cols-1 sm:grid-cols-3 gap-8 mt-20 w-full">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 mt-20 w-full">
           <div className="bg-white p-8 rounded-xl animate-fade-in cursor-pointer hover:-translate-y-1 transition-all duration-300 border border-zinc-100 shadow-sm" style={{
           animationDelay: '0.3s'
         }} onClick={() => {
@@ -167,6 +167,16 @@ export const Hero = () => {
             </div>
             <h3 className="text-xl font-gordita font-semibold mb-3 text-zinc-900">Airline Luggage Sizes</h3>
             <p className="text-zinc-600 font-roboto">View comprehensive information about carry-on and checked baggage dimensions.</p>
+          </div>
+          
+          <div className="bg-white p-8 rounded-xl animate-fade-in cursor-pointer hover:-translate-y-1 transition-all duration-300 border border-zinc-100 shadow-sm" style={{
+          animationDelay: '0.6s'
+        }} onClick={() => navigate('/book-flights')}>
+            <div className="w-16 h-16 bg-blue-100 rounded-lg flex items-center justify-center mb-5">
+              <CreditCard className="h-8 w-8 text-blue-600" />
+            </div>
+            <h3 className="text-xl font-gordita font-semibold mb-3 text-zinc-900">Book Your Flights</h3>
+            <p className="text-zinc-600 font-roboto">Find and book flights with the best deals and convenient booking options.</p>
           </div>
         </div>
       </div>
