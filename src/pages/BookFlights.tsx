@@ -11,7 +11,7 @@ const BookFlights = () => {
     // Create and load the flight booking script
     const script = document.createElement('script');
     script.async = true;
-    script.src = 'https://tpemd.com/content?currency=usd&trs=448606&shmarker=664168&locale=en&stops=any&powered_by=true&limit=4&primary_color=00AE98&results_background_color=FFFFFF&form_background_color=FFFFFF&campaign_id=111&promo_id=3411';
+    script.src = 'https://tpemd.com/content?currency=usd&trs=448606&shmarker=664168&locale=en&powered_by=true&limit=4&primary_color=00AE98&results_background_color=FFFFFF&form_background_color=FFFFFF&campaign_id=111&promo_id=3411';
     script.charset = 'utf-8';
 
     if (containerRef.current) {
