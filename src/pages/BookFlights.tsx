@@ -67,37 +67,6 @@ const BookFlights = () => {
                 </div>
               </CardContent>
             </Card>
-            
-            {/* Alternative Booking Options */}
-            <div className="bg-white rounded-lg shadow-lg p-6">
-              <h3 className="text-lg font-semibold mb-4">More Flight Search Options</h3>
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-                <a 
-                  href="https://www.expedia.com/Flights" 
-                  target="_blank" 
-                  rel="noopener noreferrer"
-                  className="flex items-center justify-center bg-sky-600 text-white px-6 py-3 rounded-lg hover:bg-sky-700 transition-colors"
-                >
-                  Search on Expedia
-                </a>
-                <a 
-                  href="https://www.kayak.com/flights" 
-                  target="_blank" 
-                  rel="noopener noreferrer"
-                  className="flex items-center justify-center bg-sky-600 text-white px-6 py-3 rounded-lg hover:bg-sky-700 transition-colors"
-                >
-                  Search on Kayak
-                </a>
-                <a 
-                  href="https://www.skyscanner.com/flights" 
-                  target="_blank" 
-                  rel="noopener noreferrer"
-                  className="flex items-center justify-center bg-sky-600 text-white px-6 py-3 rounded-lg hover:bg-sky-700 transition-colors"
-                >
-                  Search on Skyscanner
-                </a>
-              </div>
-            </div>
           </div>
         </div>
       </main>
