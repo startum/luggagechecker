@@ -49,91 +49,22 @@ const BookFlights = () => {
               </p>
             </div>
 
-            {/* Flight Search Form */}
+            {/* Flight Booking Widget */}
             <Card className="mb-8">
               <CardHeader>
                 <CardTitle className="flex items-center gap-2">
                   <Plane className="h-5 w-5" />
-                  Search Flights
+                  Book Your Flight
                 </CardTitle>
               </CardHeader>
-              <CardContent className="space-y-4">
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                  <div className="space-y-2">
-                    <Label htmlFor="from" className="flex items-center gap-2">
-                      <MapPin className="h-4 w-4" />
-                      From
-                    </Label>
-                    <Input
-                      id="from"
-                      placeholder="Departure city (e.g., NYC)"
-                      value={searchParams.from}
-                      onChange={(e) => setSearchParams(prev => ({ ...prev, from: e.target.value }))}
-                    />
-                  </div>
-                  <div className="space-y-2">
-                    <Label htmlFor="to" className="flex items-center gap-2">
-                      <MapPin className="h-4 w-4" />
-                      To
-                    </Label>
-                    <Input
-                      id="to"
-                      placeholder="Destination city (e.g., LAX)"
-                      value={searchParams.to}
-                      onChange={(e) => setSearchParams(prev => ({ ...prev, to: e.target.value }))}
-                    />
-                  </div>
+              <CardContent>
+                <div id="tpemd-booking-widget" className="min-h-[400px]">
+                  <script 
+                    async 
+                    src="https://tpemd.com/content?currency=usd&trs=448606&shmarker=664168&locale=en&stops=any&show_hotels=true&powered_by=true&border_radius=0&plain=true&color_button=%2300A991&color_button_text=%23ffffff&promo_id=3414&campaign_id=111" 
+                    charSet="utf-8"
+                  />
                 </div>
-                
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-                  <div className="space-y-2">
-                    <Label htmlFor="departDate" className="flex items-center gap-2">
-                      <Calendar className="h-4 w-4" />
-                      Departure Date
-                    </Label>
-                    <Input
-                      id="departDate"
-                      type="date"
-                      value={searchParams.departDate}
-                      onChange={(e) => setSearchParams(prev => ({ ...prev, departDate: e.target.value }))}
-                    />
-                  </div>
-                  <div className="space-y-2">
-                    <Label htmlFor="returnDate" className="flex items-center gap-2">
-                      <Calendar className="h-4 w-4" />
-                      Return Date
-                    </Label>
-                    <Input
-                      id="returnDate"
-                      type="date"
-                      value={searchParams.returnDate}
-                      onChange={(e) => setSearchParams(prev => ({ ...prev, returnDate: e.target.value }))}
-                    />
-                  </div>
-                  <div className="space-y-2">
-                    <Label htmlFor="passengers" className="flex items-center gap-2">
-                      <Users className="h-4 w-4" />
-                      Passengers
-                    </Label>
-                    <Input
-                      id="passengers"
-                      type="number"
-                      min="1"
-                      max="9"
-                      value={searchParams.passengers}
-                      onChange={(e) => setSearchParams(prev => ({ ...prev, passengers: e.target.value }))}
-                    />
-                  </div>
-                </div>
-                
-                <Button 
-                  onClick={handleSearch}
-                  className="w-full"
-                  disabled={!searchParams.from || !searchParams.to || !searchParams.departDate}
-                >
-                  <Plane className="h-4 w-4 mr-2" />
-                  Search Flights on Kayak
-                </Button>
               </CardContent>
             </Card>
             
