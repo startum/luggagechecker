@@ -1,33 +1,51 @@
 import { Layout } from '@/components/Layout';
 import { Helmet } from 'react-helmet-async';
-import { useState } from 'react';
-import { Button } from '@/components/ui/button';
-import { Input } from '@/components/ui/input';
-import { Label } from '@/components/ui/label';
+import { useEffect, useRef, useState } from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { Plane, Calendar, MapPin, Users } from 'lucide-react';
+import { Plane } from 'lucide-react';
 
 const BookFlights = () => {
-  const [searchParams, setSearchParams] = useState({
-    from: '',
-    to: '',
-    departDate: '',
-    returnDate: '',
-    passengers: '1'
-  });
+  const [isLoading, setIsLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
+  const scriptLoaded = useRef(false);
 
-  const handleSearch = () => {
-    const query = new URLSearchParams({
-      from: searchParams.from,
-      to: searchParams.to,
-      depart: searchParams.departDate,
-      return: searchParams.returnDate,
-      passengers: searchParams.passengers
-    });
-    
-    // Open Kayak with search parameters
-    window.open(`https://www.kayak.com/flights/${searchParams.from}-${searchParams.to}/${searchParams.departDate}/${searchParams.returnDate}?sort=bestflight_a&fs=stops=0`, '_blank');
-  };
+  useEffect(() => {
+    const loadTpemdScript = () => {
+      // Check if script is already loaded
+      if (scriptLoaded.current || document.querySelector('script[src*="tpemd.com"]')) {
+        setIsLoading(false);
+        return;
+      }
+
+      const script = document.createElement('script');
+      script.src = 'https://tpemd.com/content?currency=usd&trs=448606&shmarker=664168&locale=en&stops=any&powered_by=true&limit=4&primary_color=00AE98&results_background_color=FFFFFF&form_background_color=FFFFFF&campaign_id=111&promo_id=3411';
+      script.async = true;
+      script.charset = 'utf-8';
+      
+      script.onload = () => {
+        setIsLoading(false);
+        scriptLoaded.current = true;
+      };
+      
+      script.onerror = () => {
+        setError('Failed to load booking widget');
+        setIsLoading(false);
+      };
+
+      document.head.appendChild(script);
+    };
+
+    loadTpemdScript();
+
+    return () => {
+      // Cleanup script on unmount
+      const script = document.querySelector('script[src*="tpemd.com"]');
+      if (script && script.parentNode) {
+        script.parentNode.removeChild(script);
+      }
+      scriptLoaded.current = false;
+    };
+  }, []);
 
   return (
     <Layout>
@@ -58,12 +76,19 @@ const BookFlights = () => {
                 </CardTitle>
               </CardHeader>
               <CardContent>
-                <div id="tpemd-booking-widget" className="min-h-[400px]">
-                  <script 
-                    async 
-                    src="https://tpemd.com/content?currency=usd&trs=448606&shmarker=664168&locale=en&stops=any&show_hotels=true&powered_by=true&border_radius=0&plain=true&color_button=%2300A991&color_button_text=%23ffffff&promo_id=3414&campaign_id=111" 
-                    charSet="utf-8"
-                  />
+                <div id="tpemd-booking-widget" className="min-h-[400px] flex items-center justify-center">
+                  {isLoading && (
+                    <div className="text-center">
+                      <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-primary mx-auto mb-4"></div>
+                      <p className="text-muted-foreground">Loading flight search...</p>
+                    </div>
+                  )}
+                  {error && (
+                    <div className="text-center">
+                      <p className="text-destructive mb-4">{error}</p>
+                      <p className="text-muted-foreground">Please try refreshing the page.</p>
+                    </div>
+                  )}
                 </div>
               </CardContent>
             </Card>
