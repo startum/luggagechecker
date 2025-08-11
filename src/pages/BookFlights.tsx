@@ -7,15 +7,24 @@ const BookFlights = () => {
   const [scriptError, setScriptError] = useState(false);
 
   useEffect(() => {
+    console.log('BookFlights component mounted, attempting to load script...');
+    
     // Remove existing script if any
     const existingScript = document.querySelector('script[src*="tpemd.com"]');
     if (existingScript) {
+      console.log('Removing existing script');
       existingScript.remove();
     }
 
     // Get the target container
     const container = document.getElementById('flight-widget-container');
-    if (!container) return;
+    if (!container) {
+      console.error('Flight widget container not found');
+      setScriptError(true);
+      return;
+    }
+
+    console.log('Container found, creating script element...');
 
     // Create and load the script dynamically
     const script = document.createElement('script');
@@ -24,31 +33,61 @@ const BookFlights = () => {
     script.charset = 'utf-8';
     
     script.onload = () => {
+      console.log('Script loaded successfully');
       setIsScriptLoaded(true);
       setScriptError(false);
       
       // Try to move any content that might have been added to body into our container
       setTimeout(() => {
+        console.log('Looking for widget elements...');
         const possibleWidget = document.querySelector('div[id*="tpemd"], div[class*="tpemd"], form[action*="tpemd"]');
         if (possibleWidget && !container.contains(possibleWidget)) {
+          console.log('Moving widget to container');
           container.appendChild(possibleWidget);
+        } else if (!possibleWidget) {
+          console.log('No widget elements found after script load');
         }
-      }, 1000);
+      }, 2000);
     };
     
-    script.onerror = () => {
+    script.onerror = (error) => {
+      console.error('Script failed to load:', error);
       setScriptError(true);
       setIsScriptLoaded(false);
     };
 
-    // Append script to the target container instead of document body
-    container.appendChild(script);
+    // Add global error handler to catch script runtime errors
+    const originalErrorHandler = window.onerror;
+    window.onerror = (message, source, lineno, colno, error) => {
+      console.error('Global error caught:', { message, source, lineno, colno, error });
+      if (source && source.includes('tpemd.com')) {
+        console.error('Error from flight booking script');
+        setScriptError(true);
+        setIsScriptLoaded(false);
+      }
+      if (originalErrorHandler) {
+        return originalErrorHandler(message, source, lineno, colno, error);
+      }
+      return false;
+    };
+
+    try {
+      // Append script to document head instead of container
+      console.log('Appending script to document head...');
+      document.head.appendChild(script);
+    } catch (error) {
+      console.error('Error appending script:', error);
+      setScriptError(true);
+    }
 
     // Cleanup function
     return () => {
+      console.log('Cleaning up script...');
       if (script.parentNode) {
         script.parentNode.removeChild(script);
       }
+      // Restore original error handler
+      window.onerror = originalErrorHandler;
     };
   }, []);
 
