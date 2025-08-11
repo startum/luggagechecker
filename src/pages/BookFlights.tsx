@@ -13,6 +13,10 @@ const BookFlights = () => {
       existingScript.remove();
     }
 
+    // Get the target container
+    const container = document.getElementById('flight-widget-container');
+    if (!container) return;
+
     // Create and load the script dynamically
     const script = document.createElement('script');
     script.src = 'https://tpemd.com/content?currency=usd&trs=448606&shmarker=664168&locale=en&powered_by=true&limit=4&primary_color=00AE98&results_background_color=FFFFFF&form_background_color=FFFFFF&campaign_id=111&promo_id=3411';
@@ -22,6 +26,14 @@ const BookFlights = () => {
     script.onload = () => {
       setIsScriptLoaded(true);
       setScriptError(false);
+      
+      // Try to move any content that might have been added to body into our container
+      setTimeout(() => {
+        const possibleWidget = document.querySelector('div[id*="tpemd"], div[class*="tpemd"], form[action*="tpemd"]');
+        if (possibleWidget && !container.contains(possibleWidget)) {
+          container.appendChild(possibleWidget);
+        }
+      }, 1000);
     };
     
     script.onerror = () => {
@@ -29,8 +41,8 @@ const BookFlights = () => {
       setIsScriptLoaded(false);
     };
 
-    // Append script to document body
-    document.body.appendChild(script);
+    // Append script to the target container instead of document body
+    container.appendChild(script);
 
     // Cleanup function
     return () => {
