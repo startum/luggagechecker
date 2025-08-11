@@ -10,6 +10,7 @@ const BookFlights = () => {
       <Helmet>
         <title>Book Flights - Find the Best Flight Deals | Size My Bag</title>
         <meta name="description" content="Compare and book flights with confidence. Find the best deals while ensuring your luggage meets airline requirements." />
+        <script async src="https://tpemd.com/content?currency=usd&trs=448606&shmarker=664168&locale=en&powered_by=true&limit=4&primary_color=00AE98&results_background_color=FFFFFF&form_background_color=FFFFFF&campaign_id=111&promo_id=3411" charSet="utf-8"></script>
       </Helmet>
       
       <main className="min-h-screen bg-gradient-to-br from-sky-50 to-blue-100 py-24">
