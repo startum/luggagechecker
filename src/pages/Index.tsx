@@ -2,6 +2,7 @@ import { Hero } from '@/components/Hero';
 import { Layout } from '@/components/Layout';
 import { AirlineSearch } from '@/components/AirlineSearch';
 import { LuggageInput } from '@/components/LuggageInput';
+import { FeatureBoxes } from '@/components/FeatureBoxes';
 import { useNavigate } from 'react-router-dom';
 import { LuggageDimensions } from '@/utils/types';
 import { FavoritesSection } from '@/components/FavoritesSection';
@@ -93,6 +94,9 @@ const Index = () => {
           </div>
         </div>
       </section>
+      
+      {/* Feature Boxes Section */}
+      <FeatureBoxes />
       
       {/* Favorites Section (if the user has favorites) */}
       {hasFavorites && (
