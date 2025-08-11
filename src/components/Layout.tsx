@@ -35,6 +35,7 @@ export const Layout: React.FC<LayoutProps> = ({
                 </div>
               </div>
               <div className="flex gap-4 sm:gap-6 flex-wrap justify-center">
+                <Link to="/about" className="text-xs sm:text-sm font-medium text-zinc-600 hover:text-teal-600 transition-colors">About</Link>
                 <Link to="/privacy-policy" className="text-xs sm:text-sm font-medium text-zinc-600 hover:text-teal-600 transition-colors">Privacy Policy</Link>
                 <Link to="/terms" className="text-xs sm:text-sm font-medium text-zinc-600 hover:text-salmon transition-colors">Terms of Service</Link>
                 <a href="mailto:deb@startumproject.com" className="text-xs sm:text-sm font-medium text-zinc-600 hover:text-amber-500 transition-colors">Contact</a>

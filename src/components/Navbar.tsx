@@ -1,7 +1,7 @@
 
 import React, { useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { Menu, X, Luggage, Search, Heart, Home, PlaneTakeoff, Lightbulb, Info } from 'lucide-react';
+import { Menu, X, Luggage, Search, Heart, Home, PlaneTakeoff, Lightbulb, Plane } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { cn } from '@/lib/utils';
 
@@ -26,9 +26,9 @@ export const Navbar = () => {
     icon: <Search className="w-4 h-4 mr-2" />,
     iconOnly: false
   }, {
-    name: 'About',
-    path: '/about',
-    icon: <Info className="w-4 h-4 mr-2" />,
+    name: 'Book Flights',
+    path: '/book-flights',
+    icon: <Plane className="w-4 h-4 mr-2" />,
     iconOnly: false
   }, {
     name: 'Favorites',
