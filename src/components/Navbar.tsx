@@ -1,7 +1,7 @@
 
 import React, { useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { Menu, X, Luggage, Search, Heart, Home, PlaneTakeoff, Lightbulb, Plane } from 'lucide-react';
+import { Menu, X, Luggage, Search, Heart, Home, PlaneTakeoff, Lightbulb, Plane, Building2 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { cn } from '@/lib/utils';
 
@@ -29,6 +29,11 @@ export const Navbar = () => {
     name: 'Book Flights',
     path: '/book-flights',
     icon: <Plane className="w-4 h-4 mr-2" />,
+    iconOnly: false
+  }, {
+    name: 'Book Hotels',
+    path: '/book-hotels',
+    icon: <Building2 className="w-4 h-4 mr-2" />,
     iconOnly: false
   }, {
     name: 'Favorites',
