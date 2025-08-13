@@ -53,7 +53,7 @@ const BookHotels = () => {
                   <Building2 className="h-5 w-5" />
                   Book Your Hotel
                 </CardTitle>
-                <p className="text-sm text-muted-foreground mt-2">
+                <p className="text-sm text-zinc-600 mt-2">
                   This search is powered by Booking.com. As an affiliate, we may earn a commission from bookings made through this page at no extra cost to you.
                 </p>
               </CardHeader>
