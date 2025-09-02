@@ -33,12 +33,12 @@ export const FeatureBoxes = () => {
 
           <div className="bg-white p-8 rounded-xl animate-fade-in cursor-pointer hover:-translate-y-1 transition-all duration-300 border border-zinc-100 shadow-sm" style={{
           animationDelay: '0.3s'
-        }} onClick={() => navigate('/results')}>
+        }} onClick={() => navigate('/airlines')}>
             <div className="w-16 h-16 bg-red-100 rounded-lg flex items-center justify-center mb-5">
               <Luggage className="h-8 w-8 text-red-600" />
             </div>
-            <h3 className="text-xl font-gordita font-semibold mb-3 text-zinc-900">Airline Luggage Sizes</h3>
-            <p className="text-zinc-600 font-roboto">View comprehensive information about carry-on and checked baggage dimensions.</p>
+            <h3 className="text-xl font-gordita font-semibold mb-3 text-zinc-900">Airline Directory</h3>
+            <p className="text-zinc-600 font-roboto">Browse all supported airlines and their complete baggage policies and size limits.</p>
           </div>
           
           <div className="bg-white p-8 rounded-xl animate-fade-in cursor-pointer hover:-translate-y-1 transition-all duration-300 border border-zinc-100 shadow-sm" style={{

@@ -55,6 +55,9 @@ export const Layout: React.FC<LayoutProps> = ({
                   <Link to="/book-hotels" className="text-xs sm:text-sm font-medium text-zinc-600 hover:text-teal-600 transition-colors">
                     Book Hotels
                   </Link>
+                  <Link to="/airlines" className="text-xs sm:text-sm font-medium text-zinc-600 hover:text-teal-600 transition-colors">
+                    All Airlines
+                  </Link>
                 </div>
               </div>
               

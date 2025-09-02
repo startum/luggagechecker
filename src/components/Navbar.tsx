@@ -22,7 +22,7 @@ export const Navbar = () => {
     iconOnly: false
   }, {
     name: 'Airlines',
-    path: '/results',
+    path: '/airlines',
     icon: <PlaneTakeoff className="w-4 h-4 mr-2" />,
     iconOnly: false
   }, {

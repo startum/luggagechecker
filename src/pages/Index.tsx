@@ -90,6 +90,14 @@ const Index = () => {
                 luggageDimensions={currentDimensions}
                 limit={6}
               />
+              <div className="text-center mt-6">
+                <button 
+                  onClick={() => navigate('/airlines')}
+                  className="text-teal-600 hover:text-teal-700 font-medium text-sm border-b border-teal-200 hover:border-teal-300 transition-colors"
+                >
+                  View All Airlines & Baggage Policies →
+                </button>
+              </div>
             </div>
           </div>
         </div>

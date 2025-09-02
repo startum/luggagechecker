@@ -12,6 +12,7 @@ import BookHotels from "./pages/BookHotels";
 import Article from "./pages/Article";
 import SingleArticle from "./pages/SingleArticle";
 import About from "./pages/About";
+import Airlines from "./pages/Airlines";
 import BagSizer from "./pages/BagSizer";
 import PrivacyPolicy from "./pages/PrivacyPolicy";
 import TermsAndConditions from "./pages/TermsAndConditions";
@@ -30,6 +31,7 @@ const App = () => (
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<Index />} />
+          <Route path="/airlines" element={<Airlines />} />
           <Route path="/results" element={<Results />} />
           <Route path="/results/:airlineId" element={<Results />} />
           <Route path="/compare" element={<Compare />} />
