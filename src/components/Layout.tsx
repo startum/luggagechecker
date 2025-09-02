@@ -23,10 +23,10 @@ export const Layout: React.FC<LayoutProps> = ({
           <div className="layout-container">
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8">
               {/* Column 1: Logo + Copyright */}
-              <div className="flex items-center flex-col md:flex-row text-center md:text-left">
+              <div className="flex flex-col items-center md:items-start text-center md:text-left">
                 <img 
                   alt="Size My Bag" 
-                  className="h-12 sm:h-16 mr-0 md:mr-2 mb-2 md:mb-0" 
+                  className="h-12 sm:h-16 mb-2" 
                   src="/lovable-uploads/b792be04-2c20-425b-b87b-cc01cc6b3ad3.png"
                   loading="lazy"
                   decoding="async"
@@ -48,6 +48,7 @@ export const Layout: React.FC<LayoutProps> = ({
               
               {/* Column 3: Navigation Links */}
               <div className="text-center md:text-left">
+                <h3 className="text-sm font-semibold text-zinc-700 mb-3">Links</h3>
                 <div className="flex flex-col gap-2">
                   <Link to="/about" className="text-xs sm:text-sm font-medium text-zinc-600 hover:text-teal-600 transition-colors">About</Link>
                   <Link to="/privacy-policy" className="text-xs sm:text-sm font-medium text-zinc-600 hover:text-teal-600 transition-colors">Privacy Policy</Link>
