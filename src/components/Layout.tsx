@@ -46,6 +46,9 @@ export const Layout: React.FC<LayoutProps> = ({
                   <Link to="/luggage-size-checker" className="text-xs sm:text-sm font-medium text-zinc-600 hover:text-teal-600 transition-colors">
                     Luggage Size Checker
                   </Link>
+                  <Link to="/measure-bag-dimensions" className="text-xs sm:text-sm font-medium text-zinc-600 hover:text-teal-600 transition-colors">
+                    How to Measure Bags
+                  </Link>
                   <Link to="/book-flights" className="text-xs sm:text-sm font-medium text-zinc-600 hover:text-teal-600 transition-colors">
                     Book Flights
                   </Link>

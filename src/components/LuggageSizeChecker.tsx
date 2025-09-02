@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 import { Ruler, Package, Scale, Info, Plus, X, Search, Plane } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Slider } from '@/components/ui/slider';
@@ -124,11 +124,20 @@ export const LuggageSizeChecker = () => {
   return (
     <Card className="p-6 bg-white shadow-lg">
       <div className="space-y-6">
-        <div className="flex justify-between items-center">
+        <div className="flex items-center justify-between">
           <h2 className="text-2xl font-bold text-gray-900">Enter Your Luggage Dimensions</h2>
-          <Badge variant="outline" className="px-3 py-1">
-            {unitSystem === 'metric' ? 'cm/kg' : 'in/lbs'}
-          </Badge>
+          <div className="flex items-center gap-3">
+            <Link 
+              to="/measure-bag-dimensions" 
+              className="text-sm text-teal-600 hover:text-teal-700 underline flex items-center gap-1"
+            >
+              <Info className="w-4 h-4" />
+              How to measure?
+            </Link>
+            <Badge variant="outline" className="px-3 py-1">
+              {unitSystem === 'metric' ? 'cm/kg' : 'in/lbs'}
+            </Badge>
+          </div>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">

@@ -18,6 +18,7 @@ import TermsAndConditions from "./pages/TermsAndConditions";
 import NotFound from "./pages/NotFound";
 
 import LuggageSizeCheckerPage from "./pages/LuggageSizeChecker";
+import MeasureBagDimensions from "./pages/MeasureBagDimensions";
 
 const queryClient = new QueryClient();
 
@@ -38,6 +39,7 @@ const App = () => (
           <Route path="/article/:slug" element={<SingleArticle />} />
           <Route path="/bag-sizer" element={<BagSizer />} />
           <Route path="/luggage-size-checker" element={<LuggageSizeCheckerPage />} />
+          <Route path="/measure-bag-dimensions" element={<MeasureBagDimensions />} />
           <Route path="/about" element={<About />} />
           <Route path="/privacy-policy" element={<PrivacyPolicy />} />
           <Route path="/terms" element={<TermsAndConditions />} />
