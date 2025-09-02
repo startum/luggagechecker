@@ -120,6 +120,36 @@ const Results = () => {
               </p>
             </div>
             <AirlineHeader airline={airline} isFavorite={isFavorite} onToggleFavorite={handleToggleFavorite} />
+            
+            {/* FAQ Section */}
+            <div className="mt-12 max-w-3xl mx-auto">
+              <h2 className="text-2xl font-bold mb-6 text-center">Frequently Asked Questions</h2>
+              <div className="space-y-6">
+                <div className="border-l-4 border-primary pl-4">
+                  <h3 className="font-semibold text-lg mb-2">Does {airline.name} allow free cabin baggage?</h3>
+                  <p className="text-muted-foreground">
+                    Yes, {airline.name} typically allows free carry-on baggage within their specified size and weight limits. 
+                    Check the dimensions above to ensure your bag complies with {airline.name} regulations.
+                  </p>
+                </div>
+                
+                <div className="border-l-4 border-primary pl-4">
+                  <h3 className="font-semibold text-lg mb-2">What happens if my bag doesn&apos;t fit {airline.name}&apos;s sizer?</h3>
+                  <p className="text-muted-foreground">
+                    If your bag doesn&apos;t fit in {airline.name}&apos;s sizing frame at the airport, you&apos;ll need to check it as hold luggage, 
+                    which may incur additional fees depending on your ticket type and baggage allowance.
+                  </p>
+                </div>
+                
+                <div className="border-l-4 border-primary pl-4">
+                  <h3 className="font-semibold text-lg mb-2">Can I bring a personal item in addition to my {airline.name} carry-on?</h3>
+                  <p className="text-muted-foreground">
+                    Most {airline.name} fare types allow a small personal item (like a handbag or laptop bag) in addition to your main carry-on. 
+                    Check your specific ticket conditions for personal item size limits and restrictions.
+                  </p>
+                </div>
+              </div>
+            </div>
           </> : isFavoritesRoute ? <>
             <h1 className="text-3xl font-bold mb-6">Your Favorite Airlines</h1>
             <p className="text-gray-600 mb-8">
