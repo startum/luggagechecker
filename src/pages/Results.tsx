@@ -111,7 +111,16 @@ const Results = () => {
       <div className="py-8 layout-container">
         {loading ? <div className="flex justify-center items-center py-20">
             <div className="animate-spin h-10 w-10 border-4 border-primary border-t-transparent rounded-full"></div>
-          </div> : airlineId && airline ? <AirlineHeader airline={airline} isFavorite={isFavorite} onToggleFavorite={handleToggleFavorite} /> : isFavoritesRoute ? <>
+          </div> : airlineId && airline ? <>
+            {/* Dynamic intro text */}
+            <div className="mb-8 text-center">
+              <p className="text-lg text-muted-foreground leading-relaxed">
+                This page lets you check your luggage against {airline.name} cabin and checked bag size rules. 
+                Enter your bag dimensions below to instantly see if it fits within {airline.name} baggage allowances and avoid extra fees at the airport.
+              </p>
+            </div>
+            <AirlineHeader airline={airline} isFavorite={isFavorite} onToggleFavorite={handleToggleFavorite} />
+          </> : isFavoritesRoute ? <>
             <h1 className="text-3xl font-bold mb-6">Your Favorite Airlines</h1>
             <p className="text-gray-600 mb-8">
               Here are the airlines you've saved for quick access. You can add or remove airlines from your favorites at any time.
