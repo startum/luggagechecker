@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useParams, useLocation } from 'react-router-dom';
+import { Helmet } from 'react-helmet-async';
 import { Layout } from '@/components/Layout';
 import { AirlineSearch } from '@/components/AirlineSearch';
 import { AirlineHeader } from '@/components/AirlineHeader';
@@ -55,6 +56,58 @@ const Results = () => {
     }
   };
   return <Layout>
+      {/* Dynamic SEO Meta Tags */}
+      {airlineId && airline && (
+        <Helmet>
+          <title>{airline.name} Bag Size Checker – Cabin and Checked Luggage Dimensions</title>
+          <meta 
+            name="description" 
+            content={`Check if your bag fits ${airline.name}'s baggage rules instantly. Enter your dimensions and compare with official airline limits.`} 
+          />
+          <link rel="canonical" href={`https://sizemybag.com/results/${airline.id}`} />
+          <meta property="og:title" content={`${airline.name} Bag Size Checker – Cabin and Checked Luggage Dimensions`} />
+          <meta 
+            property="og:description" 
+            content={`Check if your bag fits ${airline.name}'s baggage rules instantly. Enter your dimensions and compare with official airline limits.`} 
+          />
+          <meta property="og:url" content={`https://sizemybag.com/results/${airline.id}`} />
+        </Helmet>
+      )}
+      
+      {isFavoritesRoute && (
+        <Helmet>
+          <title>Your Favorite Airlines - Quick Access | SizeMyBag</title>
+          <meta 
+            name="description" 
+            content="Access your saved favorite airlines for quick luggage size checking. Compare baggage policies and dimensions." 
+          />
+          <link rel="canonical" href="https://sizemybag.com/favorites" />
+          <meta property="og:title" content="Your Favorite Airlines - Quick Access | SizeMyBag" />
+          <meta 
+            property="og:description" 
+            content="Access your saved favorite airlines for quick luggage size checking. Compare baggage policies and dimensions." 
+          />
+          <meta property="og:url" content="https://sizemybag.com/favorites" />
+        </Helmet>
+      )}
+      
+      {!airlineId && !isFavoritesRoute && (
+        <Helmet>
+          <title>Find Your Airline - Luggage Size Checker | SizeMyBag</title>
+          <meta 
+            name="description" 
+            content="Browse or search for airlines to view their luggage sizes, including carry-on and checked baggage dimensions, plus weight limits." 
+          />
+          <link rel="canonical" href="https://sizemybag.com/results" />
+          <meta property="og:title" content="Find Your Airline - Luggage Size Checker | SizeMyBag" />
+          <meta 
+            property="og:description" 
+            content="Browse or search for airlines to view their luggage sizes, including carry-on and checked baggage dimensions, plus weight limits." 
+          />
+          <meta property="og:url" content="https://sizemybag.com/results" />
+        </Helmet>
+      )}
+
       <div className="py-8 layout-container">
         {loading ? <div className="flex justify-center items-center py-20">
             <div className="animate-spin h-10 w-10 border-4 border-primary border-t-transparent rounded-full"></div>
