@@ -12,6 +12,7 @@ import BookHotels from "./pages/BookHotels";
 import Article from "./pages/Article";
 import SingleArticle from "./pages/SingleArticle";
 import About from "./pages/About";
+import BagSizer from "./pages/BagSizer";
 import PrivacyPolicy from "./pages/PrivacyPolicy";
 import TermsAndConditions from "./pages/TermsAndConditions";
 import NotFound from "./pages/NotFound";
@@ -33,6 +34,7 @@ const App = () => (
           <Route path="/book-hotels" element={<BookHotels />} />
           <Route path="/article" element={<Article />} />
           <Route path="/article/:slug" element={<SingleArticle />} />
+          <Route path="/bag-sizer" element={<BagSizer />} />
           <Route path="/about" element={<About />} />
           <Route path="/privacy-policy" element={<PrivacyPolicy />} />
           <Route path="/terms" element={<TermsAndConditions />} />
