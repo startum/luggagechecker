@@ -4,11 +4,11 @@ import { Card } from "@/components/ui/card";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import { Check, X, AlertTriangle, Ruler, Shield, Clock } from "lucide-react";
 import { Link } from "react-router-dom";
-import { Navbar } from "@/components/Navbar";
+import { Layout } from "@/components/Layout";
 
 const BagSizer = () => {
   return (
-    <>
+    <Layout>
       <Helmet>
         <title>Airport Bag Sizer Guide - Check Your Carry-On Size Online | SizeMyBag</title>
         <meta name="description" content="Learn about airport bag sizers, why airlines use them, and how to avoid last-minute check-in fees. Use our online bag sizer tool to check carry-on dimensions before you fly." />
@@ -28,9 +28,7 @@ const BagSizer = () => {
       </Helmet>
 
       <div className="min-h-screen bg-background">
-        <Navbar />
-        
-        <main className="container mx-auto px-4 pt-24 pb-8 max-w-4xl">
+        <div className="container mx-auto px-4 py-8 max-w-4xl">
           {/* Hero Section */}
           <header className="text-center mb-12">
             <h1 className="text-4xl md:text-5xl font-bold text-foreground mb-4">
@@ -264,9 +262,9 @@ const BagSizer = () => {
               </Button>
             </div>
           </section>
-        </main>
+        </div>
       </div>
-    </>
+    </Layout>
   );
 };
 
