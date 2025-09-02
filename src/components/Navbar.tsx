@@ -31,16 +31,6 @@ export const Navbar = () => {
     icon: <Search className="w-4 h-4 mr-2" />,
     iconOnly: false
   }, {
-    name: 'Book Flights',
-    path: '/book-flights',
-    icon: <Plane className="w-4 h-4 mr-2" />,
-    iconOnly: false
-  }, {
-    name: 'Book Hotels',
-    path: '/book-hotels',
-    icon: <Building2 className="w-4 h-4 mr-2" />,
-    iconOnly: false
-  }, {
     name: 'Favorites',
     path: '/favorites',
     icon: <Heart className="w-4 h-4" />,
