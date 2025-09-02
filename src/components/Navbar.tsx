@@ -16,6 +16,11 @@ export const Navbar = () => {
     icon: <Home className="w-4 h-4 mr-2" />,
     iconOnly: false
   }, {
+    name: 'Size Checker',
+    path: '/luggage-size-checker',
+    icon: <Luggage className="w-4 h-4 mr-2" />,
+    iconOnly: false
+  }, {
     name: 'Airlines',
     path: '/results',
     icon: <PlaneTakeoff className="w-4 h-4 mr-2" />,

@@ -39,9 +39,12 @@ export const Layout: React.FC<LayoutProps> = ({
               {/* Column 2: Helpful Resources */}
               <div className="text-center md:text-left">
                 <h3 className="text-sm font-semibold text-zinc-700 mb-3">Helpful Resources</h3>
-                <div className="flex flex-col">
-                  <Link to="/bag-sizer" className="text-xs sm:text-sm font-medium text-zinc-600 hover:text-teal-600 transition-colors mb-2">
+                <div className="flex flex-col gap-2">
+                  <Link to="/bag-sizer" className="text-xs sm:text-sm font-medium text-zinc-600 hover:text-teal-600 transition-colors">
                     Bag Sizer
+                  </Link>
+                  <Link to="/luggage-size-checker" className="text-xs sm:text-sm font-medium text-zinc-600 hover:text-teal-600 transition-colors">
+                    Luggage Size Checker
                   </Link>
                 </div>
               </div>
