@@ -23,14 +23,22 @@ const Compare = () => {
   const [searchResults, setSearchResults] = useState<Airline[]>([]);
   const [dialogOpen, setDialogOpen] = useState(false);
   useEffect(() => {
-    // Try to load luggage dimensions from session storage
+    // Try to load luggage dimensions and selected airlines from session storage
     try {
       const storedDimensions = sessionStorage.getItem('luggage-dimensions');
       if (storedDimensions) {
         setLuggageDimensions(JSON.parse(storedDimensions));
       }
+      
+      const storedAirlines = sessionStorage.getItem('selected-airlines');
+      if (storedAirlines) {
+        const airlineIds = JSON.parse(storedAirlines);
+        if (Array.isArray(airlineIds) && airlineIds.length > 0) {
+          setSelectedAirlines(airlineIds);
+        }
+      }
     } catch (error) {
-      console.error('Failed to load luggage dimensions:', error);
+      console.error('Failed to load stored data:', error);
     }
   }, []);
 
