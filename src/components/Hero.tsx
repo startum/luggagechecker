@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { Search, Plane, Check, Sun, Luggage } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
+import { PWAInstallButton } from '@/components/PWAInstallButton';
 import airlineService from '@/utils/airlineData';
 import { Airline } from '@/utils/types';
 export const Hero = () => {
@@ -131,5 +132,6 @@ export const Hero = () => {
         </div>
         
       </div>
+      <PWAInstallButton />
     </section>;
 };
