@@ -7,7 +7,7 @@ export type Json =
   | Json[]
 
 export type Database = {
-  // Allows to automatically instanciate createClient with right options
+  // Allows to automatically instantiate createClient with right options
   // instead of createClient<Database, { PostgrestVersion: 'XX' }>(URL, KEY)
   __InternalSupabase: {
     PostgrestVersion: "12.2.3 (519615d)"
@@ -51,6 +51,48 @@ export type Database = {
           country_name?: string | null
           iata_code?: string | null
           id?: number
+          logo_url?: string | null
+          website_url?: string | null
+        }
+        Relationships: []
+      }
+      airlines_data_backup: {
+        Row: {
+          airline_name: string | null
+          callsign: string | null
+          carry_on_size: string | null
+          carry_on_weight: string | null
+          checked_bag_size: string | null
+          checked_bag_weight: string | null
+          country_name: string | null
+          iata_code: string | null
+          id: number | null
+          logo_url: string | null
+          website_url: string | null
+        }
+        Insert: {
+          airline_name?: string | null
+          callsign?: string | null
+          carry_on_size?: string | null
+          carry_on_weight?: string | null
+          checked_bag_size?: string | null
+          checked_bag_weight?: string | null
+          country_name?: string | null
+          iata_code?: string | null
+          id?: number | null
+          logo_url?: string | null
+          website_url?: string | null
+        }
+        Update: {
+          airline_name?: string | null
+          callsign?: string | null
+          carry_on_size?: string | null
+          carry_on_weight?: string | null
+          checked_bag_size?: string | null
+          checked_bag_weight?: string | null
+          country_name?: string | null
+          iata_code?: string | null
+          id?: number | null
           logo_url?: string | null
           website_url?: string | null
         }
