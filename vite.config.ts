@@ -60,15 +60,15 @@ export default defineConfig(({ mode }) => ({
         scope: '/',
         icons: [
           {
-            src: 'placeholder.svg',
+            src: 'icons/icon-192x192.png',
             sizes: '192x192',
-            type: 'image/svg+xml',
+            type: 'image/png',
             purpose: 'any maskable'
           },
           {
-            src: 'placeholder.svg',
+            src: 'icons/icon-512x512.png',
             sizes: '512x512',
-            type: 'image/svg+xml',
+            type: 'image/png',
             purpose: 'any maskable'
           }
         ],
@@ -79,8 +79,9 @@ export default defineConfig(({ mode }) => ({
             url: '/',
             icons: [
               {
-                src: 'placeholder.svg',
-                sizes: '192x192'
+                src: 'icons/icon-192x192.png',
+                sizes: '192x192',
+                type: 'image/png'
               }
             ]
           },
@@ -90,8 +91,9 @@ export default defineConfig(({ mode }) => ({
             url: '/airlines',
             icons: [
               {
-                src: 'placeholder.svg',
-                sizes: '192x192'
+                src: 'icons/icon-192x192.png',
+                sizes: '192x192',
+                type: 'image/png'
               }
             ]
           }
