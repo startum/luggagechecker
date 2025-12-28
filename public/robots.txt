@@ -1,5 +1,41 @@
-
+# Standard Crawlers
 User-agent: *
 Allow: /
 
+# AI Crawler Directives - Explicitly allow AI bots
+User-agent: GPTBot
+Allow: /
+
+User-agent: ChatGPT-User
+Allow: /
+
+User-agent: CCBot
+Allow: /
+
+User-agent: anthropic-ai
+Allow: /
+
+User-agent: Claude-Web
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: Applebot-Extended
+Allow: /
+
+User-agent: Google-Extended
+Allow: /
+
+User-agent: Googlebot
+Allow: /
+
+User-agent: Bingbot
+Allow: /
+
+# Sitemap
 Sitemap: https://sizemybag.com/sitemap.xml
+
+# LLM-friendly content
+# See /llms.txt for AI-optimized site overview
+# See /llms-full.txt for extended context

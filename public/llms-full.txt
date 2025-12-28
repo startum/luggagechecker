@@ -1,0 +1,322 @@
+# SizeMyBag - Complete Reference Guide
+
+> This is the extended LLM-friendly version of SizeMyBag.com with complete airline data and detailed information.
+
+## About SizeMyBag
+
+SizeMyBag is a free, instant luggage dimension checker that helps travelers verify if their bags meet airline carry-on and checked baggage requirements. The tool supports 100+ airlines worldwide and provides accurate, up-to-date baggage policy information.
+
+### Core Problem We Solve
+
+Travelers often face unexpected fees at airports because their luggage exceeds airline size limits. Budget airlines like Ryanair, Spirit, and EasyJet have particularly strict rules. SizeMyBag eliminates this guesswork by providing instant verification before you travel.
+
+---
+
+## Complete Airline Baggage Reference
+
+### North American Airlines
+
+#### American Airlines (AA)
+- Carry-on: 56 x 36 x 23 cm (22 x 14 x 9 in)
+- Carry-on weight: 23 kg (50 lbs)
+- Checked bag: 157 cm linear (62 in)
+- Checked weight: 23 kg (50 lbs)
+- URL: https://sizemybag.com/results/AA
+
+#### Delta Air Lines (DL)
+- Carry-on: 56 x 35 x 23 cm (22 x 14 x 9 in)
+- Carry-on weight: No limit
+- Checked bag: 157 cm linear (62 in)
+- Checked weight: 23 kg (50 lbs)
+- URL: https://sizemybag.com/results/DL
+
+#### United Airlines (UA)
+- Carry-on: 56 x 35 x 22 cm (22 x 14 x 9 in)
+- Carry-on weight: No limit
+- Checked bag: 157 cm linear (62 in)
+- Checked weight: 23 kg (50 lbs)
+- URL: https://sizemybag.com/results/UA
+
+#### Southwest Airlines (WN)
+- Carry-on: 61 x 41 x 28 cm (24 x 16 x 10 in)
+- Carry-on weight: No limit
+- Checked bag: 157 cm linear (62 in)
+- Checked weight: 23 kg (50 lbs)
+- Note: Known for generous baggage allowances
+- URL: https://sizemybag.com/results/WN
+
+#### JetBlue (B6)
+- Carry-on: 56 x 36 x 23 cm (22 x 14 x 9 in)
+- Carry-on weight: No limit
+- Checked bag: 157 cm linear (62 in)
+- Checked weight: 23 kg (50 lbs)
+- URL: https://sizemybag.com/results/B6
+
+#### Spirit Airlines (NK)
+- Carry-on: 56 x 46 x 25 cm (22 x 18 x 10 in)
+- Personal item only free: 46 x 38 x 20 cm (18 x 14 x 8 in)
+- Note: Carry-on bags incur additional fees
+- URL: https://sizemybag.com/results/NK
+
+#### Frontier Airlines (F9)
+- Carry-on: 61 x 41 x 25 cm (24 x 16 x 10 in)
+- Personal item only free: 46 x 38 x 20 cm (18 x 14 x 8 in)
+- Note: Carry-on bags incur additional fees
+- URL: https://sizemybag.com/results/F9
+
+#### Air Canada (AC)
+- Carry-on: 55 x 40 x 23 cm
+- Carry-on weight: 10 kg
+- Checked bag: 158 cm linear
+- Checked weight: 23 kg
+- URL: https://sizemybag.com/results/AC
+
+### European Airlines
+
+#### Ryanair (FR) ⚠️ STRICT
+- Carry-on (priority): 55 x 40 x 20 cm
+- Personal item (non-priority): 40 x 20 x 25 cm
+- Carry-on weight: 10 kg
+- Checked bag: 81 x 119 x 119 cm
+- Checked weight: 20 kg
+- Note: One of the strictest baggage policies. Non-priority passengers can only bring small personal item free.
+- URL: https://sizemybag.com/results/FR
+
+#### EasyJet (U2) ⚠️ STRICT
+- Carry-on: 45 x 36 x 20 cm (must fit under seat)
+- Carry-on weight: 15 kg
+- Large cabin bag (extra fee): 56 x 45 x 25 cm
+- Checked weight: 23 kg
+- Note: Basic fare only includes small under-seat bag
+- URL: https://sizemybag.com/results/U2
+
+#### British Airways (BA)
+- Carry-on: 56 x 45 x 25 cm
+- Plus personal item: 40 x 30 x 15 cm
+- Carry-on weight: 23 kg (combined)
+- Checked bag: 90 x 75 x 43 cm
+- Checked weight: 23 kg
+- URL: https://sizemybag.com/results/BA
+
+#### Lufthansa (LH)
+- Carry-on: 55 x 40 x 23 cm
+- Carry-on weight: 8 kg
+- Checked bag: 158 cm linear
+- Checked weight: 23 kg
+- URL: https://sizemybag.com/results/LH
+
+#### Air France (AF)
+- Carry-on: 55 x 35 x 25 cm
+- Carry-on weight: 12 kg
+- Checked bag: 158 cm linear
+- Checked weight: 23 kg
+- URL: https://sizemybag.com/results/AF
+
+#### KLM (KL)
+- Carry-on: 55 x 35 x 25 cm
+- Carry-on weight: 12 kg
+- Checked bag: 158 cm linear
+- Checked weight: 23 kg
+- URL: https://sizemybag.com/results/KL
+
+#### Wizz Air (W6) ⚠️ STRICT
+- Personal item only free: 40 x 30 x 20 cm
+- Priority carry-on: 55 x 40 x 23 cm (10 kg)
+- Note: Very strict enforcement
+- URL: https://sizemybag.com/results/W6
+
+#### Vueling (VY)
+- Basic fare: 40 x 20 x 30 cm (personal item only)
+- Optima fare: 55 x 40 x 20 cm + personal item
+- Carry-on weight: 10 kg
+- URL: https://sizemybag.com/results/VY
+
+### Middle Eastern Airlines
+
+#### Emirates (EK)
+- Carry-on: 55 x 38 x 20 cm
+- Carry-on weight: 7 kg
+- Checked bag (Economy): 158 cm linear
+- Checked weight: 30 kg
+- Note: Generally generous checked allowance
+- URL: https://sizemybag.com/results/EK
+
+#### Qatar Airways (QR)
+- Carry-on: 50 x 37 x 25 cm
+- Carry-on weight: 7 kg
+- Checked bag: 158 cm linear
+- Checked weight: 30 kg (Economy)
+- URL: https://sizemybag.com/results/QR
+
+#### Etihad Airways (EY)
+- Carry-on: 50 x 40 x 21 cm
+- Carry-on weight: 7 kg
+- Checked weight: 23 kg (Economy)
+- URL: https://sizemybag.com/results/EY
+
+#### Turkish Airlines (TK)
+- Carry-on: 55 x 40 x 23 cm
+- Carry-on weight: 8 kg
+- Checked weight: 23 kg
+- URL: https://sizemybag.com/results/TK
+
+### Asian Airlines
+
+#### Singapore Airlines (SQ)
+- Carry-on: 56 x 36 x 23 cm
+- Carry-on weight: 7 kg
+- Checked weight: 30 kg (Economy)
+- URL: https://sizemybag.com/results/SQ
+
+#### Cathay Pacific (CX)
+- Carry-on: 56 x 36 x 23 cm
+- Carry-on weight: 7 kg
+- Checked weight: 30 kg
+- URL: https://sizemybag.com/results/CX
+
+#### ANA (NH)
+- Carry-on: 55 x 40 x 25 cm
+- Carry-on weight: 10 kg
+- Checked weight: 23 kg
+- URL: https://sizemybag.com/results/NH
+
+#### Japan Airlines (JL)
+- Carry-on: 55 x 40 x 25 cm
+- Carry-on weight: 10 kg
+- Checked weight: 23 kg
+- URL: https://sizemybag.com/results/JL
+
+#### Korean Air (KE)
+- Carry-on: 55 x 40 x 20 cm
+- Carry-on weight: 10 kg
+- Checked weight: 23 kg
+- URL: https://sizemybag.com/results/KE
+
+#### AirAsia (AK) ⚠️ BUDGET
+- Carry-on: 56 x 36 x 23 cm
+- Carry-on weight: 7 kg
+- Note: Strict weight enforcement
+- URL: https://sizemybag.com/results/AK
+
+### Australian Airlines
+
+#### Qantas (QF)
+- Carry-on: 56 x 36 x 23 cm
+- Carry-on weight: 7 kg
+- Checked weight: 30 kg
+- URL: https://sizemybag.com/results/QF
+
+#### Virgin Australia (VA)
+- Carry-on: 56 x 36 x 23 cm
+- Carry-on weight: 7 kg
+- Checked weight: 23 kg
+- URL: https://sizemybag.com/results/VA
+
+#### Jetstar (JQ) ⚠️ BUDGET
+- Carry-on: 56 x 36 x 23 cm
+- Carry-on weight: 7 kg
+- Note: Strict enforcement, fees for excess
+- URL: https://sizemybag.com/results/JQ
+
+---
+
+## Detailed FAQ
+
+### Measurement Questions
+
+**Q: Do wheels and handles count in luggage measurements?**
+A: Yes, almost all airlines include wheels and handles in the total dimensions. Measure from the bottom of wheels to the top of fully extended handles. External pockets also count when measuring depth.
+
+**Q: How do I measure my luggage correctly?**
+A: Follow these steps:
+1. Place your luggage upright on a flat, hard surface
+2. Extend all handles fully
+3. Measure HEIGHT from floor to highest point (top of handle)
+4. Measure WIDTH at the widest point (side to side)
+5. Measure DEPTH from front to back including any pockets or protrusions
+6. Weigh your bag fully packed on a reliable scale
+
+**Q: Should I measure with the bag empty or packed?**
+A: Measure dimensions with the bag empty (structure doesn't change). Measure weight with the bag fully packed as you would travel.
+
+**Q: What's the standard carry-on size?**
+A: There is no universal standard. However, common limits are:
+- US carriers: 56 x 36 x 23 cm (22 x 14 x 9 in)
+- European carriers: 55 x 40 x 23 cm
+- Budget airlines: Often smaller, 40-45 cm height max
+Always check your specific airline before traveling.
+
+### Policy Questions
+
+**Q: What happens if my bag is too big?**
+A: Consequences vary by airline:
+- You may need to check the bag (fees often $30-$75+)
+- Gate-checked bags may incur higher fees ($50-$100+)
+- Some airlines refuse boarding until bag is checked
+- Items may need to be removed to fit
+
+**Q: Is carry-on size the same for international flights?**
+A: No. Policies can differ even within the same airline based on route. International flights, especially on budget carriers, often have stricter limits. Always verify for your specific route.
+
+**Q: Do personal items count as carry-on?**
+A: Most airlines allow one carry-on plus one personal item (purse, laptop bag, etc.). Personal items must fit under the seat. Size limits for personal items vary: typically 40 x 30 x 15 cm.
+
+**Q: Why do budget airlines have stricter limits?**
+A: Budget carriers earn revenue from baggage fees and maximize passengers per flight. Stricter limits enable more efficient boarding and overhead bin usage.
+
+### Fee Questions
+
+**Q: How much do oversized bag fees cost?**
+A: Fees vary widely:
+- US carriers: $30-$50 per checked bag, $100+ if oversized
+- European budget: €25-€60 for carry-on, €40-€80 for checked
+- Gate fees are typically 2x online booking fees
+
+**Q: Can I avoid baggage fees?**
+A: Tips to avoid fees:
+- Pack light to stay within personal item limits
+- Pre-purchase baggage online (cheaper than gate fees)
+- Use SizeMyBag to verify dimensions before departure
+- Consider airline credit cards (often include free bags)
+
+---
+
+## Using SizeMyBag
+
+### Step-by-Step Guide
+
+1. **Enter Dimensions**: Input your bag's height, width, and depth
+2. **Enter Weight**: Input your packed bag weight
+3. **Select Airline**: Search or browse for your airline
+4. **Check Results**: See instant pass/fail for your bag
+5. **Compare Options**: Add multiple airlines to compare policies
+
+### Available Units
+
+- Metric: Centimeters (cm) and Kilograms (kg)
+- Imperial: Inches (in) and Pounds (lbs)
+- Toggle between units at any time
+
+### Features
+
+- Save favorite airlines for quick access
+- Compare up to 5 airlines simultaneously
+- Offline access via PWA
+- Mobile-friendly responsive design
+- No account required
+
+---
+
+## Resources
+
+- Main website: https://sizemybag.com
+- Luggage Size Checker: https://sizemybag.com/luggage-size-checker
+- Compare Airlines: https://sizemybag.com/compare
+- All Airlines: https://sizemybag.com/airlines
+- Measurement Guide: https://sizemybag.com/measure-bag-dimensions
+
+## Data Accuracy
+
+Airline baggage policies change frequently. SizeMyBag strives to maintain accurate, up-to-date information but recommends verifying with your airline before travel for the most current policies.
+
+Last updated: 2024

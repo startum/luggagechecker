@@ -45,6 +45,11 @@
     <meta name="keywords" content="luggage size checker, carry-on size guide, cabin baggage tool, online bag size tool, check baggage size" />
     <meta name="author" content="Lovable" />
     
+    <!-- AI SEO Meta Tags -->
+    <meta name="ai-summary" content="SizeMyBag is a free luggage size checker that helps travelers verify if their bags meet airline carry-on and checked baggage requirements. Compare 100+ airlines' baggage policies instantly, measure dimensions, and avoid surprise fees at the airport." />
+    <meta name="ai-category" content="Travel Tools, Luggage, Airlines, Baggage Policy, Travel Planning" />
+    <meta name="ai-query-examples" content="What is the carry-on size for Ryanair? Does my bag fit on Delta? Compare airline baggage policies. What's the standard carry-on size? Do wheels count in luggage measurements?" />
+    
     <!-- Open Graph -->
     <meta property="og:title" content="Free Online Luggage Size Checker" />
     <meta property="og:description" content="Instantly check if your bag fits airline rules. Use our interactive carry-on size checker before you fly." />
@@ -76,27 +81,60 @@
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
+      "@type": "WebApplication",
+      "name": "SizeMyBag - Luggage Size Checker",
+      "url": "https://sizemybag.com",
+      "description": "Free online tool to check if your luggage dimensions meet airline carry-on and checked baggage requirements. Compare 100+ airlines instantly.",
+      "applicationCategory": "TravelApplication",
+      "operatingSystem": "Any",
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "USD"
+      },
+      "featureList": [
+        "Check luggage dimensions against airline requirements",
+        "Compare 100+ airlines' baggage policies",
+        "Supports metric and imperial units",
+        "Works offline as PWA",
+        "Save favorite airlines"
+      ],
+      "speakable": {
+        "@type": "SpeakableSpecification",
+        "cssSelector": [".faq-section", ".measurement-guide", ".hero-content", "h1", "h2"]
+      }
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
       "@type": "HowTo",
       "name": "How to Measure Your Luggage",
+      "description": "Step-by-step guide to measure your luggage dimensions for airline compliance",
       "step": [
         {
           "@type": "HowToStep",
+          "name": "Position your luggage",
           "text": "Place your luggage upright on a flat surface."
         },
         {
           "@type": "HowToStep",
+          "name": "Measure height",
           "text": "Use a tape measure to measure from the ground to the top handle (height)."
         },
         {
           "@type": "HowToStep",
+          "name": "Measure width",
           "text": "Measure the width from side to side."
         },
         {
           "@type": "HowToStep",
+          "name": "Measure depth",
           "text": "Measure the depth from front to back, including wheels and handles."
         },
         {
           "@type": "HowToStep",
+          "name": "Record dimensions",
           "text": "Record these dimensions in inches or centimeters."
         }
       ]

@@ -1,0 +1,86 @@
+# SizeMyBag - Luggage Size Checker
+
+> SizeMyBag is a free web tool that helps travelers check if their luggage dimensions meet airline carry-on and checked baggage requirements. Compare 100+ airlines' baggage policies instantly.
+
+## What We Do
+
+SizeMyBag solves a common travel problem: "Will my bag fit on my flight?" Enter your luggage dimensions, select your airline, and get an instant answer. No more guessing, no more surprise fees at the airport.
+
+## Main Tools
+
+- [Luggage Size Checker](/luggage-size-checker): Interactive tool to check if your bag meets airline requirements
+- [Compare Airlines](/compare): Compare baggage policies across multiple airlines side-by-side
+- [Bag Sizer](/bag-sizer): Visual tool to see how your bag compares to limits
+- [How to Measure Your Bag](/measure-bag-dimensions): Step-by-step measurement guide with diagrams
+
+## Key Features
+
+- **Instant Dimension Check**: Enter height, width, depth, and weight
+- **100+ Airlines Supported**: Major carriers and budget airlines worldwide
+- **Carry-on & Checked Bags**: Check both types of luggage
+- **Unit Conversion**: Switch between metric (cm/kg) and imperial (inches/lbs)
+- **Save Favorites**: Quick access to airlines you fly frequently
+- **Comparison View**: See multiple airlines' limits at once
+
+## Airlines Directory
+
+Browse all supported airlines at [/airlines](/airlines)
+
+### Popular Airlines
+
+- [American Airlines](/results/AA): Carry-on: 56 x 36 x 23 cm, Weight: 23 kg
+- [Delta Air Lines](/results/DL): Carry-on: 56 x 35 x 23 cm, Weight: No limit
+- [United Airlines](/results/UA): Carry-on: 56 x 35 x 22 cm, Weight: No limit
+- [Southwest Airlines](/results/WN): Carry-on: 61 x 41 x 28 cm, Weight: No limit
+- [Ryanair](/results/FR): Carry-on: 40 x 20 x 25 cm, Weight: 10 kg
+- [EasyJet](/results/U2): Carry-on: 45 x 36 x 20 cm, Weight: 15 kg
+- [British Airways](/results/BA): Carry-on: 56 x 45 x 25 cm, Weight: 23 kg
+- [Lufthansa](/results/LH): Carry-on: 55 x 40 x 23 cm, Weight: 8 kg
+- [Air France](/results/AF): Carry-on: 55 x 35 x 25 cm, Weight: 12 kg
+- [Emirates](/results/EK): Carry-on: 55 x 38 x 20 cm, Weight: 7 kg
+- [Qatar Airways](/results/QR): Carry-on: 50 x 37 x 25 cm, Weight: 7 kg
+- [Singapore Airlines](/results/SQ): Carry-on: 56 x 36 x 23 cm, Weight: 7 kg
+
+## Frequently Asked Questions
+
+### Do wheels and handles count in luggage measurements?
+Yes, most airlines include wheels and handles in your total baggage dimensions. Always measure from the bottom of wheels to the top of handles.
+
+### What's the standard carry-on size for airlines?
+Typically 22 x 14 x 9 inches (56 x 36 x 23 cm), but it varies significantly by airline. Budget carriers often have stricter limits like 40 x 20 x 25 cm.
+
+### What happens if my bag is too big?
+You may be charged an oversized baggage fee (often $50-$100+) or be required to check your bag at the gate.
+
+### Is carry-on size the same for international flights?
+No. International flights, especially on budget airlines, often have stricter carry-on size limits. Always verify before you fly.
+
+### How do I measure my luggage correctly?
+1. Place luggage upright on a flat surface
+2. Measure height from floor to top (including wheels/handles)
+3. Measure width side to side at widest point
+4. Measure depth front to back (including pockets)
+
+## Guides & Articles
+
+- [Understanding Luggage Size Requirements](/article/understanding-luggage-size-requirements)
+- [Budget Airlines: Navigating Strict Baggage Policies](/article/budget-airlines-navigating-strict-baggage-policies)
+- [International Travel Luggage Requirements by Region](/article/international-travel-luggage-requirements-by-region)
+- [Checked Baggage vs Carry-On: Making the Right Choice](/article/checked-baggage-vs-carry-on-making-the-right-choice)
+
+## Technical Details
+
+- Website: https://sizemybag.com
+- Free to use, no account required
+- Mobile-friendly responsive design
+- Works offline as a Progressive Web App (PWA)
+
+## Contact
+
+For questions or to report outdated airline information, contact us through the website.
+
+## Optional
+
+- [llms-full.txt](/llms-full.txt): Extended version with complete airline data
+- [FAQ Markdown](/faq.md): Full FAQ in markdown format
+- [Airlines Markdown](/airlines.md): Complete airline directory
