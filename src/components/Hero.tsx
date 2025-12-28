@@ -65,7 +65,7 @@ export const Hero = () => {
       <div className="layout-container relative z-10">
         <div className="flex flex-col lg:flex-row items-center max-w-6xl mx-auto">
           <div className="flex flex-col items-center lg:items-start text-center lg:text-left lg:w-1/2 mb-12 lg:mb-0">
-            <span className="inline-block px-5 py-2 rounded-full bg-primary/10 font-medium mb-8 animate-fade-in text-primary">
+            <span className="inline-block px-5 py-2 rounded-full font-medium mb-8 animate-fade-in text-primary-foreground bg-amber-400">
               <div className="flex items-center gap-2">
                 <Luggage className="h-5 w-5" />
                 <span>Online Baggage Sizes</span>
