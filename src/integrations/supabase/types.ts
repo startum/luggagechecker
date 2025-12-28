@@ -188,7 +188,7 @@ export type Database = {
     }
     Functions: {
       fetch_airline_data: {
-        Args: Record<PropertyKey, never>
+        Args: never
         Returns: {
           airline_name: string
           callsign: string | null
@@ -202,6 +202,12 @@ export type Database = {
           logo_url: string | null
           website_url: string | null
         }[]
+        SetofOptions: {
+          from: "*"
+          to: "airlines_data"
+          isOneToOne: false
+          isSetofReturn: true
+        }
       }
     }
     Enums: {
