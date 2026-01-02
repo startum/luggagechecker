@@ -243,6 +243,12 @@ const SingleArticle = () => {
           
           <img src={article.image} alt={article.title} className="w-full rounded-xl mb-8" />
 
+          {/*
+            SECURITY NOTE: This content is SAFE because it is hardcoded static HTML
+            defined within this file. If article content ever comes from user input,
+            database, or external API, it MUST be sanitized using DOMPurify before rendering.
+            Example: dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(article.content) }}
+          */}
           <div className="space-y-6" dangerouslySetInnerHTML={{ __html: article.content }} />
 
           <div className="mt-12 flex justify-center">
