@@ -143,21 +143,6 @@ export type Database = {
         }
         Relationships: []
       }
-      "SEO Summary Database Table": {
-        Row: {
-          created_at: string
-          id: number
-        }
-        Insert: {
-          created_at?: string
-          id?: number
-        }
-        Update: {
-          created_at?: string
-          id?: number
-        }
-        Relationships: []
-      }
       temp_airlines_data: {
         Row: {
           carry_on_size: string | null
