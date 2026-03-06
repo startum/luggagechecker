@@ -59,6 +59,21 @@ const Index = () => {
   
   return (
     <Layout>
+      <Helmet>
+        <title>Size My Bag – Check Airline Luggage Size Limits Instantly</title>
+        <meta name="description" content="Check if your luggage meets airline carry-on and checked bag size limits. Compare baggage policies for 100+ airlines worldwide and avoid extra fees." />
+        <link rel="canonical" href="https://sizemybag.com/" />
+        <meta property="og:title" content="Size My Bag – Check Airline Luggage Size Limits Instantly" />
+        <meta property="og:description" content="Check if your luggage meets airline carry-on and checked bag size limits. Compare baggage policies for 100+ airlines worldwide." />
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content="https://sizemybag.com/" />
+        <meta property="og:image" content="https://sizemybag.com/og-image.png" />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="Size My Bag – Check Airline Luggage Size Limits Instantly" />
+        <meta name="twitter:description" content="Check if your luggage meets airline carry-on and checked bag size limits." />
+        <meta name="twitter:image" content="https://sizemybag.com/og-image.png" />
+      </Helmet>
+
       {/* Hero Section */}
       <Hero />
       

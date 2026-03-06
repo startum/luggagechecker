@@ -1,10 +1,17 @@
 
 import React from 'react';
+import { Helmet } from 'react-helmet-async';
 import { Layout } from '@/components/Layout';
 
 const PrivacyPolicy = () => {
   return (
     <Layout>
+      <Helmet>
+        <title>Privacy Policy – Size My Bag</title>
+        <meta name="description" content="Privacy Policy for Size My Bag. Learn how we collect, use, and protect your personal data." />
+        <link rel="canonical" href="https://sizemybag.com/privacy-policy" />
+        <meta name="robots" content="noindex, follow" />
+      </Helmet>
       <div className="layout-container py-8 sm:py-12">
         <article className="prose prose-zinc lg:prose-lg max-w-4xl mx-auto">
           <h1 className="text-3xl sm:text-4xl font-bold mb-6">Privacy Policy for Luggage Size Checker</h1>

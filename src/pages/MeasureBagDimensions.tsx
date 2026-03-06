@@ -11,7 +11,7 @@ import measuringSteps from '@/assets/measuring-luggage-steps.jpg';
 
 const MeasureBagDimensions = () => {
   return (
-    <HelmetProvider>
+    <>
       <Helmet>
         <title>How to Measure Bag Dimensions: Complete Guide for Accurate Luggage Measurements</title>
         <meta 
