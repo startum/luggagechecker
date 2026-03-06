@@ -1,5 +1,5 @@
 import React from 'react';
-import { Helmet, HelmetProvider } from 'react-helmet-async';
+import { Helmet } from 'react-helmet-async';
 import { Link } from 'react-router-dom';
 import { Layout } from '@/components/Layout';
 import { Button } from '@/components/ui/button';
@@ -11,7 +11,7 @@ import measuringSteps from '@/assets/measuring-luggage-steps.jpg';
 
 const MeasureBagDimensions = () => {
   return (
-    <HelmetProvider>
+    <>
       <Helmet>
         <title>How to Measure Bag Dimensions: Complete Guide for Accurate Luggage Measurements</title>
         <meta 
@@ -352,7 +352,7 @@ const MeasureBagDimensions = () => {
           </div>
         </div>
       </Layout>
-    </HelmetProvider>
+    </>
   );
 };
 

@@ -1,10 +1,17 @@
 
 import React from 'react';
+import { Helmet } from 'react-helmet-async';
 import { Layout } from '@/components/Layout';
 
 const TermsAndConditions = () => {
   return (
     <Layout>
+      <Helmet>
+        <title>Terms and Conditions – Size My Bag</title>
+        <meta name="description" content="Terms and Conditions for Size My Bag. Read our terms of service, usage policies, and legal information." />
+        <link rel="canonical" href="https://sizemybag.com/terms" />
+        <meta name="robots" content="noindex, follow" />
+      </Helmet>
       <div className="layout-container py-8 sm:py-12">
         <article className="prose prose-zinc lg:prose-lg max-w-4xl mx-auto">
           <h1 className="text-3xl sm:text-4xl font-bold mb-6">Terms and Conditions for Size My Bag</h1>

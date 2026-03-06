@@ -1,5 +1,6 @@
 
 import React from 'react';
+import { Helmet } from 'react-helmet-async';
 import { Layout } from '@/components/Layout';
 import { Button } from '@/components/ui/button';
 import { Link } from 'react-router-dom';
@@ -40,6 +41,16 @@ const posts = [
 const Article = () => {
   return (
     <Layout>
+      <Helmet>
+        <title>Travel Tips & Luggage Guides – Size My Bag</title>
+        <meta name="description" content="Expert travel tips and guides on airline luggage policies, packing strategies, and how to avoid baggage fees. Stay informed for stress-free travel." />
+        <link rel="canonical" href="https://sizemybag.com/article" />
+        <meta property="og:title" content="Travel Tips & Luggage Guides – Size My Bag" />
+        <meta property="og:description" content="Expert travel tips and guides on airline luggage policies, packing strategies, and how to avoid baggage fees." />
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content="https://sizemybag.com/article" />
+        <meta property="og:image" content="https://sizemybag.com/og-image.png" />
+      </Helmet>
       <div className="layout-container py-8 sm:py-12">
         <div className="max-w-4xl mx-auto">
           <h1 className="text-3xl sm:text-4xl font-bold mb-8">Travel Tips & Guides</h1>

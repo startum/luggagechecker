@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { Helmet } from 'react-helmet-async';
 import { Layout } from '@/components/Layout';
 import { LuggageInput } from '@/components/LuggageInput';
 import { ComparisonView } from '@/components/ComparisonView';
@@ -116,6 +117,16 @@ const Compare = () => {
     loadInitialAirlines();
   }, [dialogOpen, searchResults.length]);
   return <Layout>
+      <Helmet>
+        <title>Compare Airline Luggage Policies Side by Side – Size My Bag</title>
+        <meta name="description" content="Compare carry-on and checked baggage policies across multiple airlines. Check your luggage dimensions against airline requirements side by side." />
+        <link rel="canonical" href="https://sizemybag.com/compare" />
+        <meta property="og:title" content="Compare Airline Luggage Policies Side by Side" />
+        <meta property="og:description" content="Compare carry-on and checked baggage policies across multiple airlines side by side." />
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content="https://sizemybag.com/compare" />
+        <meta property="og:image" content="https://sizemybag.com/og-image.png" />
+      </Helmet>
       <div className="py-10 layout-container">
         {/* Back Button */}
         <Button variant="ghost" size="sm" className="mb-6" onClick={() => navigate(-1)}>

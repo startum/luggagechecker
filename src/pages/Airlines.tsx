@@ -104,11 +104,12 @@ const Airlines = () => {
           content="Complete guide to airline baggage policies, carry-on size limits, and checked luggage dimensions for 100+ airlines worldwide. Check your bag size instantly." 
         />
         <meta name="keywords" content="airline baggage policies, carry-on size limits, checked luggage dimensions, airline luggage rules, baggage allowance" />
-        <link rel="canonical" href={`${window.location.origin}/airlines`} />
+        <link rel="canonical" href="https://sizemybag.com/airlines" />
         <meta property="og:title" content="Complete Airline Baggage Policies & Luggage Size Limits" />
         <meta property="og:description" content="Complete guide to airline baggage policies, carry-on size limits, and checked luggage dimensions for 100+ airlines worldwide." />
         <meta property="og:type" content="website" />
-        <meta property="og:url" content={`${window.location.origin}/airlines`} />
+        <meta property="og:url" content="https://sizemybag.com/airlines" />
+        <meta property="og:image" content="https://sizemybag.com/og-image.png" />
       </Helmet>
 
       {/* Hero Section */}
