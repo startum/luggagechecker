@@ -352,7 +352,7 @@ const MeasureBagDimensions = () => {
           </div>
         </div>
       </Layout>
-    </HelmetProvider>
+    </>
   );
 };
 
