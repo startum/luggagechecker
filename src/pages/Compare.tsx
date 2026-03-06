@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { Helmet } from 'react-helmet-async';
 import { Layout } from '@/components/Layout';
 import { LuggageInput } from '@/components/LuggageInput';
 import { ComparisonView } from '@/components/ComparisonView';
