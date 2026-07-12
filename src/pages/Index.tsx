@@ -16,6 +16,7 @@ import BlogSection from '@/components/BlogSection';
 import FAQSection from '@/components/FAQSection';
 import TransferBanner from '@/components/TransferBanner';
 import ScoutBadgeSection from '@/components/ScoutBadgeSection';
+import LastVerifiedBadge from '@/components/LastVerifiedBadge';
 
 const Index = () => {
   const navigate = useNavigate();
