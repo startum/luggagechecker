@@ -95,7 +95,7 @@ export const fetchAirlinesFromDatabase = async (): Promise<Airline[]> => {
         id: record.iata_code?.toLowerCase() || `airline-${record.id}`,
         name: record.airline_name || 'Unknown Airline',
         code: record.iata_code || '',
-        logo: record.logo_url || "https://images.unsplash.com/photo-1583810111145-069345044bf5?q=80&w=120&auto=format&fit=crop",
+        logo: buildLogoUrl(record.website_url, record.logo_url),
         website: record.website_url || '#',
         country: record.country_name || 'Unknown',
         carryOn: {
