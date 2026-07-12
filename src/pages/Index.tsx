@@ -77,7 +77,10 @@ const Index = () => {
 
       {/* Hero Section */}
       <Hero />
-      
+
+      {/* Last verified badge */}
+      <LastVerifiedBadge />
+
       {/* Main Content */}
       <section className="py-10 sm:py-15 md:py-20 bg-white">
         <div className="layout-container">
