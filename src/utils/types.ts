@@ -9,6 +9,7 @@ export interface Airline {
   carryOn: LuggagePolicy;
   checkedBaggage: LuggagePolicy[];
   popularRoutes: string[];
+  updatedAt?: string; // ISO timestamp of last policy verification
 }
 
 export interface LuggagePolicy {

@@ -1,11 +1,12 @@
 
 import { useNavigate } from 'react-router-dom';
-import { ArrowRight, Heart, MapPin, Plane } from 'lucide-react';
+import { ArrowRight, Heart, MapPin, Plane, Clock } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Airline } from '@/utils/types';
 import airlineService from '@/utils/airlineData';
 import { useState } from 'react';
 import { useUnit } from '@/contexts/UnitContext';
+import { formatDistanceToNowStrict } from 'date-fns';
 
 interface AirlineCardProps {
   airline: Airline;
@@ -124,7 +125,14 @@ export const AirlineCard = ({ airline, delay = 0, compact = false }: AirlineCard
             <p className="text-base font-bold">{formatValue(airline.carryOn.maxWeight, 'weight')}</p>
           </div>
         </div>
-        
+
+        {airline.updatedAt && (
+          <p className="flex items-center gap-1 text-xs text-gray-500 mb-4">
+            <Clock className="h-3 w-3" aria-hidden="true" />
+            <span>Updated {formatDistanceToNowStrict(new Date(airline.updatedAt), { addSuffix: true })}</span>
+          </p>
+        )}
+
         <Button size="lg" className="w-full group">
           View Details <ArrowRight className="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform" />
         </Button>

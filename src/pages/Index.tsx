@@ -16,6 +16,7 @@ import BlogSection from '@/components/BlogSection';
 import FAQSection from '@/components/FAQSection';
 import TransferBanner from '@/components/TransferBanner';
 import ScoutBadgeSection from '@/components/ScoutBadgeSection';
+import LastVerifiedBadge from '@/components/LastVerifiedBadge';
 
 const Index = () => {
   const navigate = useNavigate();
@@ -76,7 +77,10 @@ const Index = () => {
 
       {/* Hero Section */}
       <Hero />
-      
+
+      {/* Last verified badge */}
+      <LastVerifiedBadge />
+
       {/* Main Content */}
       <section className="py-10 sm:py-15 md:py-20 bg-white">
         <div className="layout-container">
