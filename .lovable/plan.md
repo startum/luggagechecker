@@ -1,32 +1,29 @@
-# Fix broken airline logos
+# Redirect /ads.txt to Ezoic's Ads.txt Manager
 
-## Problem
-Airline logo URLs in `airlines_data` point at 3rd-party hosts (wikimedia, logos-world.net, cdnlogo, easyjet.com, britishairways media centre, etc.). Several of these either hotlink-block, 404, or return HTML pages instead of images, which is why some cards render the fallback Unsplash airport photo instead of the real logo.
+## Context
+This is a static Vite SPA hosted on Lovable — there's no Apache, Nginx, PHP, WordPress, or cron available. The site already ships a static `public/ads.txt` and uses `public/_redirects` (Netlify-style) for SPA routing. Lovable's hosting honors `_redirects` rules, including 301s to external URLs, so that's the right hook for the Ezoic "Server Redirects" pattern.
 
-Rather than hand-fix ~15 URLs (which will rot again), switch to Logo.dev, which serves consistent brand logos by domain.
+Domain: `sizemybag.com` (from canonical config).
 
 ## Changes
 
-### 1. Connect Logo.dev
-Link the Logo.dev connector so `VITE_LOVABLE_CONNECTOR_LOGO_DEV_API_KEY` is available in the frontend.
+### 1. `public/_redirects`
+Add a 301 for `/ads.txt` **before** the SPA catch-all so it isn't swallowed:
 
-### 2. Build logo URL from the airline's own domain
-In `src/utils/supabaseService.ts`, when mapping DB rows to the `Airline` type:
+```
+/ads.txt  https://srv.adstxtmanager.com/19390/sizemybag.com  301!
+/*        /index.html                                        200
+```
 
-- Extract the hostname from `record.website_url` (strip protocol, `www.`, and path).
-- If a domain is available AND the Logo.dev publishable key is present, set  
-  `logo = https://img.logo.dev/{domain}?token={key}&size=200&format=png&fallback=monogram`
-- Otherwise fall back to `record.logo_url`, then to the existing Unsplash placeholder.
+The `301!` force flag ensures the redirect wins over the existing static `ads.txt` asset.
 
-The existing `onError` handler on `<img>` in `AirlineCard` stays as a last-resort fallback.
+### 2. `public/ads.txt`
+Delete the static file so there's no confusion about which version is authoritative (the redirect now serves the live Ezoic list). Safe because the redirect takes over `/ads.txt`.
 
-### 3. No DB writes
-`airlines_data.logo_url` is left untouched; the frontend just derives a better URL at read time. This keeps the fix reversible and doesn't touch policy data.
+## Verification
+After deploy, `curl -I https://sizemybag.com/ads.txt` should return `301` pointing at `srv.adstxtmanager.com/19390/sizemybag.com`, and following the redirect returns Ezoic's managed list.
 
 ## Out of scope
-- No changes to baggage data or the "last updated" badges.
-- The stray `Sample Jet` test row is not removed here — flag it separately if you want it cleaned up.
-
-## Files
-- `src/utils/supabaseService.ts` — domain extraction + Logo.dev URL builder
-- Connector link (Logo.dev) via the connect tool
+- No WordPress plugin (not a WP site).
+- No cron/curl automation (no server).
+- Preview URL (`*.lovable.app`) will also redirect — Ezoic keys off the manager URL, not the requesting host, so that's fine.
