@@ -26,6 +26,7 @@ export type Database = {
           iata_code: string | null
           id: number
           logo_url: string | null
+          updated_at: string
           website_url: string | null
         }
         Insert: {
@@ -39,6 +40,7 @@ export type Database = {
           iata_code?: string | null
           id?: number
           logo_url?: string | null
+          updated_at?: string
           website_url?: string | null
         }
         Update: {
@@ -52,6 +54,7 @@ export type Database = {
           iata_code?: string | null
           id?: number
           logo_url?: string | null
+          updated_at?: string
           website_url?: string | null
         }
         Relationships: []
@@ -185,6 +188,7 @@ export type Database = {
           iata_code: string | null
           id: number
           logo_url: string | null
+          updated_at: string
           website_url: string | null
         }[]
         SetofOptions: {
