@@ -1,11 +1,12 @@
 
 import { useNavigate } from 'react-router-dom';
-import { ArrowRight, Heart, MapPin, Plane } from 'lucide-react';
+import { ArrowRight, Heart, MapPin, Plane, Clock } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Airline } from '@/utils/types';
 import airlineService from '@/utils/airlineData';
 import { useState } from 'react';
 import { useUnit } from '@/contexts/UnitContext';
+import { formatDistanceToNowStrict } from 'date-fns';
 
 interface AirlineCardProps {
   airline: Airline;
