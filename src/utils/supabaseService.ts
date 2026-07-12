@@ -41,6 +41,28 @@ const parseWeight = (weightStr: string | null): number => {
   return 10; // Fallback to default
 };
 
+// Extract clean hostname from a website URL for use with logo services
+const extractDomain = (url: string | null): string | null => {
+  if (!url) return null;
+  try {
+    const withProtocol = /^https?:\/\//i.test(url) ? url : `https://${url}`;
+    const host = new URL(withProtocol).hostname.replace(/^www\./i, '').toLowerCase();
+    return host || null;
+  } catch {
+    return null;
+  }
+};
+
+// Build a Logo.dev logo URL from a domain, falling back gracefully
+const LOGO_DEV_TOKEN = import.meta.env.VITE_LOVABLE_CONNECTOR_LOGO_DEV_API_KEY as string | undefined;
+const buildLogoUrl = (websiteUrl: string | null, fallback: string | null): string => {
+  const domain = extractDomain(websiteUrl);
+  if (domain && LOGO_DEV_TOKEN) {
+    return `https://img.logo.dev/${domain}?token=${LOGO_DEV_TOKEN}&size=200&format=png&fallback=monogram`;
+  }
+  return fallback || "https://images.unsplash.com/photo-1583810111145-069345044bf5?q=80&w=120&auto=format&fit=crop";
+};
+
 // Fetch airlines from Supabase
 export const fetchAirlinesFromDatabase = async (): Promise<Airline[]> => {
   try {
@@ -73,7 +95,7 @@ export const fetchAirlinesFromDatabase = async (): Promise<Airline[]> => {
         id: record.iata_code?.toLowerCase() || `airline-${record.id}`,
         name: record.airline_name || 'Unknown Airline',
         code: record.iata_code || '',
-        logo: record.logo_url || "https://images.unsplash.com/photo-1583810111145-069345044bf5?q=80&w=120&auto=format&fit=crop",
+        logo: buildLogoUrl(record.website_url, record.logo_url),
         website: record.website_url || '#',
         country: record.country_name || 'Unknown',
         carryOn: {
