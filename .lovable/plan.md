@@ -1,29 +1,33 @@
-# Redirect /ads.txt to Ezoic's Ads.txt Manager
+## Goal
+Redirect `/ads.txt` on `sizemybag.com` to Ezoic's Ads.txt Manager URL: `https://srv.adstxtmanager.com/19390/sizemybag.com`.
 
 ## Context
-This is a static Vite SPA hosted on Lovable — there's no Apache, Nginx, PHP, WordPress, or cron available. The site already ships a static `public/ads.txt` and uses `public/_redirects` (Netlify-style) for SPA routing. Lovable's hosting honors `_redirects` rules, including 301s to external URLs, so that's the right hook for the Ezoic "Server Redirects" pattern.
-
-Domain: `sizemybag.com` (from canonical config).
+- `sizemybag.com` is served by **Netlify** (confirmed earlier via response headers).
+- Netlify honors `public/_redirects`, including 301s to external URLs and the `!` force flag (which lets the rule win over an existing static file of the same name).
+- Current `public/_redirects` only has the SPA catch-all.
+- Current `public/ads.txt` is a static file with a single Google AdSense line — it will be superseded by the redirect.
 
 ## Changes
 
 ### 1. `public/_redirects`
-Add a 301 for `/ads.txt` **before** the SPA catch-all so it isn't swallowed:
+Add the Ezoic redirect **before** the SPA catch-all:
 
 ```
 /ads.txt  https://srv.adstxtmanager.com/19390/sizemybag.com  301!
 /*        /index.html                                        200
 ```
 
-The `301!` force flag ensures the redirect wins over the existing static `ads.txt` asset.
+Order matters (Netlify processes top-to-bottom). `301!` forces the redirect even though `ads.txt` exists as a static asset.
 
 ### 2. `public/ads.txt`
-Delete the static file so there's no confusion about which version is authoritative (the redirect now serves the live Ezoic list). Safe because the redirect takes over `/ads.txt`.
+Delete the file so there's a single source of truth (Ezoic's manager). Not strictly required because of `301!`, but avoids future confusion.
 
-## Verification
-After deploy, `curl -I https://sizemybag.com/ads.txt` should return `301` pointing at `srv.adstxtmanager.com/19390/sizemybag.com`, and following the redirect returns Ezoic's managed list.
+## Verification (after Netlify redeploys)
+```
+curl -I https://sizemybag.com/ads.txt
+```
+Expect `HTTP/2 301` with `location: https://srv.adstxtmanager.com/19390/sizemybag.com`. Following it should return Ezoic's managed ads.txt contents.
 
-## Out of scope
-- No WordPress plugin (not a WP site).
-- No cron/curl automation (no server).
-- Preview URL (`*.lovable.app`) will also redirect — Ezoic keys off the manager URL, not the requesting host, so that's fine.
+## Notes
+- This only takes effect once Netlify rebuilds from the repo. If Netlify is wired to your Lovable GitHub repo, pushing these changes triggers it automatically. If Netlify deploys from a different source, the same two edits need to land in that source.
+- The Lovable preview (`luggagechecker.lovable.app`) does not process `_redirects` — the redirect only works on the Netlify-hosted `sizemybag.com`. That's fine; Ezoic only cares about the canonical domain.
