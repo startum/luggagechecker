@@ -92,7 +92,8 @@ export const fetchAirlinesFromDatabase = async (): Promise<Airline[]> => {
             price: "From €20.99"
           }
         ],
-        popularRoutes: ["Major routes information not available"]
+        popularRoutes: ["Major routes information not available"],
+        updatedAt: (record as { updated_at?: string }).updated_at
       };
     });
   } catch (error) {
