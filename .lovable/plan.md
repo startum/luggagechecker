@@ -1,33 +1,20 @@
 ## Goal
-Redirect `/ads.txt` on `sizemybag.com` to Ezoic's Ads.txt Manager URL: `https://srv.adstxtmanager.com/19390/sizemybag.com`.
+Verify whether this Lovable project is connected to a GitHub repository.
 
-## Context
-- `sizemybag.com` is served by **Netlify** (confirmed earlier via response headers).
-- Netlify honors `public/_redirects`, including 301s to external URLs and the `!` force flag (which lets the rule win over an existing static file of the same name).
-- Current `public/_redirects` only has the SPA catch-all.
-- Current `public/ads.txt` is a static file with a single Google AdSense line — it will be superseded by the redirect.
+## Result (verification complete — no code changes needed)
+Connected and confirmed: `https://github.com/startum/luggagechecker`
 
-## Changes
+Evidence:
+- Public GitHub API shows the repo's latest commits match this project's local history exactly by SHA:
+  - `71c3e22` Update plan (2026-09-03 14:45 UTC)
+  - `1c9a509` Work in progress (2026-09-03 14:44 UTC)
+  - `0901ad8` Fixed security findings, `b874f0d` Changes, `628a5fc` Deployed ads.txt to live
+- `public/_redirects` in the repo matches the local working copy, including the Ezoic rule:
+  `/ads.txt  https://srv.adstxtmanager.com/19390/sizemybag.com  301!`
+- The static `public/ads.txt` is absent from the repo, matching the local deletion.
 
-### 1. `public/_redirects`
-Add the Ezoic redirect **before** the SPA catch-all:
+## Why the earlier check was wrong
+Lovable's GitHub sync mirrors commits to GitHub server-side; the local sandbox clone only shows Lovable's internal storage remote, so git config alone cannot prove or disprove the connection.
 
-```
-/ads.txt  https://srv.adstxtmanager.com/19390/sizemybag.com  301!
-/*        /index.html                                        200
-```
-
-Order matters (Netlify processes top-to-bottom). `301!` forces the redirect even though `ads.txt` exists as a static asset.
-
-### 2. `public/ads.txt`
-Delete the file so there's a single source of truth (Ezoic's manager). Not strictly required because of `301!`, but avoids future confusion.
-
-## Verification (after Netlify redeploys)
-```
-curl -I https://sizemybag.com/ads.txt
-```
-Expect `HTTP/2 301` with `location: https://srv.adstxtmanager.com/19390/sizemybag.com`. Following it should return Ezoic's managed ads.txt contents.
-
-## Notes
-- This only takes effect once Netlify rebuilds from the repo. If Netlify is wired to your Lovable GitHub repo, pushing these changes triggers it automatically. If Netlify deploys from a different source, the same two edits need to land in that source.
-- The Lovable preview (`luggagechecker.lovable.app`) does not process `_redirects` — the redirect only works on the Netlify-hosted `sizemybag.com`. That's fine; Ezoic only cares about the canonical domain.
+## Remaining actions
+None. The Lovable → GitHub → Netlify chain is intact; the ads.txt redirect changes are already in the repo Netlify deploys from.
